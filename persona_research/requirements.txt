@@ -1,6 +1,0 @@
-gdm-concordia
-google-genai
-google-generativeai
-sentence-transformers
-pandas
-python-dotenv

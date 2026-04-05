@@ -3,8 +3,6 @@ from debate_agents.agents.pros_agent import get_pros_agent
 from debate_agents.agents.cons_agent import get_cons_agent
 from debate_agents.agents.topic_extract_agent import get_topic_extract_agent
 from debate_agents.config import MAX_ROUNDS
-from google.adk.agents.callback_context import CallbackContext
-
 
 
 # Instantiate the sub-agents

@@ -1,2 +1,3 @@
-# Debate Topic: The ethical and societal justification of war
+# Debate Topic: # Debate Topic
+The impact of war on societal development and progress.
 

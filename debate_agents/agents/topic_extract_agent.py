@@ -1,8 +1,9 @@
 import os
 from google.adk.agents import LlmAgent
-from debate_agents.config import GEMINI_MODEL
+from debate_agents.config import GEMINI_MODEL, GLOBAL_GENERATE_CONTENT_CONFIG # Import added
 from debate_agents.tools.memory_tools import get_write_markdown_tool, refresh_memory
 from google.adk.agents.callback_context import CallbackContext
+from google.genai import types
 
 async def refresh_memory_callback(callback_context: CallbackContext) -> None:
     """Clears all memory folders before a new topic is extracted and debated."""
@@ -22,5 +23,7 @@ def get_topic_extract_agent():
         output_key="topic",
         include_contents='none',
         tools=[get_write_markdown_tool()],
-        before_agent_callback=refresh_memory_callback
+        before_agent_callback=refresh_memory_callback,
+        # Use the global configuration for generate_content_config
+        generate_content_config=GLOBAL_GENERATE_CONTENT_CONFIG 
     )

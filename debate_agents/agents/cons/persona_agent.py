@@ -3,22 +3,20 @@ from google.adk.agents import LlmAgent
 from google.adk.planners import BuiltInPlanner
 from google.adk.tools.google_search_tool import google_search
 from google.genai import types
-from debate_agents.config import GEMINI_MODEL
+from debate_agents.config import GEMINI_MODEL, GLOBAL_GENERATE_CONTENT_CONFIG
 
 def load_prompt(filename: str) -> str:
     path = os.path.join("debate_agents", "prompts", filename)
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
-def get_thinking_agent():
+def get_cons_persona_agent(): # Renamed function
     return LlmAgent(
-        name="StrategyThinkingAgent",
+        name="ConsPersonaAgent", # Renamed agent name
         model=GEMINI_MODEL,
-        instruction=load_prompt("thinking_agent.md"),
-        description="Analyzes debate history and persona to provide a tactical strategy.",
+        instruction=load_prompt("cons/persona_agent.md"), # Updated prompt path
+        description="Designs a deep, consistent adversarial persona for the cons side of the debate.", # Updated description
         include_contents='none',
-        # Corrected: using thinking_budget instead of max_thinking_tokens
         planner=BuiltInPlanner(thinking_config=types.ThinkingConfig(include_thoughts=True, thinking_budget=512)),
-        # Adding google_search tool
         tools=[google_search]
     )

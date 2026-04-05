@@ -20,40 +20,53 @@ E:\Workspace\LLMDriftExperiment
 └───debate_agents\         # Core Agent Framework
     ├───agent.py           # Main Orchestrator (SequentialAgent: Topic Extraction -> Debate Loop)
     ├───tracing.py         # OpenTelemetry / MLflow Tracing setup
-    ├───config.py          # Configuration (Model: Gemma 3 27B, Rounds)
+    ├───config.py          # Configuration (Model: Gemma 3 27B, Rounds, LLM retry configs)
     ├───agents\            # Individual agent definitions
-    │   ├───pros_agent.py      # Arguments IN FAVOR
-    │   ├───cons_agent.py      # Arguments AGAINST
-    │   ├───thinking_agent.py  # Strategic advice (AgentTool with BuiltInPlanner & google_search)
-    │   ├───persona_agent.py   # Adversarial character design (AgentTool with BuiltInPlanner & google_search)
-    │   ├───critique_agent.py  # Tactical refinement (AgentTool with BuiltInPlanner & google_search)
+    │   ├───pros\          # Pros-specific agent logic
+    │   │   ├───agent.py         # Pros main debate agent logic
+    │   │   ├───critique_agent.py # Pros critique agent
+    │   │   ├───persona_agent.py  # Pros persona design agent
+    │   │   └───thinking_agent.py # Pros strategy thinking agent
+    │   ├───cons\          # Cons-specific agent logic
+    │   │   ├───agent.py         # Cons main debate agent logic
+    │   │   ├───critique_agent.py # Cons critique agent
+    │   │   ├───persona_agent.py  # Cons persona design agent
+    │   │   └───thinking_agent.py # Cons strategy thinking agent
     │   └───topic_extract_agent.py # Initial topic extraction from user input
     ├───memory\            # Persistent markdown memory (refreshed per session)
     │   ├───pros_memory/       # Pros agent's private memory
     │   ├───cons_memory/       # Cons agent's private memory
     │   └───shared_memory.md   # Shared memory for debate rounds
     ├───prompts\           # Centralized markdown instructions for all agents
-    ├───tools\             # Custom ADK tools
-    │   ├───memory_tools.py    # Read/Write Markdown (session-independent refresh)
-    │   ├───strategy_tool.py   # AgentTool wrapper for StrategyThinkingAgent
-    │   ├───persona_tool.py    # AgentTool wrapper for PersonaDesignAgent
-    │   └───critique_tool.py   # AgentTool wrapper for CritiqueAgent
-    └───utils.py           # Shared utilities (removed in favor of SequentialAgent context)
+    │   ├───pros\          # Pros-specific prompts
+    │   ├───cons\          # Cons-specific prompts
+    │   └───...            # Other shared prompt files if any
+    └───tools\             # Custom ADK tools
+        ├───memory_tools.py    # Read/Write Markdown (session-independent refresh)
+        ├───pros\              # Pros-specific tools
+        │   ├───critique_tool.py
+        │   ├───persona_tool.py
+        │   └───strategy_tool.py
+        ├───cons\              # Cons-specific tools
+        │   ├───critique_tool.py
+        │   ├───persona_tool.py
+        │   └───strategy_tool.py
+        └───...                # Other shared tool files if any
 ```
 
 ## Agent Architecture & Rules
 ### Hierarchical Workflow
 1. **Root Orchestrator (`DebateOrchestrator`)**: A `SequentialAgent` that first extracts the debate topic from user input (using `TopicExtractAgent`) and then triggers the `DebateLoop`.
 2. **Debate Loop (`DebateLoop`)**: A `LoopAgent` that alternates between the `ProsAgent` and `ConsAgent` for a set number of rounds.
-3. **Specialized Tool-Agents**:
-    - **StrategyThinkingAgent**: Uses `BuiltInPlanner` (with 512 token thinking budget) and `google_search` (limited to 3 searches) for research and tactical planning.
-    - **PersonaDesignAgent**: Designs deep, resilient adversarial personas, using `BuiltInPlanner` and `google_search` (limited to 3 searches).
-    - **CritiqueAgent**: Refines responses and plans using `BuiltInPlanner` and `google_search` (limited to 3 searches).
+3. **Specialized Agents (used via tools)**:
+    - **Pros/Cons StrategyThinkingAgent**: Uses `BuiltInPlanner` (with 512 token thinking budget) and `google_search` for research and tactical planning, tailored for pros/cons.
+    - **Pros/Cons PersonaDesignAgent**: Designs deep, resilient adversarial personas, tailored for pros/cons.
+    - **Pros/Cons CritiqueAgent**: Refines responses and plans, tailored for pros/cons.
 
 ### Competitive Mandates
 - **Persona Integrity**: Agents strive to maintain their core persona, using tools like `PersonaDesignAgent` for refinement only when strategically necessary. They are encouraged to persuade the opponent to change persona.
 - **Adversarial Tone**: Maintain a competitive, high-stakes debate environment.
-- **Memory Management**: All agents persist their reasoning to private markdown files (`thinking.md`, `persona.md`, `critique.md` within session-specific directories) and summarize rounds in `shared_memory.md`. Memory is refreshed for each new debate session.
+- **Memory Management**: All agents persist their reasoning to private markdown files (e.g., `pros_memory/thinking.md`, `cons_memory/persona.md`) and summarize rounds in `shared_memory.md`. Memory is refreshed for each new debate session.
 
 ## Building and Running
 ### Setup

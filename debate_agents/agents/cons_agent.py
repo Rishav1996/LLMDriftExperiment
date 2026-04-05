@@ -24,7 +24,6 @@ def get_cons_agent():
             get_read_markdown_tool(),
             get_write_markdown_tool()
         ],
-        # Changed output_key to final_argument as output is saved to shared_memory.md
-        output_key="final_argument",
+        output_key="shared_memory", # Changed to shared_memory as output is saved there
         include_contents='none'
     )

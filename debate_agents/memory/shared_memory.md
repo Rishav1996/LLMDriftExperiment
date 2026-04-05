@@ -1,2 +1,2 @@
-# Debate Topic: The ethics and societal consequences of war.
+# Debate Topic: The ethical and societal justification of war
 

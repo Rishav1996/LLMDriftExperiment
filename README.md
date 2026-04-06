@@ -1,51 +1,101 @@
-# LLM Drift Experiment Framework
+# 🧬 LLM Drift Experiment Framework
+> **An Adversarial Multi-Agent System for Observing Persona & Response Evolution**
 
-A specialized adversarial debate framework built with **Agent Developer Kit (ADK)** to observe and analyze **LLM Drift** through iterative competitive interactions.
+[![ADK](https://img.shields.io/badge/Powered%20by-Google%20ADK-blue)](https://github.com/google/adk)
+[![Model](https://img.shields.io/badge/Model-Gemini%202.5%20Flash%20Lite-orange)](https://ai.google.dev/gemini)
+[![Tracking](https://img.shields.io/badge/Tracing-MLflow-green)](https://mlflow.org/)
 
-## 🚀 Key Features
-- **Adversarial Orchestration**: A `SequentialAgent` pipeline that first extracts a topic from user input and then coordinates a `LoopAgent` debate between `Pros` and `Cons` agents. This includes specialized pros and cons agents for debate roles.
-- **Modular Agent Design**: Individual agents for topic extraction, pros debate, cons debate, strategy thinking, persona design, and critique, each with distinct pros/cons implementations.
-- **Strategic Persona Core**: Agents utilize specialized `AgentTool` sub-agents (`StrategyThinkingAgent`, `PersonaDesignAgent`, `CritiqueAgent`) for pros and cons to refine their characters and tactics.
-- **Isolated Session Memory**: Custom markdown-based memory system with session-isolated private folders (`pros_memory/`, `cons_memory/`) and a `shared_memory.md` for round summaries.
-- **Model Grounding**: Powered by **Gemma 3 27B** with `BuiltInPlanner` for advanced reasoning and `google_search` for factual grounding.
-- **Experiment Tracking**: Integrated with **MLflow** for post-debate analysis of agent evolution.
-- **Distributed Tracing**: Full instrumentation via **OpenTelemetry** exporting to **MLflow** for detailed performance and trajectory analysis.
+This project is a high-fidelity framework designed to evaluate **LLM Drift** through structured, competitive debates. It leverages the **Agent Development Kit (ADK)** to orchestrate two adversarial teams (Pros and Cons) that evolve their personas and strategies over multiple rounds of high-stakes interaction.
+
+---
+
+## 🏛️ System Architecture
+
+The framework employs a hierarchical multi-agent orchestration model:
+
+```text
+Root Orchestrator (SequentialAgent)
+└── 🔍 TopicExtractAgent (Initial Input Parsing)
+└── 🔄 DebateLoop (LoopAgent)
+    ├── 🔵 ProsAgent Team
+    │   ├── 🧠 ProsThinkingAgent
+    │   ├── 👤 ProsPersonaAgent
+    │   └── ⚖️ ProsCritiqueAgent
+    └── 🔴 ConsAgent Team
+        ├── 🧠 ConsThinkingAgent
+        ├── 👤 ConsPersonaAgent
+        └── ⚖️ ConsCritiqueAgent
+```
+
+---
+
+## 🚀 Key Pillars
+
+### 🎭 Adversarial Persona Core
+Agents don't just "talk"; they **inhabit**. Using specialized `PersonaDesignAgent` sub-agents, each side builds a deep, resilient character profile designed to withstand pressure and persuade the opponent.
+
+### 🧠 Strategic Execution
+Every argument is backed by a 3-step tactical cycle:
+1.  **Strategize**: Analyze the debate state and identify rhetorical openings using `google_search`.
+2.  **Synthesize**: Draft high-impact arguments while maintaining 100% persona integrity.
+3.  **Critique**: Perform a self-review of the draft for logical strength and character consistency.
+
+### 📁 Persistent Session Memory
+A dual-layer memory system ensures context is never lost while maintaining "fog of war":
+*   **Private Memory**: `pros_memory/` and `cons_memory/` store internal thoughts, strategy, and persona logic.
+*   **Shared Memory**: `shared_memory.md` acts as the public transcript for all debate rounds.
+
+### 📊 Observable Trajectory
+Full instrumentation via **OpenTelemetry** and **MLflow** allows researchers to trace every decision, tool call, and thought process.
+
+---
 
 ## 🛠️ Project Structure
-- `debate_agents/agent.py`: The root orchestrator (SequentialAgent).
-- `debate_agents/tracing.py`: Global tracing configuration (OTLP -> MLflow).
-- `debate_agents/config.py`: Global configurations, including LLM settings and retry options.
-- `debate_agents/agents/`: Individual agent logic definitions.
-  - `debate_agents/agents/pros/`: Pros-specific agent logic.
-  - `debate_agents/agents/cons/`: Cons-specific agent logic.
-- `debate_agents/prompts/`: Centralized markdown files for all agent instructions.
-  - `debate_agents/prompts/pros/`: Pros-specific prompts.
-  - `debate_agents/prompts/cons/`: Cons-specific prompts.
-- `debate_agents/tools/`: Custom tools, wrappers for specialized agents.
-  - `debate_agents/tools/pros/`: Pros-specific tools.
-  - `debate_agents/tools/cons/`: Cons-specific tools.
-- `debate_agents/memory/`: Persistent storage for agent reasoning history.
+
+```bash
+debate_agents/
+├── agent.py           # Root Orchestrator & Debate Loop
+├── config.py          # LLM Config & Global Retry Logic
+├── agents/
+│   ├── pros/          # Pros Team: Root, Persona, Thinking, Critique
+│   ├── cons/          # Cons Team: Root, Persona, Thinking, Critique
+│   └── topic_extract_agent.py # Initial Input Processing
+├── prompts/           # Side-specific Markdown Instructions
+│   ├── pros/          # Pros prompts
+│   └── cons/          # Cons prompts
+├── tools/             # Memory, Search, and Agent-as-a-Tool wrappers
+│   ├── pros/          # Pros-specific tools
+│   └── cons/          # Cons-specific tools
+└── memory/            # Session-isolated Markdown persistence
+```
+
+---
 
 ## ⚡ Quick Start
-### Prerequisites
-- Python 3.12+
-- `uv` package manager
-- Google AI Studio API Key (configured as `GOOGLE_API_KEY`)
-- Local MLflow server running: `mlflow server --backend-store-uri sqlite:///mlflow.db --port 5000`
 
-### Installation
+### 1. Prerequisites
+*   **Python 3.12+** & **uv** package manager.
+*   **Google AI Studio API Key** (set as `GOOGLE_API_KEY`).
+*   **MLflow Server**: Running locally for trace capture.
+
+### 2. Installation
 ```bash
 uv sync
 ```
 
-### Running the Debate
+### 3. Execution
 ```bash
+# Start the MLflow tracking server
+mlflow server --backend-store-uri sqlite:///mlflow.db --port 5000
+
+# Run the debate orchestrator
 adk run debate_agents/agent.py
 ```
-*Note: Ensure your MLflow server is active to capture traces.*
 
-## 🧬 Framework Details
-The agents follow a 3-step preparation cycle in each round, with specialized logic for pros and cons:
-1. **Persona Design**: Refining their voice and adversarial stance using pros/cons specific designs.
-2. **Strategy Thinking**: Researching the topic and formulating tactical points tailored to pros/cons.
-3. **Critique**: Self-evaluating the persona and strategy before final generation, from pros/cons perspectives.
+---
+
+## 🧪 Experiment Parameters
+*   **Core Model**: `gemini-2.5-flash-lite` (via ADK Gemini Model wrapper).
+*   **Reasoning**: `BuiltInPlanner` enabled for all specialized agents (512 token budget).
+*   **Grounding**: `google_search` tool enabled (max 3 queries per agent/turn).
+*   **Retries**: Global HTTP retry logic configured (30s initial delay, 5 attempts) to mitigate rate limits.

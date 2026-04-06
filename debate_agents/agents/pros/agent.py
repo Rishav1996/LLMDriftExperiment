@@ -16,7 +16,7 @@ def get_pros_agent():
     return LlmAgent(
         name="ProsAgent",
         model=GEMINI_MODEL,
-        instruction=load_prompt("pros/agent.md"), # Updated prompt path
+        instruction=load_prompt("pros/agent.md"), 
         description="Generates refined arguments in favor using persona, tactical, critique, and memory tools.",
         tools=[
             get_strategy_tool(), 
@@ -25,7 +25,7 @@ def get_pros_agent():
             get_read_markdown_tool(),
             get_write_markdown_tool()
         ],
-        output_key="shared_memory", # Changed to shared_memory as output is saved there
+        output_key="pros_argument", # Updated to use pros_ prefix
         include_contents='none',
         generate_content_config=GLOBAL_GENERATE_CONTENT_CONFIG 
     )

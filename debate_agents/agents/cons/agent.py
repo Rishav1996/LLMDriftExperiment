@@ -16,7 +16,7 @@ def get_cons_agent():
     return LlmAgent(
         name="ConsAgent",
         model=GEMINI_MODEL,
-        instruction=load_prompt("cons/agent.md"), # Updated prompt path
+        instruction=load_prompt("cons/agent.md"), 
         description="Generates refined arguments against using persona, tactical, critique, and memory tools.",
         tools=[
             get_strategy_tool(), 
@@ -25,7 +25,7 @@ def get_cons_agent():
             get_read_markdown_tool(),
             get_write_markdown_tool()
         ],
-        output_key="shared_memory", # Changed to shared_memory as output is saved there
+        output_key="cons_argument", # Updated to use cons_ prefix
         include_contents='none',
         generate_content_config=GLOBAL_GENERATE_CONTENT_CONFIG 
     )

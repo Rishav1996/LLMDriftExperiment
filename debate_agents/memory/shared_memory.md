@@ -1,8 +1,3 @@
-# Debate Topic: The impact of war on societal development and progress.
+# Debate Topic: # Debate Topic
+The extent to which Artificial Intelligence will replace human employment.
 
-
-
-### Entry by ProsAgent
-Topic: The impact of war on societal development and progress.
-Goal: Win the debate arguing IN FAVOR.
-Status: Initialization phase.

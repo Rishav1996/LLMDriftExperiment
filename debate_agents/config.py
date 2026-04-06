@@ -1,5 +1,4 @@
 # Configuration for the LLM Drift Experiment
-from google.adk.models import Gemini
 from google.genai import types # Import added
 
 GEMINI_MODEL = "gemini-3.1-flash-lite-preview"

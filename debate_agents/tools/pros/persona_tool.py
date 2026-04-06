@@ -2,7 +2,7 @@ from google.adk.tools.agent_tool import AgentTool
 # Updated import path for the persona agent
 from debate_agents.agents.pros.persona_agent import get_pros_persona_agent
 
-def get_persona_tool():
+def get_pros_persona_tool():
     """
     Returns an AgentTool that wraps the ProsPersonaAgent.
     This allows other agents to invoke the pros persona agent for persona design.

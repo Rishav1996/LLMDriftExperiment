@@ -1,35 +1,37 @@
+from google.adk.apps.app import App
 from google.adk.agents import LoopAgent, SequentialAgent
-from debate_agents.agents.pros.agent import get_pros_agent # Updated path and file name
-from debate_agents.agents.cons.agent import get_cons_agent # Updated path and file name
+from debate_agents.agents.pros.agent import get_pros_agent
+from debate_agents.agents.cons.agent import get_cons_agent
 from debate_agents.agents.topic_extract_agent import get_topic_extract_agent
-from debate_agents.config import MAX_ROUNDS
-
-
-# Instantiate the sub-agents
-pros_agent = get_pros_agent()
-cons_agent = get_cons_agent()
-topic_extract_agent = get_topic_extract_agent()
-
-# Orchestrate them in a LoopAgent
-debate_loop = LoopAgent(
-    name="DebateLoop",
-    sub_agents=[
-        pros_agent,
-        cons_agent
-    ],
-    max_iterations=MAX_ROUNDS
-)
+from debate_agents.config import MAX_ROUNDS, GEMINI_MODEL_ADAPTER # Updated import
+from google.adk.plugins import ReflectAndRetryToolPlugin
 
 # Root agent for ADK orchestration
 debate_orchestrator = SequentialAgent(
     name="DebateOrchestrator",
     sub_agents=[
-        topic_extract_agent,
-        debate_loop
+        get_topic_extract_agent(), # Instantiate directly for SequentialAgent
+        LoopAgent(
+            name="DebateLoop",
+            sub_agents=[
+                get_pros_agent(), # Instantiate pros agent
+                get_cons_agent()  # Instantiate cons agent
+            ],
+            max_iterations=MAX_ROUNDS
+        )
     ]
 )
 
 root_agent = debate_orchestrator
 
+# Initialize the ADK App with the root agent and the retry plugin
+app = App(
+    name="debate_agents", 
+    root_agent=root_agent,
+    plugins=[
+        ReflectAndRetryToolPlugin(max_retries=3), 
+    ],
+)
+
 if __name__ == "__main__":
-    print(f"Orchestrator initialized with agents: {[a.name for a in debate_orchestrator.sub_agents]}")
+    app.run()

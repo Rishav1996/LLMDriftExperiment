@@ -1,6 +1,6 @@
 import os
 from google.adk.agents import LlmAgent
-from debate_agents.config import GEMINI_MODEL, GLOBAL_GENERATE_CONTENT_CONFIG # Import added
+from debate_agents.config import GEMINI_MODEL_ADAPTER # Import added
 from debate_agents.tools.memory_tools import get_write_markdown_tool, refresh_memory
 from google.adk.agents.callback_context import CallbackContext
 from google.genai import types
@@ -17,13 +17,11 @@ def load_prompt(filename: str) -> str:
 def get_topic_extract_agent():
     return LlmAgent(
         name="TopicExtractAgent",
-        model=GEMINI_MODEL,
+        model=GEMINI_MODEL_ADAPTER,
         instruction=load_prompt("topic_extract_agent.md"),
         description="Extracts the debate topic from user input.",
         output_key="topic",
         include_contents='none',
         tools=[get_write_markdown_tool()],
         before_agent_callback=refresh_memory_callback,
-        # Use the global configuration for generate_content_config
-        generate_content_config=GLOBAL_GENERATE_CONTENT_CONFIG 
     )

@@ -3,7 +3,7 @@ from google.adk.agents import LlmAgent
 from google.adk.planners import BuiltInPlanner
 from google.adk.tools.google_search_tool import google_search
 from google.genai import types
-from debate_agents.config import GEMINI_MODEL, GLOBAL_GENERATE_CONTENT_CONFIG
+from debate_agents.config import GEMINI_MODEL_ADAPTER # Updated import
 from debate_agents.tools.memory_tools import get_write_markdown_tool
 
 def load_prompt(filename: str) -> str:
@@ -14,7 +14,7 @@ def load_prompt(filename: str) -> str:
 def get_cons_persona_agent():
     return LlmAgent(
         name="ConsPersonaAgent",
-        model=GEMINI_MODEL,
+        model=GEMINI_MODEL_ADAPTER, # Use the adapter instance
         instruction=load_prompt("cons/persona_agent.md"),
         description="Designs a deep, consistent adversarial persona for the cons side of the debate.",
         include_contents='none',

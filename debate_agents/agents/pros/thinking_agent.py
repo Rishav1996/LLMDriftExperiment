@@ -3,8 +3,8 @@ from google.adk.agents import LlmAgent
 from google.adk.planners import BuiltInPlanner
 from google.adk.tools.google_search_tool import google_search
 from google.genai import types
-from debate_agents.config import GEMINI_MODEL, GLOBAL_GENERATE_CONTENT_CONFIG
-from debate_agents.tools.memory_tools import get_write_markdown_tool
+from debate_agents.config import GEMINI_MODEL_ADAPTER # Updated import
+from debate_agents.tools.memory_tools import get_write_markdown_tool, get_read_markdown_tool
 
 def load_prompt(filename: str) -> str:
     path = os.path.join("debate_agents", "prompts", filename)
@@ -14,7 +14,7 @@ def load_prompt(filename: str) -> str:
 def get_pros_thinking_agent():
     return LlmAgent(
         name="ProsThinkingAgent",
-        model=GEMINI_MODEL,
+        model=GEMINI_MODEL_ADAPTER, # Use the adapter instance
         instruction=load_prompt("pros/thinking_agent.md"),
         description="Analyzes debate history and persona to provide a tactical strategy for the pros.",
         include_contents='none',

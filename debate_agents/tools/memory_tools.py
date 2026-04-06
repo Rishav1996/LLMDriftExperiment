@@ -7,21 +7,41 @@ BASE_MEMORY_DIR = "debate_agents/memory"
 
 def refresh_memory():
     """
-    Clears the entire memory directory to start a fresh debate.
+    Clears the entire memory directory and initializes the required structure for a fresh debate.
     """
     if os.path.exists(BASE_MEMORY_DIR):
         shutil.rmtree(BASE_MEMORY_DIR)
-    os.makedirs(os.path.join(BASE_MEMORY_DIR, "pros_memory"), exist_ok=True)
-    os.makedirs(os.path.join(BASE_MEMORY_DIR, "cons_memory"), exist_ok=True)
-    print("Memory refreshed: Old data cleared and structure re-created.")
+    
+    # Create directories
+    pros_dir = os.path.join(BASE_MEMORY_DIR, "pros_memory")
+    cons_dir = os.path.join(BASE_MEMORY_DIR, "cons_memory")
+    os.makedirs(pros_dir, exist_ok=True)
+    os.makedirs(cons_dir, exist_ok=True)
+    
+    # Initialize required files
+    files_to_init = [
+        os.path.join(BASE_MEMORY_DIR, "shared_memory.md"),
+        os.path.join(pros_dir, "persona.md"),
+        os.path.join(pros_dir, "thinking.md"),
+        os.path.join(pros_dir, "critique.md"),
+        os.path.join(cons_dir, "persona.md"),
+        os.path.join(cons_dir, "thinking.md"),
+        os.path.join(cons_dir, "critique.md"),
+    ]
+    
+    for file_path in files_to_init:
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write("") # Initialize with empty content
+            
+    print("Memory refreshed: Structure initialized with required markdown files.")
 
 def get_memory_path(agent_name: str, filename: str) -> str:
     """
     Constructs the file path based on agent role.
     """
-    if "ProsAgent" in agent_name:
+    if "Pros" in agent_name: # Broadened match
         sub_dir = "pros_memory"
-    elif "ConsAgent" in agent_name:
+    elif "Cons" in agent_name: # Broadened match
         sub_dir = "cons_memory"
     else:
         # Default for shared or other agents

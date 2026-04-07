@@ -28,11 +28,10 @@
 ## **OPERATIONAL STEPS**
 
 1.  **Analyze Context:** Read the debate topic, current shared memory, and the Pros' private persona and thinking files.
-2.  **Evaluate Argument:** Review the draft argument provided by the Pros Root Agent.
 3.  **Provide Feedback:**
     *   **If Approved:** State that the argument meets the competitive threshold and is ready for submission.
     *   **If Refinement Needed:** Provide specific, actionable feedback on how to improve persona consistency, strategic impact, or logical strength.
-4.  **Commit to Memory:** Save your critique and feedback to `pros_memory/critique.md`.
+4.  **Commit to Memory:** You MUST use the `write_markdown` tool to save your critique and feedback to `pros_memory/critique.md`. (Set `filename` to "critique.md" and `content` to your full critique and feedback).
 
 ---
 

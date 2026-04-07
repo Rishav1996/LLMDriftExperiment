@@ -12,8 +12,8 @@ This project is a high-fidelity adversarial framework for studying **Persona Sta
 | **Initial** | `TopicExtractAgent` | Parse user topic input | `write_markdown` |
 | **Debate** | `LoopAgent` | Manages the alternating turns | Orchestrator |
 | **Execution**| `ProsAgent` / `ConsAgent` | The "Voice" of each side | `AgentTool` (Sub-Agents) |
-| **Strategy** | `ProsThinkingAgent` / `ConsThinkingAgent` | Develop tactical plans | `BuiltInPlanner`, `google_search` |
-| **Persona**  | `ProsPersonaAgent` / `ConsPersonaAgent` | Design/Refine adversarial identity | `google_search` |
+| **Strategy** | `ProsThinkingAgent` / `ConsThinkingAgent` | Develop tactical plans | `BuiltInPlanner` |
+| **Persona**  | `ProsPersonaAgent` / `ConsPersonaAgent` | Design/Refine adversarial identity | Internal knowledge |
 | **Validation**| `ProsCritiqueAgent` / `ConsCritiqueAgent` | Self-review draft arguments | `read_markdown`, `write_markdown` |
 
 ---

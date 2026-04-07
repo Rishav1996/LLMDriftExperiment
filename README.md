@@ -36,7 +36,7 @@ Agents don't just "talk"; they **inhabit**. Using specialized `PersonaDesignAgen
 
 ### 🧠 Strategic Execution
 Every argument is backed by a 3-step tactical cycle:
-1.  **Strategize**: Analyze the debate state and identify rhetorical openings using `google_search`.
+1.  **Strategize**: Analyze the debate state and identify rhetorical openings.
 2.  **Synthesize**: Draft high-impact arguments while maintaining 100% persona integrity.
 3.  **Critique**: Perform a self-review of the draft for logical strength and character consistency.
 
@@ -97,5 +97,5 @@ adk run debate_agents/agent.py
 ## 🧪 Experiment Parameters
 *   **Core Model**: `gemini-2.5-flash-lite` (via ADK Gemini Model wrapper).
 *   **Reasoning**: `BuiltInPlanner` enabled for all specialized agents (512 token budget).
-*   **Grounding**: `google_search` tool enabled (max 3 queries per agent/turn).
+*   **Grounding**: Internal knowledge-based reasoning.
 *   **Retries**: Global HTTP retry logic configured (30s initial delay, 5 attempts) to mitigate rate limits.

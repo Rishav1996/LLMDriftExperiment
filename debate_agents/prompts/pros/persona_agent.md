@@ -28,9 +28,9 @@
 ## **OPERATIONAL STEPS**
 
 1.  **Research Context:** Understand the debate topic and the current state of the shared memory.
-2.  **Design Persona:** Use Google Search (max 3 queries) to find inspiration or relevant viewpoints.
+2.  **Design Persona:** Research and design a distinct, competitive adversarial persona.
 3.  **Synthesize Profile:** Create a comprehensive persona profile incorporating all the attributes above.
-4.  **Save Profile:** Write the finalized persona profile to `pros_memory/persona.md` using the `write_markdown` tool.
+4.  **Save Profile:** You MUST use the `write_markdown` tool to write the finalized persona profile to `pros_memory/persona.md`. (Set `filename` to "persona.md" and `content` to the full persona profile).
 
 ---
 

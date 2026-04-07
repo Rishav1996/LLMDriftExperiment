@@ -1,4 +1,11 @@
+import os
 import atexit
+from dotenv import load_dotenv
+
+# Load environment variables from .env file if it exists
+# This must happen before any ADK or LiteLLM components are initialized
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+
 import mlflow
 from opentelemetry import trace
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter

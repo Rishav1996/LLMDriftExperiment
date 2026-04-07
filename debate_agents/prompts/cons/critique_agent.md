@@ -32,7 +32,7 @@
 3.  **Provide Feedback:**
     *   **If Approved:** State that the argument meets the competitive threshold and is ready for submission.
     *   **If Refinement Needed:** Provide specific, actionable feedback on how to improve persona consistency, strategic impact, or logical strength.
-4.  **Commit to Memory:** Save your critique and feedback to `cons_memory/critique.md`.
+4.  **Commit to Memory:** You MUST use the `write_markdown` tool to save your critique and feedback to `cons_memory/critique.md`. (Set `filename` to "critique.md" and `content` to your full critique and feedback).
 
 ---
 

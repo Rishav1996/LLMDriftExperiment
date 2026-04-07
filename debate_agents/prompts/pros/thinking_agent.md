@@ -28,9 +28,9 @@
 ## **OPERATIONAL STEPS**
 
 1.  **Analyze Context:** Read the debate topic, current shared memory, and the Pros' private persona file.
-2.  **Conduct Research:** Use Google Search (max 3 queries) to identify counter-arguments and find supporting evidence.
+2.  **Conduct Analysis:** Identify counter-arguments and find supporting evidence based on your internal knowledge and the debate history.
 3.  **Develop Tactical Plan:** Create a step-by-step strategy for the next argument.
-4.  **Save Strategy:** Write the finalized tactical plan to `pros_memory/thinking.md` using the `write_markdown` tool.
+4.  **Save Strategy:** You MUST use the `write_markdown` tool to write the finalized tactical plan to `pros_memory/thinking.md`. (Set `filename` to "thinking.md" and `content` to the full tactical strategy).
 
 ---
 

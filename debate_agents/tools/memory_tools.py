@@ -60,27 +60,25 @@ async def write_markdown(
     tool_context: ToolContext
 ) -> Dict[str, Any]:
     """
-    Writes content to a markdown file in the agent's private or shared memory.
+    Writes (appends) content to a markdown file in the agent's private or shared memory.
     
     Args:
         filename: The name of the file (e.g., 'thinking.md', 'persona.md', 'critique.md', or 'shared_memory.md').
-        content: The text content to write or append.
+        content: The text content to append.
     """
     agent_name = tool_context.agent_name
     file_path = get_memory_path(agent_name, filename)
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
     
-    mode = 'a' if filename == "shared_memory.md" else 'w'
+    # Always use append mode to preserve history within each round/session
+    mode = 'a'
     
     with open(file_path, mode, encoding='utf-8') as f:
-        if mode == 'a':
-            # Use a slightly different header for the topic initialization vs arguments
-            if "TopicExtractAgent" in agent_name:
-                f.write(f"# Debate Topic: {content}\n\n")
-            else:
-                f.write(f"\n\n### Entry by {agent_name}\n{content}")
+        if "TopicExtractAgent" in agent_name and filename == "shared_memory.md":
+            f.write(f"# Debate Topic: {content}\n\n")
         else:
-            f.write(content)
+            # Add a clear header for each entry to separate them in the file
+            f.write(f"\n\n### Entry by {agent_name}\n{content}\n")
             
     return {"status": "success", "path": file_path}
 

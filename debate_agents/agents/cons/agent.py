@@ -1,18 +1,15 @@
-import os
 from google.adk.agents import LlmAgent
+
 from debate_agents.config import GEMINI_MODEL_ADAPTER
 from debate_agents.tools.memory_tools import get_read_markdown_tool, get_write_markdown_tool
-# Updated tool imports to use cons versions with specific function names
 from debate_agents.tools.cons.strategy_tool import get_cons_strategy_tool
 from debate_agents.tools.cons.persona_tool import get_cons_persona_tool
 from debate_agents.tools.cons.critique_tool import get_cons_critique_tool
-
-def load_prompt(filename: str) -> str:
-    path = os.path.join("debate_agents", "prompts", filename)
-    with open(path, "r", encoding="utf-8") as f:
-        return f.read()
+from debate_agents.schema.cons.agent_schema import AgentSchema
+from debate_agents.agents.utils import load_prompt
 
 def get_cons_agent():
+    """Factory function for the ConsRootAgent."""
     return LlmAgent(
         name="ConsAgent",
         model=GEMINI_MODEL_ADAPTER,
@@ -27,4 +24,5 @@ def get_cons_agent():
         ],
         output_key="cons_argument", 
         include_contents='none',
+        output_schema=AgentSchema
     )

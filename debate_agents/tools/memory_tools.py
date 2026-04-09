@@ -37,39 +37,13 @@ def refresh_memory():
     print("Memory refreshed: Structure initialized with required JSON files.")
 
 def get_memory_path(agent_name: str, filename: str) -> str:
-    """
-    Constructs the file path based on agent role, mapping .md requests to .json.
-    """
-    # Map old .md requests to .json
+    """Constructs the file path based on agent role."""
     json_filename = filename.replace(".md", ".json")
-    
-    if "Pros" in agent_name:
-        sub_dir = "pros_memory"
-    elif "Cons" in agent_name:
-        sub_dir = "cons_memory"
-    else:
-        sub_dir = ""
+    sub_dir = "pros_memory" if "Pros" in agent_name else "cons_memory" if "Cons" in agent_name else ""
+    return os.path.join(BASE_MEMORY_DIR, sub_dir, json_filename)
 
-    if json_filename == "shared_memory.json":
-        path = os.path.join(BASE_MEMORY_DIR, "shared_memory.json")
-    else:
-        path = os.path.join(BASE_MEMORY_DIR, sub_dir, json_filename)
-    
-    return path
-
-async def write_json(
-    filename: str,
-    content: Any,
-    tool_context: ToolContext
-) -> Dict[str, Any]:
-    """
-    Appends an object to a JSON file (list of entries) in the agent's memory.
-    
-    Args:
-        filename: The name of the file (e.g., 'thinking.json').
-        content: The data (dict/object) to append.
-    """
-    agent_name = tool_context.agent_name
+async def write_json_direct(filename: str, content: Any, agent_name: str) -> None:
+    """Directly writes/appends to JSON file without being a tool."""
     file_path = get_memory_path(agent_name, filename)
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
     
@@ -78,44 +52,29 @@ async def write_json(
         with open(file_path, "r", encoding="utf-8") as f:
             try:
                 data = json.load(f)
-            except json.JSONDecodeError:
+            except:
                 data = []
-
-    # Ensure content is dict
-    if isinstance(content, str):
-        try:
-            content = json.loads(content)
-        except:
-            content = {"message": content}
-
-    entry = {
-        "agent": agent_name,
-        "content": content
-    }
-    data.append(entry)
-            
+    
+    data.append({"agent": agent_name, "content": content})
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
-            
-    return {"status": "success", "path": file_path}
 
-async def read_json(
-    filename: str,
-    tool_context: ToolContext
-) -> Dict[str, Any]:
-    """
-    Reads a JSON file from the agent's memory.
-    """
-    agent_name = tool_context.agent_name
+async def read_json_direct(filename: str, agent_name: str) -> Any:
+    """Directly reads JSON file without being a tool."""
     file_path = get_memory_path(agent_name, filename)
-    
-    if not os.path.exists(file_path):
-        return {"status": "error", "message": f"File {filename} not found."}
-        
+    if not os.path.exists(file_path): return []
     with open(file_path, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-        
-    return {"status": "success", "content": data}
+        return json.load(f)
+
+async def read_json(filename: str, tool_context: ToolContext) -> Dict[str, Any]:
+    """Reads a JSON file from the agent's memory as a tool."""
+    content = await read_json_direct(filename, tool_context.agent_name)
+    return {"status": "success", "content": content}
+
+async def write_json(filename: str, content: Any, tool_context: ToolContext) -> Dict[str, Any]:
+    """Appends content to a JSON file as a tool."""
+    await write_json_direct(filename, content, tool_context.agent_name)
+    return {"status": "success"}
 
 def get_read_json_tool():
     return FunctionTool(func=read_json)

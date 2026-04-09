@@ -9,12 +9,12 @@ This project is a high-fidelity adversarial framework for studying **Persona Sta
 
 | Phase | Agent | Role | Tools |
 | :--- | :--- | :--- | :--- |
-| **Initial** | `TopicExtractAgent` | Parse user topic input | `write_markdown` |
+| **Initial** | `TopicExtractAgent` | Parse user topic input | `write_json` |
 | **Debate** | `LoopAgent` | Manages the alternating turns | Orchestrator |
 | **Execution**| `ProsAgent` / `ConsAgent` | The "Voice" of each side | `AgentTool` (Sub-Agents) |
 | **Strategy** | `ProsThinkingAgent` / `ConsThinkingAgent` | Develop tactical plans | `BuiltInPlanner` |
 | **Persona**  | `ProsPersonaAgent` / `ConsPersonaAgent` | Design/Refine adversarial identity | Internal knowledge |
-| **Validation**| `ProsCritiqueAgent` / `ConsCritiqueAgent` | Self-review draft arguments | `read_markdown`, `write_markdown` |
+| **Validation**| `ProsCritiqueAgent` / `ConsCritiqueAgent` | Self-review draft arguments | `read_json`, `write_json` |
 
 ---
 
@@ -23,10 +23,10 @@ This project is a high-fidelity adversarial framework for studying **Persona Sta
 ### 1. **Adversarial Integrity**
 Agents are instructed to be **competitors**, not assistants. They must maintain a strong, biased stance (Pro or Con) and strive to persuade the opponent to yield. Neutrality is considered a failure.
 
-### 2. **Session Persistence (Markdown-Native)**
-The system uses a custom Markdown-based memory schema:
-*   **Isolated Private Context**: `memory/pros_memory/` and `memory/cons_memory/` store side-specific reasoning (`thinking.md`, `persona.md`, `critique.md`).
-*   **Public Transcript**: `memory/shared_memory.md` contains the public debate history.
+### 2. **Session Persistence (JSON-Native)**
+The system uses a custom JSON-based memory schema:
+*   **Isolated Private Context**: `memory/pros_memory/` and `memory/cons_memory/` store side-specific reasoning (`thinking.json`, `persona.json`, `critique.json`).
+*   **Public Transcript**: `memory/shared_memory.json` contains the public debate history.
 *   **Read/Write Flow**: Agents are configured to explicitly read and write their state at each turn to ensure cross-round continuity.
 
 ### 3. **Strategic Reasoning**

@@ -10,7 +10,7 @@
 
 1.  **Analyze Context:** Read the debate topic and existing shared memory to understand the current argumentative landscape.
 2.  **Architect Persona:** Design a persona that is not just a speaker, but a competitor. They must be biased, unwavering, and tactically positioned to win.
-3.  **Persist Identity:** You MUST use the `write_markdown` tool to save the profile to `pros_memory/persona.md`. (Set `filename` to "persona.md" and `content` to the full persona profile).
+3.  **Persist Identity:** You MUST use the `write_json` tool to save the profile to `pros_memory/persona.md`. (Set `filename` to "persona.md" and `content` to the full persona profile).
 
 ---
 

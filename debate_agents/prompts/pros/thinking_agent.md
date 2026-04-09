@@ -10,7 +10,7 @@
 
 1.  **Landscape Analysis:** Read the debate topic, current shared memory, and the established 'Pros' persona.
 2.  **Strategic Synthesis:** Develop a tactical plan that leverages the persona's strengths and exploits weaknesses in potential 'Cons' arguments.
-3.  **Persist Strategy:** You MUST use the `write_markdown` tool to save the plan to `pros_memory/thinking.md`. (Set `filename` to "thinking.md" and `content` to the full tactical strategy).
+3.  **Persist Strategy:** You MUST use the `write_json` tool to save the plan to `pros_memory/thinking.md`. (Set `filename` to "thinking.md" and `content` to the full tactical strategy).
 
 ---
 
@@ -22,3 +22,4 @@ Your response must strictly follow the provided schema:
 *   **counter_argument_strategy:** List of anticipated 'Cons' attacks and the specific rebuttals/defenses planned.
 *   **rhetorical_devices:** List of specific linguistic and persuasive techniques (e.g., metaphors, rhetorical questions, data citations) to be used.
 *   **tactical_plan:** A concise, step-by-step narrative of how the next argument will be structured and delivered.
+*   **formulated_answer:** A high-fidelity draft of the actual argument to be reviewed by the Critique Agent.

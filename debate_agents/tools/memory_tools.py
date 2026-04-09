@@ -1,5 +1,6 @@
 import os
 import shutil
+import json
 from typing import Dict, Any
 from google.adk.tools import FunctionTool, ToolContext
 
@@ -20,91 +21,104 @@ def refresh_memory():
     
     # Initialize required files
     files_to_init = [
-        os.path.join(BASE_MEMORY_DIR, "shared_memory.md"),
-        os.path.join(pros_dir, "persona.md"),
-        os.path.join(pros_dir, "thinking.md"),
-        os.path.join(pros_dir, "critique.md"),
-        os.path.join(cons_dir, "persona.md"),
-        os.path.join(cons_dir, "thinking.md"),
-        os.path.join(cons_dir, "critique.md"),
+        os.path.join(BASE_MEMORY_DIR, "shared_memory.json"),
+        os.path.join(pros_dir, "persona.json"),
+        os.path.join(pros_dir, "thinking.json"),
+        os.path.join(pros_dir, "critique.json"),
+        os.path.join(cons_dir, "persona.json"),
+        os.path.join(cons_dir, "thinking.json"),
+        os.path.join(cons_dir, "critique.json"),
     ]
     
     for file_path in files_to_init:
         with open(file_path, "w", encoding="utf-8") as f:
-            f.write("") # Initialize with empty content
+            json.dump([], f) # Initialize with empty list to store entries
             
-    print("Memory refreshed: Structure initialized with required markdown files.")
+    print("Memory refreshed: Structure initialized with required JSON files.")
 
 def get_memory_path(agent_name: str, filename: str) -> str:
     """
-    Constructs the file path based on agent role.
+    Constructs the file path based on agent role, mapping .md requests to .json.
     """
-    if "Pros" in agent_name: # Broadened match
+    # Map old .md requests to .json
+    json_filename = filename.replace(".md", ".json")
+    
+    if "Pros" in agent_name:
         sub_dir = "pros_memory"
-    elif "Cons" in agent_name: # Broadened match
+    elif "Cons" in agent_name:
         sub_dir = "cons_memory"
     else:
-        # Default for shared or other agents
         sub_dir = ""
 
-    if filename == "shared_memory.md":
-        path = os.path.join(BASE_MEMORY_DIR, "shared_memory.md")
+    if json_filename == "shared_memory.json":
+        path = os.path.join(BASE_MEMORY_DIR, "shared_memory.json")
     else:
-        path = os.path.join(BASE_MEMORY_DIR, sub_dir, filename)
+        path = os.path.join(BASE_MEMORY_DIR, sub_dir, json_filename)
     
     return path
 
-async def write_markdown(
+async def write_json(
     filename: str,
-    content: str,
+    content: Any,
     tool_context: ToolContext
 ) -> Dict[str, Any]:
     """
-    Writes (appends) content to a markdown file in the agent's private or shared memory.
+    Appends an object to a JSON file (list of entries) in the agent's memory.
     
     Args:
-        filename: The name of the file (e.g., 'thinking.md', 'persona.md', 'critique.md', or 'shared_memory.md').
-        content: The text content to append.
+        filename: The name of the file (e.g., 'thinking.json').
+        content: The data (dict/object) to append.
     """
     agent_name = tool_context.agent_name
     file_path = get_memory_path(agent_name, filename)
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
     
-    # Always use append mode to preserve history within each round/session
-    mode = 'a'
-    
-    with open(file_path, mode, encoding='utf-8') as f:
-        if "TopicExtractAgent" in agent_name and filename == "shared_memory.md":
-            f.write(f"# Debate Topic: {content}\n\n")
-        else:
-            # Add a clear header for each entry to separate them in the file
-            f.write(f"\n\n### Entry by {agent_name}\n{content}\n")
+    data = []
+    if os.path.exists(file_path):
+        with open(file_path, "r", encoding="utf-8") as f:
+            try:
+                data = json.load(f)
+            except json.JSONDecodeError:
+                data = []
+
+    # Ensure content is dict
+    if isinstance(content, str):
+        try:
+            content = json.loads(content)
+        except:
+            content = {"message": content}
+
+    entry = {
+        "agent": agent_name,
+        "content": content
+    }
+    data.append(entry)
+            
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4)
             
     return {"status": "success", "path": file_path}
 
-async def read_markdown(
+async def read_json(
     filename: str,
     tool_context: ToolContext
 ) -> Dict[str, Any]:
     """
-    Reads content from a markdown file in the agent's private or shared memory.
-    
-    Args:
-        filename: The name of the file to read.
+    Reads a JSON file from the agent's memory.
     """
     agent_name = tool_context.agent_name
     file_path = get_memory_path(agent_name, filename)
     
     if not os.path.exists(file_path):
-        return {"status": "error", "message": f"File {filename} not found in memory."}
+        return {"status": "error", "message": f"File {filename} not found."}
         
     with open(file_path, 'r', encoding='utf-8') as f:
-        content = f.read()
+        data = json.load(f)
         
-    return {"status": "success", "content": content}
+    return {"status": "success", "content": data}
 
-def get_read_markdown_tool():
-    return FunctionTool(func=read_markdown)
+def get_read_json_tool():
+    return FunctionTool(func=read_json)
 
-def get_write_markdown_tool():
-    return FunctionTool(func=write_markdown)
+def get_write_json_tool():
+    return FunctionTool(func=write_json)

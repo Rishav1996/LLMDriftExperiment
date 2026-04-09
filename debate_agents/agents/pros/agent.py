@@ -1,28 +1,52 @@
-from google.adk.agents import LlmAgent
+import os
+import json
+from google.adk.agents import LoopAgent
+from google.adk.agents.callback_context import CallbackContext
+from debate_agents.tools.memory_tools import get_read_json_tool, get_write_json_tool
+from debate_agents.agents.pros.persona_agent import get_pros_persona_agent
+from debate_agents.agents.pros.thinking_agent import get_pros_thinking_agent
+from debate_agents.agents.pros.critique_agent import get_pros_critique_agent
 
-from debate_agents.config import GEMINI_MODEL_ADAPTER
-from debate_agents.tools.memory_tools import get_read_markdown_tool, get_write_markdown_tool
-from debate_agents.tools.pros.strategy_tool import get_pros_strategy_tool
-from debate_agents.tools.pros.persona_tool import get_pros_persona_tool
-from debate_agents.tools.pros.critique_tool import get_pros_critique_tool
-from debate_agents.schema.pros.agent_schema import AgentSchema
-from debate_agents.agents.utils import load_prompt
+def check_critique_approval(callback_context: CallbackContext) -> None:
+    """
+    Checks if the CritiqueAgent has approved the argument.
+    Reads the last entry from critique.json and checks for approved: true.
+    """
+    critique_file = os.path.join("debate_agents", "memory", "pros_memory", "critique.json")
+    if os.path.exists(critique_file):
+        with open(critique_file, "r", encoding="utf-8") as f:
+            try:
+                data = json.load(f)
+                if data and isinstance(data, list):
+                    # Check the last critique entry
+                    last_critique = data[-1].get("content", {})
+                    # Ensure content is dict or parsed string
+                    if isinstance(last_critique, str):
+                        try:
+                            last_critique = json.loads(last_critique)
+                        except:
+                            pass
+                    
+                    if isinstance(last_critique, dict) and last_critique.get("approved") is True:
+                        callback_context.actions.escalate = True
+            except json.JSONDecodeError:
+                pass
 
 def get_pros_agent():
-    """Factory function for the ProsRootAgent."""
-    return LlmAgent(
+    """Factory function for the ProsRootAgent (LoopAgent)."""
+    persona_agent = get_pros_persona_agent()
+    thinking_agent = get_pros_thinking_agent()
+    critique_agent = get_pros_critique_agent()
+    
+    critique_agent.after_agent_callback = check_critique_approval
+    
+    return LoopAgent(
         name="ProsAgent",
-        model=GEMINI_MODEL_ADAPTER,
-        instruction=load_prompt("pros/agent.md"), 
-        description="Generates refined arguments in favor using persona, tactical, critique, and memory tools.",
-        tools=[
-            get_pros_strategy_tool(), 
-            get_pros_persona_tool(), 
-            get_pros_critique_tool(),
-            get_read_markdown_tool(),
-            get_write_markdown_tool()
+        sub_agents=[
+            persona_agent,
+            thinking_agent,
+            critique_agent
         ],
-        output_key="pros_argument", 
-        include_contents='none',
-        output_schema=AgentSchema
+        max_iterations=5,
+        description="Coordinates iterative debate refinement loop."
     )

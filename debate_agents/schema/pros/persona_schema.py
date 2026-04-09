@@ -3,8 +3,6 @@ from typing import List
 
 class PersonaSchema(BaseModel):
     """Schema for the competitive adversarial persona profile."""
-    agent_name: str = Field(..., description="The name of the agent providing the response.")
-    name: str = Field(..., description="The name of the persona.")
     voice_and_tone: str = Field(..., description="The speaking style, vocabulary level, and emotional resonance.")
     adversarial_stance: str = Field(..., description="How they specifically target and challenge the opposing position.")
     background: str = Field(..., description="A concise backstory that shapes their viewpoint.")

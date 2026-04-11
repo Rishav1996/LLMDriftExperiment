@@ -1,8 +1,18 @@
 from debate_agents.agents.base.factory import AgentWrapper
 from debate_agents.schema.pros_schema import PersonaSchema, ThinkingSchema, CritiqueSchema
 from debate_agents.tools.memory_tools import write_json_direct, read_json_direct
+from typing import Any, Dict
 
-async def pros_persona_node(state):
+async def pros_persona_node(state: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Generates the Pro agent's persona.
+
+    Args:
+        state (Dict[str, Any]): The current LangGraph debate state.
+
+    Returns:
+        Dict[str, Any]: The updated state including the last output and iteration count.
+    """
     agent = AgentWrapper(PersonaSchema, "pros/persona_agent.md", "ProsPersonaAgent")
     shared_memory = await read_json_direct("shared_memory.json", "ProsPersonaAgent")
     context = f"Topic: {state['topic']}\nShared Memory: {shared_memory}"
@@ -10,7 +20,16 @@ async def pros_persona_node(state):
     await write_json_direct("persona.json", result.model_dump(), "ProsPersonaAgent", state['round'])
     return {"last_output": result, "pros_iteration": state.get("pros_iteration", 0) + 1}
 
-async def pros_thinking_node(state):
+async def pros_thinking_node(state: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Generates the Pro agent's thinking process.
+
+    Args:
+        state (Dict[str, Any]): The current LangGraph debate state.
+
+    Returns:
+        Dict[str, Any]: The updated state including the last output.
+    """
     agent = AgentWrapper(ThinkingSchema, "pros/thinking_agent.md", "ProsThinkingAgent")
     persona = await read_json_direct("persona.json", "ProsThinkingAgent")
     shared_memory = await read_json_direct("shared_memory.json", "ProsThinkingAgent")
@@ -19,7 +38,16 @@ async def pros_thinking_node(state):
     await write_json_direct("thinking.json", result.model_dump(), "ProsThinkingAgent", state['round'])
     return {"last_output": result}
 
-async def pros_critique_node(state):
+async def pros_critique_node(state: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Critiques the Pro agent's thinking process.
+
+    Args:
+        state (Dict[str, Any]): The current LangGraph debate state.
+
+    Returns:
+        Dict[str, Any]: The updated state including approval status and last output.
+    """
     agent = AgentWrapper(CritiqueSchema, "pros/critique_agent.md", "ProsCritiqueAgent")
     thinking = await read_json_direct("thinking.json", "ProsCritiqueAgent")
     persona = await read_json_direct("persona.json", "ProsCritiqueAgent")

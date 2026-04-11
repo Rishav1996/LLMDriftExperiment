@@ -1,8 +1,18 @@
 from debate_agents.agents.base.factory import AgentWrapper
 from debate_agents.schema.topic_extract_schema import TopicExtractSchema
 from debate_agents.tools.memory_tools import refresh_memory, write_json_direct
+from typing import Any, Dict
 
-async def topic_extractor_node(state):
+async def topic_extractor_node(state: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Extracts the debate topic from the user input.
+
+    Args:
+        state (Dict[str, Any]): The current LangGraph debate state.
+
+    Returns:
+        Dict[str, Any]: The updated state including the topic, current round, and team.
+    """
     refresh_memory()
     agent = AgentWrapper(TopicExtractSchema, "topic_extract_agent.md", "TopicExtractAgent")
     # Include round in context for the agent

@@ -13,6 +13,9 @@ from debate_agents.agents.cons_agent import cons_persona_node, cons_thinking_nod
 
 # 1. Define Graph State
 class DebateState(TypedDict):
+    """
+    Represents the state of the debate simulation.
+    """
     topic: str
     round: int
     current_team: str # "pros" or "cons"
@@ -23,19 +26,46 @@ class DebateState(TypedDict):
     user_input: str
 
 # 2. Define Edge Logic
-def should_continue_pros(state: DebateState):
+def should_continue_pros(state: DebateState) -> str:
+    """
+    Determines the next node for the Pro team.
+    
+    Args:
+        state (DebateState): The current debate state.
+
+    Returns:
+        str: The name of the next node to execute.
+    """
     if state["is_approved"] or state.get("pros_iteration", 0) >= 5:
         return "cons_persona"
     return "pros_persona"
 
-def should_continue_cons(state: DebateState):
+def should_continue_cons(state: DebateState) -> str:
+    """
+    Determines the next node for the Con team.
+    
+    Args:
+        state (DebateState): The current debate state.
+
+    Returns:
+        str: The name of the next node to execute or END.
+    """
     if state["is_approved"] or state.get("cons_iteration", 0) >= 5:
         if state["round"] >= MAX_ROUNDS:
             return END
         return "next_round"
     return "cons_persona"
 
-def next_round_node(state: DebateState):
+def next_round_node(state: DebateState) -> Dict[str, Any]:
+    """
+    Updates the state to increment the round number.
+    
+    Args:
+        state (DebateState): The current debate state.
+
+    Returns:
+        Dict[str, Any]: The updated state with the incremented round.
+    """
     return {"round": state["round"] + 1, "pros_iteration": 0, "cons_iteration": 0}
 
 # 3. Build Graph
@@ -74,6 +104,12 @@ workflow.add_edge("next_round", "pros_persona")
 app = workflow.compile()
 
 def generate_graph_image():
+    """
+    Generates and saves a visualization of the LangGraph workflow.
+    
+    Returns:
+        None
+    """
     try:
         path = "debate_agents/assets/graph.png"
         with open(path, "wb") as f:

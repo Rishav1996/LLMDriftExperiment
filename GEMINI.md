@@ -3,6 +3,8 @@
 
 This project is a high-fidelity adversarial framework for studying **Persona Stability and Response Drift** in Large Language Models. It is built as a **native ADK application**, where teams of specialized agents compete to win a persuasive debate.
 
+By forcing LLMs into strictly defined, adversarial roles and measuring how their arguments evolve over multiple rounds of critique and opposition, the project provides an empirical environment to test the limits of persona adherence and logical consistency in modern AI models.
+
 ---
 
 ## 🏛️ Agent Hierarchy & Workflow

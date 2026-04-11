@@ -32,9 +32,13 @@ def refresh_memory():
 def get_memory_path(agent_name: str, filename: str) -> str:
     """
     Constructs the file path.
+    If filename is shared_memory.json, use it directly in BASE_MEMORY_DIR.
     If filename already includes the team folder, use it directly.
     Otherwise, prepend team folder based on agent_name.
     """
+    if filename == "shared_memory.json":
+        return os.path.join(BASE_MEMORY_DIR, filename)
+        
     if "pros_memory" in filename or "cons_memory" in filename:
         return os.path.join(BASE_MEMORY_DIR, filename)
     
@@ -72,3 +76,13 @@ async def write_json(filename: str, content: Any, tool_context: ToolContext) -> 
 
 def get_read_json_tool(): return FunctionTool(func=read_json)
 def get_write_json_tool(): return FunctionTool(func=write_json)
+
+async def exit_loop(tool_context: ToolContext):
+    """Call this function ONLY when the critique indicates no further changes are needed, signaling the iterative process should end."""
+    print(f"  [Tool Call] exit_loop triggered by {tool_context.agent_name}")
+    tool_context.actions.escalate = True
+    tool_context.actions.skip_summarization = True
+    # Return empty dict as tools should typically return JSON-serializable output
+    return {}
+
+def get_exit_loop_tool(): return FunctionTool(func=exit_loop)

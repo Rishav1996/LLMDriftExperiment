@@ -5,4 +5,11 @@ description = "A specialized framework to evaluate LLM Drift through adversarial
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "google-adk>=1.29.0",
+    "litellm>=1.83.0",
+    "mlflow>=3.11.1",
+    "opentelemetry-api>=1.38.0",
+    "opentelemetry-exporter-otlp>=1.38.0",
+    "opentelemetry-sdk>=1.38.0",
+    "python-dotenv>=1.2.2",
 ]

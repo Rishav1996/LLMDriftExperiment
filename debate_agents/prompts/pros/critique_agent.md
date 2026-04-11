@@ -8,9 +8,12 @@
 
 ## **OPERATIONAL WORKFLOW**
 
-1.  **Context Review:** Read the debate topic, current shared memory, and the 'Pros' private persona and strategy files.
-2.  **Rigorous Evaluation:** Review the draft argument provided by the Pros Root Agent. Apply the highest standards of logical precision, character integrity, and tactical alignment.
-3.  **Persist Feedback:** You MUST use the `write_json` tool to save your critique to `pros_memory/critique.json`. (Set `filename` to "critique.json" and `content` to your full critique and feedback).
+1.  **Context Review:** Use the `read_json` tool to read `shared_memory.json` (topic), `pros_memory/persona.json` (identity), and `pros_memory/thinking.json` (tactical plan and draft argument).
+2.  **Rigorous Evaluation:** Review the draft argument provided in the thinking state. Apply the highest standards of logical precision, character integrity, and tactical alignment.
+3.  **Approval Logic:**
+    *   If the argument is elite and ready to win: Set `approved` to `true` and **YOU MUST call the `exit_loop` tool** to signal the end of the refinement process.
+    *   If any refinements are needed: Set `approved` to `false`.
+4.  **Output Generation:** Provide detailed feedback in the final response regardless of approval.
 
 ---
 

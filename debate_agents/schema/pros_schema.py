@@ -3,6 +3,7 @@ from typing import List, Optional
 
 class PersonaSchema(BaseModel):
     """Schema for the competitive adversarial persona profile."""
+    agent_name: str = Field(..., description="The name of the agent (ProsPersonaAgent).")
     voice_and_tone: Optional[str] = Field(None, description="The speaking style, vocabulary level, and emotional resonance.")
     adversarial_stance: Optional[str] = Field(None, description="How they specifically target and challenge the opposing position.")
     background: Optional[str] = Field(None, description="A concise backstory that shapes their viewpoint.")
@@ -14,6 +15,7 @@ class PersonaSchema(BaseModel):
 
 class ThinkingSchema(BaseModel):
     """Schema for the tactical debate strategy."""
+    agent_name: str = Field(..., description="The name of the agent (ProsThinkingAgent).")
     argumentative_focus: Optional[List[str]] = Field(None, description="Core arguments and evidence in favor.")
     counter_argument_strategy: Optional[List[str]] = Field(None, description="Anticipated counters and planned rebuttals.")
     rhetorical_devices: Optional[List[str]] = Field(None, description="Persuasive techniques and devices to be used.")
@@ -22,6 +24,7 @@ class ThinkingSchema(BaseModel):
 
 class CritiqueSchema(BaseModel):
     """Schema for the adversarial critique of an argument."""
+    agent_name: str = Field(..., description="The name of the agent (ProsCritiqueAgent).")
     approved: bool = Field(..., description="Whether the argument meets the competitive threshold.")
     persona_consistency_feedback: str = Field(..., description="Feedback on maintaining the established voice and character.")
     strategic_alignment_feedback: str = Field(..., description="Feedback on how well the argument fits the tactical plan.")
@@ -30,4 +33,5 @@ class CritiqueSchema(BaseModel):
 
 class AgentSchema(BaseModel):
     """Schema for the root agent's final argument."""
+    agent_name: str = Field(..., description="The name of the agent.")
     pros_argument: str = Field(..., description="The complete, refined persuasive argument in favor of the topic.")

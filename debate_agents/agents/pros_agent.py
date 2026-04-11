@@ -11,17 +11,19 @@ from debate_agents.agents.base.persistence import (
     save_critique_callback,
     save_persona_callback,
     save_thinking_callback,
+    save_shared_memory_callback,
 )
+from debate_agents.tools.memory_tools import get_read_json_tool, get_exit_loop_tool
 
 async def check_critique_approval(callback_context: CallbackContext) -> None:
     """
-    Checks if the CritiqueAgent has approved the argument.
-    If approved, save the critique result and stop the loop.
+    Saves the critique output and the answer to shared memory if approved.
+    The actual loop termination is now handled by the 'exit_loop' tool.
     """
     # 1. Save the critique output first (callback ensures it's persisted)
     await save_critique_callback(callback_context)
-    
-    # 2. Check for approval
+
+    # 2. Check for approval to save to shared memory
     critique_file = os.path.join("debate_agents", "memory", "pros_memory", "critique.json")
     if os.path.exists(critique_file):
         with open(critique_file, "r", encoding="utf-8") as f:
@@ -32,19 +34,20 @@ async def check_critique_approval(callback_context: CallbackContext) -> None:
                     if isinstance(last_critique, str):
                         try: last_critique = json.loads(last_critique)
                         except: pass
-                    
+
                     if isinstance(last_critique, dict) and last_critique.get("approved") is True:
-                        # Escalation triggers the LoopAgent to stop
-                        callback_context.actions.escalate = True
+                        # Save to shared_memory.json
+                        await save_shared_memory_callback(callback_context)
             except json.JSONDecodeError: pass
 
 def get_pros_agent():
     persona_agent = create_base_agent("ProsPersonaAgent", "pros/persona_agent.md", "Designs a persona.", "pros_persona", PersonaSchema, planner=BuiltInPlanner(thinking_config=types.ThinkingConfig(include_thoughts=True, thinking_budget=512)), tools=[get_read_json_tool()], callback=save_persona_callback)
     thinking_agent = create_base_agent("ProsThinkingAgent", "pros/thinking_agent.md", "Analyzes debate.", "pros_thinking", ThinkingSchema, planner=BuiltInPlanner(thinking_config=types.ThinkingConfig(include_thoughts=True, thinking_budget=512)), tools=[get_read_json_tool()], callback=save_thinking_callback)
-    critique_agent = create_base_agent("ProsCritiqueAgent", "pros/critique_agent.md", "Evaluates arguments.", "pros_critique", CritiqueSchema, planner=BuiltInPlanner(thinking_config=types.ThinkingConfig(include_thoughts=True, thinking_budget=512)), tools=[get_read_json_tool()], callback=None)
-    
+    critique_agent = create_base_agent("ProsCritiqueAgent", "pros/critique_agent.md", "Evaluates arguments.", "pros_critique", CritiqueSchema, planner=BuiltInPlanner(thinking_config=types.ThinkingConfig(include_thoughts=True, thinking_budget=512)), tools=[get_read_json_tool(), get_exit_loop_tool()], callback=None)
+
     # Register the approval check (which now includes saving) as the critique agent's callback
     critique_agent.after_agent_callback = check_critique_approval
+
     
     return LoopAgent(
         name="ProsAgent",

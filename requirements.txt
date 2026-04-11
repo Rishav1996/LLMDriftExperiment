@@ -5,3 +5,7 @@ opentelemetry-exporter-otlp
 opentelemetry-sdk
 python-dotenv
 litellm
+langchain-google-genai
+langgraph
+langsmith
+pydantic

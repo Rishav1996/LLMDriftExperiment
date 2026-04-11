@@ -25,6 +25,7 @@ class ThinkingSchema(BaseModel):
 class CritiqueSchema(BaseModel):
     """Schema for the adversarial critique (Cons)."""
     agent_name: str = Field(..., description="The name of the agent (ConsCritiqueAgent).")
+    round: int = Field(..., description="The current round of the debate.")
     approved: bool = Field(..., description="Whether the argument meets the competitive threshold.")
     persona_consistency_feedback: str = Field(..., description="Feedback on maintaining the skeptical voice and character.")
     strategic_alignment_feedback: str = Field(..., description="Feedback on how well the argument challenges the 'Pros'.")
@@ -34,4 +35,5 @@ class CritiqueSchema(BaseModel):
 class AgentSchema(BaseModel):
     """Schema for the Cons root agent's final argument."""
     agent_name: str = Field(..., description="The name of the agent.")
+    round: int = Field(..., description="The current round of the debate.")
     cons_argument: str = Field(..., description="The complete, refined persuasive argument against the topic.")

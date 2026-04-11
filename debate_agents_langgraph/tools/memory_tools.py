@@ -2,9 +2,8 @@ import os
 import shutil
 import json
 from typing import Dict, Any
-from google.adk.tools import FunctionTool, ToolContext
 
-BASE_MEMORY_DIR = "debate_agents/memory"
+BASE_MEMORY_DIR = "debate_agents_langgraph/memory"
 
 def refresh_memory():
     """Clears the memory directory and initializes the required structure."""
@@ -66,23 +65,5 @@ async def read_json_direct(filename: str, agent_name: str) -> Any:
     with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
-async def read_json(filename: str, tool_context: ToolContext) -> Dict[str, Any]:
-    content = await read_json_direct(filename, tool_context.agent_name)
-    return {"status": "success", "content": content}
-
-async def write_json(filename: str, content: Any, tool_context: ToolContext) -> Dict[str, Any]:
-    await write_json_direct(filename, content, tool_context.agent_name)
-    return {"status": "success"}
-
-def get_read_json_tool(): return FunctionTool(func=read_json)
-def get_write_json_tool(): return FunctionTool(func=write_json)
-
-async def exit_loop(tool_context: ToolContext):
-    """Call this function ONLY when the critique indicates no further changes are needed, signaling the iterative process should end."""
-    print(f"  [Tool Call] exit_loop triggered by {tool_context.agent_name}")
-    tool_context.actions.escalate = True
-    tool_context.actions.skip_summarization = True
-    # Return empty dict as tools should typically return JSON-serializable output
-    return {}
-
-def get_exit_loop_tool(): return FunctionTool(func=exit_loop)
+# Note: The original ADK tool wrappers (FunctionTool) are removed for LangGraph.
+# Node implementations directly use write_json_direct and read_json_direct.

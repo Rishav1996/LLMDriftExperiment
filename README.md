@@ -80,6 +80,23 @@ adk run debate_agents/agent.py
 
 ---
 
+## 🔗 LangGraph Version (`debate_agents_langgraph/`)
+
+A replication of the debate framework built using **LangGraph** and **LangChain** instead of the Google ADK. This version maintains the same adversarial logic and persistence schema but uses a graph-based state machine for orchestration.
+
+### **Key Differences**
+*   **Orchestration**: Uses a `StateGraph` to define the debate flow, rounds, and iterative refinement loops.
+*   **Nodes & Edges**: Each agent phase (Topic Extraction, Persona, Thinking, Critique) is a discrete node in the graph.
+*   **Agent Wrapper**: Uses `AgentWrapper` with LangChain's `with_structured_output` for consistent JSON generation.
+*   **Independence**: Fully decoupled from `google-adk`, using `langchain-google-genai` and `langgraph`.
+
+### **Execution (LangGraph)**
+```bash
+python -m debate_agents_langgraph.agent
+```
+
+---
+
 ## ⚙️ Configuration
 The system configuration is centralized in `debate_agents/config.py`. Key settings include:
 - `MAX_ROUNDS`: The number of turns in the main debate loop.

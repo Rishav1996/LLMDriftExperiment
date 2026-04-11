@@ -51,6 +51,32 @@ The system uses a **Global Content Generation Config** in `config.py` with the f
 
 ---
 
+## 🔗 LangGraph Architecture (`debate_agents_langgraph/`)
+
+A separate implementation of the debate framework using **LangGraph** to manage state and orchestration, providing an alternative to the ADK-native `SequentialAgent` and `LoopAgent` models.
+
+### **Key Technical Specs**
+- **Framework**: `langgraph`
+- **Model Interface**: `langchain-google-genai`
+- **State Definition**: `DebateState(TypedDict)`
+- **Graph Nodes**: Discrete Python functions per agent phase.
+- **Persistence**: Shared JSON logic (via `debate_agents_langgraph/tools/memory_tools.py`).
+
+### **Directory Structure (LangGraph)**
+```text
+debate_agents_langgraph/
+├── agent.py                 # Graph Definition & Entry
+├── config.py                # LangGraph-specific settings
+├── agents/                  # Node Logic & Wrapper
+│   ├── base/factory.py      # LangChain Model Factory
+│   └── topic_extract_agent.py / pros_agent.py / cons_agent.py
+├── memory/                  # JSON Session Data (Isolated)
+├── prompts/                 # (Copied Markdown instructions)
+└── schema/                  # (Copied Pydantic models)
+```
+
+---
+
 ## 📁 Directory Architecture
 
 ```text

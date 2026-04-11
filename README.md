@@ -25,11 +25,25 @@ debate_agents/
 
 ---
 
+## 🏛️ Multi-Agent Orchestration
+
+The system uses a hierarchical ADK orchestration pattern:
+
+1.  **SequentialAgent (DebateOrchestrator)**: Manages the high-level flow from topic extraction to the debate loop.
+2.  **LoopAgent (DebateLoop)**: Manages alternating turns between the Pros and Cons teams for `MAX_ROUNDS`.
+3.  **Team Root (ProsAgent/ConsAgent)**: A sub-loop that coordinates three specialized agents:
+    - **PersonaAgent**: Designs and maintains the adversarial identity.
+    - **ThinkingAgent**: Develops tactical arguments and plans.
+    - **CritiqueAgent**: Self-reviews and approves arguments before they are sent to the opponent.
+
+---
+
 ## ⚡ Core Features
 
-*   **Iterative Refinement**: Agents loop through persona design, strategic thinking, and adversarial critique until an argument is approved.
-*   **Structured Persistence**: All agent states (personas, tactics, critiques) are saved as structured **JSON** files in the `memory/` directory.
+*   **Iterative Refinement**: Agents loop through persona design, strategic thinking, and adversarial critique until an argument is approved (or `max_iterations` reached).
+*   **Structured Persistence**: All agent states (personas, tactics, critiques) are saved as structured **JSON** files in side-specific memory directories.
 *   **Adversarial Integrity**: Agents are strictly mandated to maintain their persona stability while actively pressuring the opponent to drift.
+*   **Native ADK Plugins**: Utilizes `ReflectAndRetryToolPlugin` for robust tool execution.
 *   **Observability**: Integrated MLflow and OpenTelemetry for end-to-end tracing of the debate orchestration.
 
 ---

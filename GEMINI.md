@@ -38,8 +38,14 @@ All specialized sub-agents utilize the `BuiltInPlanner` with a 512-token thinkin
 
 ### **LLM Client Configuration**
 The system uses a **Global Content Generation Config** in `config.py` with the following parameters:
-- **Model**: `gemini-2.5-flash-lite` (Configurable via `GEMINI_MODEL_ADAPTER`)
+- **Model**: `gemini-3.1-flash-lite-preview` (Configurable via `GEMINI_MODEL_ADAPTER`)
 - **Http Retry Logic**: `initial_delay=30s`, `attempts=5`.
+- **Secondary Adapter**: `Cerebras (LiteLLM)` using `CEREBRAS_MODEL_ID = "cerebras/qwen-3-235b-a22b-instruct-2507"`.
+
+### **ADK Orchestration**
+- **Orchestrator**: `SequentialAgent` (`DebateOrchestrator`)
+- **Plugins**: `ReflectAndRetryToolPlugin` (max_retries=3)
+- **Monitoring**: OpenTelemetry + MLflow OTLP endpoint (port 5000).
 
 ---
 

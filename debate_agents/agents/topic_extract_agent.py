@@ -1,7 +1,7 @@
 from google.adk.agents.callback_context import CallbackContext
 from debate_agents.tools.memory_tools import refresh_memory
 from debate_agents.schema.topic_extract_schema import TopicExtractSchema
-from debate_agents.agents.factory import create_base_agent
+from debate_agents.agents.base.factory import create_base_agent
 
 async def refresh_memory_callback(callback_context: CallbackContext) -> None:
     refresh_memory()

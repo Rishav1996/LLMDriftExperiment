@@ -36,8 +36,8 @@ atexit.register(provider.shutdown)
 # 3. Import ADK components and project agents AFTER tracing is configured
 from google.adk.apps.app import App
 from google.adk.agents import LoopAgent, SequentialAgent
-from debate_agents.agents.pros.agent import get_pros_agent
-from debate_agents.agents.cons.agent import get_cons_agent
+from debate_agents.agents.pros_agent import get_pros_agent
+from debate_agents.agents.cons_agent import get_cons_agent
 from debate_agents.agents.topic_extract_agent import get_topic_extract_agent
 from debate_agents.config import MAX_ROUNDS, GEMINI_MODEL_ADAPTER 
 from google.adk.plugins import ReflectAndRetryToolPlugin

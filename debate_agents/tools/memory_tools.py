@@ -1,7 +1,7 @@
 import os
 import shutil
 import json
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
 BASE_MEMORY_DIR = "debate_agents/memory"
 
@@ -44,8 +44,8 @@ def get_memory_path(agent_name: str, filename: str) -> str:
     sub_dir = "pros_memory" if "Pros" in agent_name else "cons_memory" if "Cons" in agent_name else ""
     return os.path.join(BASE_MEMORY_DIR, sub_dir, filename)
 
-async def write_json_direct(filename: str, content: Any, agent_name: str) -> None:
-    """Directly writes/appends to JSON file."""
+async def write_json_direct(filename: str, content: Any, agent_name: str, round_num: Optional[int] = None) -> None:
+    """Directly writes/appends to JSON file, optionally including the debate round."""
     file_path = get_memory_path(agent_name, filename)
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
     
@@ -55,7 +55,11 @@ async def write_json_direct(filename: str, content: Any, agent_name: str) -> Non
             try: data = json.load(f)
             except: data = []
     
-    data.append({"agent": agent_name, "content": content})
+    entry = {"agent": agent_name, "content": content}
+    if round_num is not None:
+        entry["round"] = round_num
+        
+    data.append(entry)
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 

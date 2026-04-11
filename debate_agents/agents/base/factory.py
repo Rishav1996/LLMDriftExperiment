@@ -15,9 +15,10 @@ class AgentWrapper:
         self.instruction = load_prompt(instruction_path)
         self.structured_model = self.model.with_structured_output(schema)
 
-    async def invoke(self, state_str: str):
+    async def invoke(self, state_str: str, round_num: int):
+        # LangChain approach
         messages = [
             SystemMessage(content=self.instruction),
-            HumanMessage(content=f"Current Context and Memory:\n{state_str}")
+            HumanMessage(content=f"Round: {round_num}\nCurrent Context and Memory:\n{state_str}")
         ]
         return await self.structured_model.ainvoke(messages)

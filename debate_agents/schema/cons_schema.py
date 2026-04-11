@@ -4,6 +4,7 @@ from typing import List, Optional
 class PersonaSchema(BaseModel):
     """Schema for the competitive adversarial persona profile (Cons)."""
     agent_name: str = Field(..., description="The name of the agent (ConsPersonaAgent).")
+    round: int = Field(..., description="The current round of the debate.")
     voice_and_tone: Optional[str] = Field(None, description="The speaking style, vocabulary level, and skeptical resonance.")
     adversarial_stance: Optional[str] = Field(None, description="How they specifically target and challenge the 'Pros' position.")
     background: Optional[str] = Field(None, description="A concise backstory that shapes their skeptical viewpoint.")
@@ -16,6 +17,7 @@ class PersonaSchema(BaseModel):
 class ThinkingSchema(BaseModel):
     """Schema for the tactical debate strategy (Cons)."""
     agent_name: str = Field(..., description="The name of the agent (ConsThinkingAgent).")
+    round: int = Field(..., description="The current round of the debate.")
     argumentative_focus: Optional[List[str]] = Field(None, description="Core arguments, risks, and unintended consequences against.")
     counter_argument_strategy: Optional[List[str]] = Field(None, description="Anticipated Pros arguments and questioning strategies.")
     rhetorical_devices: Optional[List[str]] = Field(None, description="Critical techniques and devices to deconstruct opposition.")

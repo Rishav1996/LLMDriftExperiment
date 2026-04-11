@@ -73,14 +73,26 @@ workflow.add_edge("next_round", "pros_persona")
 # Compile
 app = workflow.compile()
 
+def generate_graph_image():
+    try:
+        path = "debate_agents/assets/graph.png"
+        with open(path, "wb") as f:
+            f.write(app.get_graph().draw_mermaid_png())
+        print(f"Graph saved to {path}")
+    except Exception as e:
+        print(f"Error generating graph: {e}")
+
 if __name__ == "__main__":
     import asyncio
+    
+    # Generate graph on start
+    generate_graph_image()
+
     async def main():
         user_input = input("Enter debate topic: ")
         async for output in app.astream({"user_input": user_input, "round": 0, "pros_iteration": 0, "cons_iteration": 0, "is_approved": False}):
             for key, value in output.items():
                 print(f"Node '{key}':")
-                # print(f"  State Update: {value}")
         print("\nDebate Finished!")
 
     asyncio.run(main())

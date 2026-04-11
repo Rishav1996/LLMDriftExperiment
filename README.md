@@ -50,5 +50,8 @@ python debate_agents/agent.py
 ```
 Input your chosen debate topic when prompted. The workflow will automatically log state transitions and memory updates in the `debate_agents/memory/` directory.
 
-## Analysis and Evaluation
-The `memory/` directory is designed for post-simulation analysis. Use these files to compare how persona, thinking, and critique content change across different model versions or iterations, providing a empirical basis for measuring LLM drift.
+## Workflow Visualization
+
+The debate agent workflow can be visualized as a graph, showcasing the state machine transitions between the extraction, persona, thinking, and critique nodes:
+
+![Debate Agent Workflow](debate_agents/assets/graph.png)

@@ -9,3 +9,4 @@ langchain-google-genai
 langgraph
 langsmith
 pydantic
+tenacity

@@ -8,6 +8,7 @@ class PersonaSchema(BaseModel):
     Attributes:
         agent_name (str): The name of the agent (ProsPersonaAgent).
         round (int): The current round of the debate.
+        skip_persona_generation (bool): Whether to skip generating a new persona and reuse the previous one.
         voice_and_tone (Optional[str]): Speaking style and vocabulary level.
         adversarial_stance (Optional[str]): Stance against the opposition.
         background (Optional[str]): Backstory shaping the viewpoint.
@@ -19,6 +20,7 @@ class PersonaSchema(BaseModel):
     """
     agent_name: str = Field(..., description="The name of the agent (ProsPersonaAgent).")
     round: int = Field(..., description="The current round of the debate.")
+    skip_persona_generation: bool = Field(False, description="Set True to skip generating a new persona and reuse the previous one.")
     voice_and_tone: Optional[str] = Field(None, description="The speaking style, vocabulary level, and emotional resonance.")
     adversarial_stance: Optional[str] = Field(None, description="How they specifically target and challenge the opposing position.")
     background: Optional[str] = Field(None, description="A concise backstory that shapes their viewpoint.")

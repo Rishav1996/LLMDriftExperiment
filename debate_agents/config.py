@@ -1,7 +1,7 @@
 # Configuration for the LLM Drift Experiment
 import os
 
-MAX_ROUNDS = 3
+MAX_ROUNDS = 5
 
 # --- 1. Native Gemini Configuration ---
 GEMINI_MODEL_ID = "gemini-3.1-flash-lite-preview" # Use a standard model name

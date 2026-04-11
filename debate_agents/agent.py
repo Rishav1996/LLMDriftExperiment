@@ -1,10 +1,15 @@
 import os
-from typing import TypedDict, List, Optional, Any
+import mlflow
+from typing import TypedDict, List, Optional, Any, Dict
 from langgraph.graph import StateGraph, START, END
 from dotenv import load_dotenv
+from debate_agents.tools.mlflow_logger import log_state_change
 
 # Load environment variables
 load_dotenv()
+
+# Initialize MLflow
+mlflow.set_experiment("LLMDriftExperiment")
 
 from debate_agents.config import MAX_ROUNDS
 from debate_agents.agents.topic_extract_agent import topic_extractor_node
@@ -66,7 +71,9 @@ def next_round_node(state: DebateState) -> Dict[str, Any]:
     Returns:
         Dict[str, Any]: The updated state with the incremented round.
     """
-    return {"round": state["round"] + 1, "pros_iteration": 0, "cons_iteration": 0}
+    new_round = state["round"] + 1
+    print(f"\n--- Starting Round {new_round} ---")
+    return {"round": new_round, "pros_iteration": 0, "cons_iteration": 0}
 
 # 3. Build Graph
 workflow = StateGraph(DebateState)
@@ -126,9 +133,16 @@ if __name__ == "__main__":
 
     async def main():
         user_input = input("Enter debate topic: ")
-        async for output in app.astream({"user_input": user_input, "round": 0, "pros_iteration": 0, "cons_iteration": 0, "is_approved": False}):
-            for key, value in output.items():
-                print(f"Node '{key}':")
+        
+        # Start top-level run for simulation
+        with mlflow.start_run(run_name="DebateSimulation"):
+            async for output in app.astream({"user_input": user_input, "round": 0, "pros_iteration": 0, "cons_iteration": 0, "is_approved": False}):
+                for key, value in output.items():
+                    print(f"Node '{key}':")
+                    # Log state updates
+                    if isinstance(value, dict):
+                        for k, v in value.items():
+                            log_state_change(k, v, 0) # Simplification: round might need tracking here
         print("\nDebate Finished!")
 
     asyncio.run(main())

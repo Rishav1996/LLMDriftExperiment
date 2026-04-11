@@ -13,6 +13,7 @@ async def topic_extractor_node(state: Dict[str, Any]) -> Dict[str, Any]:
     Returns:
         Dict[str, Any]: The updated state including the topic, current round, and team.
     """
+    print("[TopicExtractAgent] Running for Round 1...")
     refresh_memory()
     agent = AgentWrapper(TopicExtractSchema, "topic_extract_agent.md", "TopicExtractAgent")
     # Include round in context for the agent

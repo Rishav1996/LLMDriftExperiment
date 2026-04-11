@@ -2067,6 +2067,7 @@ dependencies = [
     { name = "opentelemetry-sdk" },
     { name = "pydantic" },
     { name = "python-dotenv" },
+    { name = "tenacity" },
 ]
 
 [package.metadata]
@@ -2082,6 +2083,7 @@ requires-dist = [
     { name = "opentelemetry-sdk", specifier = ">=1.38.0" },
     { name = "pydantic", specifier = ">=2.12.5" },
     { name = "python-dotenv", specifier = ">=1.2.2" },
+    { name = "tenacity", specifier = ">=9.1.4" },
 ]
 
 [[package]]

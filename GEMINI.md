@@ -3,12 +3,14 @@
 This file contains specialized instructions and operational context for using the Gemini CLI within this project.
 
 ## Project Scope
-This project, `llmdriftexperiment`, utilizes an adversarial debate framework to track and analyze LLM drift.
+This project, `llmdriftexperiment`, utilizes an adversarial debate framework to track and analyze LLM drift through iterative multi-round simulations.
 
 ## Operational Mandates
-- **Memory Management:** Ensure that any modifications to agent logic respect the file-based memory system in `debate_agents/memory/`.
-- **Schema Integrity:** Any changes to agent logic (in `debate_agents/agents/`) must be reflected in the corresponding schemas (in `debate_agents/schema/`).
-- **Graph Updates:** If modifying the debate workflow in `debate_agents/agent.py`, update the `DebateState` and conditional edge logic to maintain graph stability.
+- **Memory Management:** Ensure that any modifications to agent logic respect the file-based memory system in `debate_agents/memory/`, including the `round` field in stored entries.
+- **Schema Integrity:** Any changes to agent logic (in `debate_agents/agents/`) must be reflected in the corresponding schemas (in `debate_agents/schema/`) and include the required `round` and persona-reuse fields.
+- **Graph Updates:** If modifying the debate workflow in `debate_agents/agent.py`, update `DebateState` and conditional edge logic to maintain graph stability.
+- **Persona Persistence:** When modifying persona agents, respect the `skip_persona_generation` feature by ensuring agents evaluate shared memory (the opponent's latest argument) before choosing to skip generation.
+- **Execution Feedback:** Ensure all new agent nodes include console print statements for tracking the agent name and the current debate round.
 
 ## Standard Development Workflows
 - **Running Simulations:** Always verify agent interactions using `python debate_agents/agent.py`.

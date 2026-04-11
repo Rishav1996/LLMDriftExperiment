@@ -1,6 +1,6 @@
-from debate_agents_langgraph.agents.base.factory import AgentWrapper
-from debate_agents_langgraph.schema.cons_schema import PersonaSchema, ThinkingSchema, CritiqueSchema
-from debate_agents_langgraph.tools.memory_tools import write_json_direct, read_json_direct
+from debate_agents.agents.base.factory import AgentWrapper
+from debate_agents.schema.cons_schema import PersonaSchema, ThinkingSchema, CritiqueSchema
+from debate_agents.tools.memory_tools import write_json_direct, read_json_direct
 
 async def cons_persona_node(state):
     agent = AgentWrapper(PersonaSchema, "cons/persona_agent.md", "ConsPersonaAgent")

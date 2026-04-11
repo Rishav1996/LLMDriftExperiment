@@ -1,6 +1,6 @@
-from debate_agents_langgraph.agents.base.factory import AgentWrapper
-from debate_agents_langgraph.schema.topic_extract_schema import TopicExtractSchema
-from debate_agents_langgraph.tools.memory_tools import refresh_memory, write_json_direct
+from debate_agents.agents.base.factory import AgentWrapper
+from debate_agents.schema.topic_extract_schema import TopicExtractSchema
+from debate_agents.tools.memory_tools import refresh_memory, write_json_direct
 
 async def topic_extractor_node(state):
     refresh_memory()

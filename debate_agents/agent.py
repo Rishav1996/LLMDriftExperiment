@@ -6,10 +6,10 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-from debate_agents_langgraph.config import MAX_ROUNDS
-from debate_agents_langgraph.agents.topic_extract_agent import topic_extractor_node
-from debate_agents_langgraph.agents.pros_agent import pros_persona_node, pros_thinking_node, pros_critique_node
-from debate_agents_langgraph.agents.cons_agent import cons_persona_node, cons_thinking_node, cons_critique_node
+from debate_agents.config import MAX_ROUNDS
+from debate_agents.agents.topic_extract_agent import topic_extractor_node
+from debate_agents.agents.pros_agent import pros_persona_node, pros_thinking_node, pros_critique_node
+from debate_agents.agents.cons_agent import cons_persona_node, cons_thinking_node, cons_critique_node
 
 # 1. Define Graph State
 class DebateState(TypedDict):

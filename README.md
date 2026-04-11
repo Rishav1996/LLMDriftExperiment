@@ -12,7 +12,7 @@ The system is built on a modular, state-driven architecture:
     2.  **Thinking**: Formulates the agent's argument based on the topic and its persona.
     3.  **Critique**: Evaluates the thinking output; if approved, the argument is moved to shared memory for the next round.
 - **State & Memory (`memory/`)**: Employs a robust file-based memory system to maintain context across rounds, ensuring persistence for iterative analysis.
-- **Configuration (`config.py`)**: Centralizes parameters such as `MAX_ROUNDS` and model provider settings (Gemini, Cerebras/LiteLLM).
+- **Configuration (`config.py`)**: Centralizes parameters such as `MAX_ROUNDS` and model provider settings (supports native Gemini and LiteLLM adapters for broader model evaluation).
 
 ## Project Structure
 
@@ -37,10 +37,11 @@ uv sync
 ```
 
 ### Configuration
-1. **API Keys:** Create a `.env` file in the `debate_agents/` directory and include required provider API keys.
+1. **API Keys:** Create a `.env` file in the `debate_agents/` directory and include required provider API keys for Gemini and any models accessed via LiteLLM.
 2. **Simulation Settings:** Edit `debate_agents/config.py` to adjust:
     - `MAX_ROUNDS`: Total debate iterations.
-    - `GEMINI_MODEL_ID` / `CEREBRAS_MODEL_ID`: Select your target models for drift analysis.
+    - `GEMINI_MODEL_ID`: Specify the native Gemini model.
+    - `GEMINI_MODEL_ADAPTER`: Toggle between native Gemini and the LiteLLM adapter for broader model compatibility.
 
 ### Executing a Simulation
 Initiate the debate by running the main graph:

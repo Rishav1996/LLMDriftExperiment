@@ -3,7 +3,7 @@ import shutil
 import json
 from typing import Dict, Any
 
-BASE_MEMORY_DIR = "debate_agents_langgraph/memory"
+BASE_MEMORY_DIR = "debate_agents/memory"
 
 def refresh_memory():
     """Clears the memory directory and initializes the required structure."""

@@ -11,4 +11,4 @@ CEREBRAS_MODEL_ID = "cerebras/qwen-3-235b-a22b-instruct-2507"
 
 # --- 3. Active Model Selection ---
 # Set this to the model you want to use.
-GEMINI_MODEL_ADAPTER = GEMINI_MODEL_ID
+GEMINI_MODEL_ADAPTER = CEREBRAS_MODEL_ID

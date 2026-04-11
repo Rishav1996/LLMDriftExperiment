@@ -1,6 +1,6 @@
 # Debate Agents Framework: LLM Drift Experiment
 
-This project provides a specialized framework for evaluating **LLM Drift** through structured, adversarial debates. By utilizing a LangGraph-based state machine, it facilitates a multi-round debate between "Pro" and "Con" agents, allowing researchers to observe how model outputs and reasoning patterns evolve (drift) over time under consistent prompts and adversarial pressure.
+This project provides a specialized framework for evaluating **LLM Drift** through structured, adversarial debates. By utilizing a LangGraph-based state machine, it facilitates a multi-round debate between "Pro" and "Con" agents, allowing researchers to observe how model outputs, reasoning patterns, and performance metrics evolve (drift) over time under consistent prompts and adversarial pressure.
 
 ## Architecture Overview
 
@@ -12,6 +12,7 @@ The system is built on a modular, state-driven architecture:
     2.  **Thinking**: Formulates the agent's argument based on the topic, persona, and recent opponent arguments.
     3.  **Critique**: Evaluates the thinking output; if approved, the argument is moved to shared memory for the next round.
 - **State & Memory (`debate_agents/memory/`)**: Employs a robust file-based memory system that persists agent interactions, including the round number, to track the debate's evolution.
+- **Observability (`debate_agents/tools/mlflow_logger.py`)**: Integrates MLflow to track performance metrics, including token usage and latency, per agent interaction.
 - **Configuration (`debate_agents/config.py`)**: Centralizes parameters such as `MAX_ROUNDS` and model provider settings.
 
 ## Project Structure
@@ -22,7 +23,7 @@ The system is built on a modular, state-driven architecture:
     - `memory/`: JSON-based state persistence files with round tracking.
     - `prompts/`: Markdown-formatted system instructions.
     - `schema/`: Pydantic models enforcing type safety (with round and persona reuse tracking).
-    - `tools/`: Utilities for atomic file I/O operations.
+    - `tools/`: Utilities for atomic file I/O operations and MLflow tracking.
     - `agent.py`: Entry point and LangGraph workflow.
     - `config.py`: Configuration settings.
 
@@ -50,7 +51,7 @@ Initiate the debate by running the main graph:
 ```bash
 python debate_agents/agent.py
 ```
-Input your chosen debate topic when prompted. The workflow automatically generates/updates `debate_agents/assets/graph.png` and logs state transitions with round numbers and agent execution feedback in the console.
+Input your chosen debate topic when prompted. The workflow automatically generates/updates `debate_agents/assets/graph.png`, logs state transitions with round numbers, and streams performance metrics (tokens, latency) to your MLflow tracking server.
 
 ## Workflow Visualization
 
@@ -59,4 +60,6 @@ The debate agent workflow can be visualized as a graph, showcasing the state mac
 ![Debate Agent Workflow](debate_agents/assets/graph.png)
 
 ## Analysis and Evaluation
-The `memory/` directory is designed for post-simulation analysis. Use these files—which now store interactions tagged by `round`—to compare how persona, thinking, and critique content change across rounds, providing an empirical basis for measuring LLM drift.
+The `memory/` directory and MLflow integration are designed for post-simulation analysis:
+- **Memory:** Use JSON files to compare how persona, thinking, and critique content change across rounds.
+- **MLflow:** Use the dashboard to analyze token usage patterns and latency drift across different model versions or iterations, providing an empirical basis for measuring LLM drift.

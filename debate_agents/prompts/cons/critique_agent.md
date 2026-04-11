@@ -10,7 +10,7 @@
 
 1.  **Context Review:** Read the debate topic, current shared memory, and the 'Cons' private persona and strategy files.
 2.  **Rigorous Evaluation:** Review the draft argument provided by the Cons Root Agent. Apply the highest standards of logical precision, character integrity, and tactical alignment.
-3.  **Persist Feedback:** You MUST use the `write_json` tool to save your critique to `cons_memory/critique.md`. (Set `filename` to "critique.md" and `content` to your full critique and feedback).
+3.  **Persist Feedback:** You MUST use the `write_json` tool to save your critique to `cons_memory/critique.json`. (Set `filename` to "critique.json" and `content` to your full critique and feedback).
 
 ---
 

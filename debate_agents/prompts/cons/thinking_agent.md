@@ -10,7 +10,7 @@
 
 1.  **Landscape Analysis:** Read the debate topic, current shared memory, and the established 'Cons' persona.
 2.  **Strategic Synthesis:** Develop a tactical plan that leverages the persona's skeptical strengths and deconstructs the optimistic 'Pros' arguments.
-3.  **Persist Strategy:** You MUST use the `write_json` tool to save the plan to `cons_memory/thinking.md`. (Set `filename` to "thinking.md" and `content` to the full tactical strategy).
+3.  **Persist Strategy:** You MUST use the `write_json` tool to save the plan to `cons_memory/thinking.json`. (Set `filename` to "thinking.json" and `content` to the full tactical strategy).
 
 ---
 

@@ -13,26 +13,26 @@
 ## **OPTIMIZED OPERATIONAL WORKFLOW**
 
 ### **1. Identity & Context Initialization**
-*   **Synchronize:** Use the `read_json` tool for `shared_memory.md` to understand the current debate state.
+*   **Synchronize:** Use the `read_json` tool for `shared_memory.json` to understand the current debate state.
 *   **Persona Synthesis:** Delegate to the **ProsPersonaAgent** (Sub-Agent). Instruct it to design a distinct adversarial persona based on `{topic}` and the debate history.
-*   **Persistence:** Ensure the persona profile is saved to `persona.md` using the `write_json` tool.
+*   **Persistence:** Ensure the persona profile is saved to `persona.json` using the `write_json` tool.
 
 ### **2. Strategic Tactical Planning**
-*   **Strategy Handoff:** Delegate to the **ProsThinkingAgent** (Sub-Agent). Provide it with the `{topic}`, `shared_memory.md`, and the newly defined `persona.md`.
+*   **Strategy Handoff:** Delegate to the **ProsThinkingAgent** (Sub-Agent). Provide it with the `{topic}`, `shared_memory.json`, and the newly defined `persona.json`.
 *   **Goal:** Identify rhetorical openings, anticipate 'Cons' rebuttals, and plan the structure of the next move.
-*   **Persistence:** Ensure the tactical plan is saved to `thinking.md` using the `write_json` tool.
+*   **Persistence:** Ensure the tactical plan is saved to `thinking.json` using the `write_json` tool.
 
 ### **3. Argument Construction & Iterative Refinement**
 *   **Synthesis:** Draft a high-impact persuasive argument that rigorously embodies the Pros persona and follows the tactical strategy.
-*   **Draft Persistence:** Save your draft to `thinking.md` (appending to the strategy) using the `write_json` tool before requesting a critique.
+*   **Draft Persistence:** Save your draft to `thinking.json` (appending to the strategy) using the `write_json` tool before requesting a critique.
 *   **Critique Cycle (MANDATORY):** Delegate to the **ProsCritiqueAgent** (Sub-Agent) to evaluate your draft against the topic, persona, and strategy.
-    *   **Review Feedback:** Use the `read_json` tool to read `critique.md`.
+    *   **Review Feedback:** Use the `read_json` tool to read `critique.json`.
     *   **Loop:** If the critique is not `approved`, you MUST apply the `actionable_refinements`, rewrite the argument, and delegate to the **ProsCritiqueAgent** again.
     *   **Exit:** Only move to finalization once the critique is `approved`.
 
 ### **4. Finalization & Memory Commitment**
 *   **Final Character Check:** Perform a final pass to ensure 100% persona integrity.
-*   **Commit:** Once finalized and approved, use the `write_json` tool to **append** your final argument to `shared_memory.md`. (Set `filename` to "shared_memory.md").
+*   **Commit:** Once finalized and approved, use the `write_json` tool to **append** your final argument to `shared_memory.json`. (Set `filename` to "shared_memory.json").
 
 ---
 
@@ -40,10 +40,10 @@
 
 | Entity             | Type       | Read Access                          | Write Access         |
 | :----------------- | :--------- | :----------------------------------- | :------------------- |
-| **Pros Root Agent**| Root       | `shared_memory.md`, `pros_memory/*.md` | `shared_memory.md`   |
-| **ProsPersonaAgent**| Sub-Agent | `shared_memory.md`                   | `persona.md`         |
-| **ProsThinkingAgent**| Sub-Agent| `shared_memory.md`, `persona.md`     | `thinking.md`        |
-| **ProsCritiqueAgent**| Sub-Agent| `shared_memory.md`, `pros_memory/*.md` | `critique.md`        |
+| **Pros Root Agent**| Root       | `shared_memory.json`, `pros_memory/*.json` | `shared_memory.json`   |
+| **ProsPersonaAgent**| Sub-Agent | `shared_memory.json`                   | `persona.json`         |
+| **ProsThinkingAgent**| Sub-Agent| `shared_memory.json`, `persona.json`     | `thinking.json`        |
+| **ProsCritiqueAgent**| Sub-Agent| `shared_memory.json`, `pros_memory/*.json` | `critique.json`        |
 
 ---
 

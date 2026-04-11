@@ -11,7 +11,7 @@ MAX_ROUNDS = 3
 GLOBAL_GEMINI_RETRY_OPTIONS = types.HttpRetryOptions(initial_delay=30, attempts=5)
 
 GEMINI_ADAPTER = Gemini(
-    model="gemini-2.0-flash-lite-preview-02-05", 
+    model="gemini-3.1-flash-lite-preview",
     retry_options=GLOBAL_GEMINI_RETRY_OPTIONS
 )
 
@@ -28,4 +28,4 @@ CEREBRAS_ADAPTER = LiteLlm(
 # --- 3. Active Model Selection ---
 # Available adapters: GEMINI_ADAPTER, CEREBRAS_ADAPTER
 # Update this alias to switch models system-wide.
-GEMINI_MODEL_ADAPTER = CEREBRAS_ADAPTER
+GEMINI_MODEL_ADAPTER = GEMINI_ADAPTER

@@ -10,3 +10,4 @@ langgraph
 langsmith
 pydantic
 tenacity
+deepagents

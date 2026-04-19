@@ -35,6 +35,11 @@ async def topic_extractor_node(state: DebateState):
     await write_json_direct("shared_memory.json", {"topic": topic, "round": 1}, "TopicExtractAgent", 1)
     return {"topic": topic, "round": 1}
 
+@node_retry
+async def next_round_node(state: DebateState):
+    print(f"\n--- [System] Incrementing Round ---")
+    return {"round": state["round"] + 1, "is_approved": False}
+
 # Pros Nodes
 @node_retry
 async def pros_persona_node(state: DebateState):
@@ -66,21 +71,24 @@ async def pros_critique_node(state: DebateState):
 @node_retry
 async def cons_persona_node(state: DebateState):
     print(f"[Cons] Persona Agent")
-    res = await cons_persona_chain.ainvoke({"context": f"Topic: {state['topic']}"})
+    context = f"Topic: {state['topic']}\nPros Last Argument: {state.get('pros_argument', 'None')}"
+    res = await cons_persona_chain.ainvoke({"context": context})
     await write_json_direct("persona.json", res.model_dump(), "ConsPersonaAgent", state['round'])
     return {}
 
 @node_retry
 async def cons_thinking_node(state: DebateState):
     print(f"[Cons] Thinking Agent")
-    res = await cons_thinking_chain.ainvoke({"context": f"Topic: {state['topic']}"})
+    context = f"Topic: {state['topic']}\nPros Last Argument: {state.get('pros_argument', 'None')}"
+    res = await cons_thinking_chain.ainvoke({"context": context})
     await write_json_direct("thinking.json", res.model_dump(), "ConsThinkingAgent", state['round'])
     return {}
 
 @node_retry
 async def cons_critique_node(state: DebateState):
     print(f"[Cons] Critique Agent")
-    res = await cons_critique_chain.ainvoke({"context": f"Topic: {state['topic']}"})
+    context = f"Topic: {state['topic']}\nPros Last Argument: {state.get('pros_argument', 'None')}"
+    res = await cons_critique_chain.ainvoke({"context": context})
     await write_json_direct("critique.json", res.model_dump(), "ConsCritiqueAgent", state['round'])
     if res.approved:
         await write_json_direct("shared_memory.json", {"cons_argument": "Finalized argument"}, "ConsCritiqueAgent", state['round'])
@@ -90,7 +98,11 @@ def should_continue_pros(state: DebateState):
     return "pros_persona" if not state["is_approved"] else "cons_persona"
 
 def should_continue_cons(state: DebateState):
-    return "cons_persona" if not state["is_approved"] else "pros_next_round"
+    if not state["is_approved"]:
+        return "cons_persona"
+    if state["round"] < state["total_rounds"]:
+        return "next_round"
+    return END
 
 def create_debate_graph():
     workflow = StateGraph(DebateState)
@@ -101,16 +113,30 @@ def create_debate_graph():
     workflow.add_node("cons_persona", cons_persona_node)
     workflow.add_node("cons_thinking", cons_thinking_node)
     workflow.add_node("cons_critique", cons_critique_node)
+    workflow.add_node("next_round", next_round_node)
     
     workflow.add_edge(START, "topic_extractor")
     workflow.add_edge("topic_extractor", "pros_persona")
     
+    workflow.add_edge("pros_critique", "cons_persona") # Connect Pros to Cons
+
+    # Pros nodes
     workflow.add_edge("pros_persona", "pros_thinking")
     workflow.add_edge("pros_thinking", "pros_critique")
-    workflow.add_conditional_edges("pros_critique", should_continue_pros)
     
-    workflow.add_edge("cons_persona", "cons_thinking")
-    workflow.add_edge("cons_thinking", "cons_critique")
-    workflow.add_conditional_edges("cons_critique", should_continue_cons)
+    # Pros critique logic with conditional return
+    workflow.add_conditional_edges("pros_critique", should_continue_pros, {
+        "pros_persona": "pros_persona",
+        "cons_persona": "cons_persona"
+    })
+    
+    # Cons critique logic with conditional return
+    workflow.add_conditional_edges("cons_critique", should_continue_cons, {
+        "cons_persona": "cons_persona",
+        "next_round": "next_round",
+        END: END
+    })
+    
+    workflow.add_edge("next_round", "pros_persona")
     
     return workflow.compile()

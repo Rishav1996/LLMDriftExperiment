@@ -11,3 +11,4 @@ langsmith
 pydantic
 tenacity
 deepagents
+langchain-google-vertexai

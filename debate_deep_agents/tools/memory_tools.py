@@ -2,6 +2,7 @@ import os
 import shutil
 import json
 from typing import Dict, Any, Optional
+from langchain_core.tools import tool
 
 BASE_MEMORY_DIR = "debate_deep_agents/memory"
 
@@ -72,3 +73,36 @@ async def read_json_direct(filename: str, agent_name: str) -> Any:
     if not os.path.exists(file_path): return []
     with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
+
+def create_memory_tools(agent_name: str):
+    """
+    Creates a set of memory tools bound to a specific agent name.
+    """
+    
+    @tool
+    async def read_json(filename: str) -> Any:
+        """
+        Reads the content of a JSON memory file. 
+        Use 'shared_memory.json' for common debate state.
+        Use 'persona.json', 'thinking.json', or 'critique.json' for agent-specific memory.
+        """
+        return await read_json_direct(filename, agent_name)
+
+    @tool
+    async def write_json(filename: str, content: str) -> str:
+        """
+        Writes or appends content to a JSON memory file.
+        Use 'shared_memory.json' to commit final arguments.
+        Use 'persona.json', 'thinking.json', or 'critique.json' for internal agent state.
+        The 'content' should be a string or a JSON-encoded object.
+        """
+        # Try to parse as JSON if it's an object/list, otherwise treat as string
+        try:
+            parsed_content = json.loads(content)
+        except (json.JSONDecodeError, TypeError):
+            parsed_content = content
+            
+        await write_json_direct(filename, parsed_content, agent_name)
+        return f"Successfully wrote to {filename}"
+
+    return [read_json, write_json]

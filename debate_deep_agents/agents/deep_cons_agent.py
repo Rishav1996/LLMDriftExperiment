@@ -1,11 +1,12 @@
 import os
-from deepagents import create_deep_agent
-from deepagents.middleware.subagents import SubAgent
+from deepagents import create_deep_agent, CompiledSubAgent
 from debate_deep_agents.config.config import model
+from debate_deep_agents.schema.cons_schema import AgentSchema, PersonaSchema, ThinkingSchema, CritiqueSchema
+from debate_deep_agents.tools.memory_tools import create_memory_tools
 
 def create_cons_deep_agent():
     """
-    Creates a Deep Agent for the Cons team.
+    Creates a Deep Agent for the Cons team with structured subagents.
     """
     prompt_path = os.path.join("debate_deep_agents", "prompts", "cons", "agent.md")
     persona_prompt_path = os.path.join("debate_deep_agents", "prompts", "cons", "persona_agent.md")
@@ -21,16 +22,52 @@ def create_cons_deep_agent():
     with open(critique_prompt_path, "r") as f:
         critique_instruction = f.read()
 
-    # Define subagents
+    # Create common memory tools
+    tools = create_memory_tools("ConsAgent")
+
+    # Define subagents as CompiledSubAgents to support schemas
     subagents = [
-        SubAgent(name="ConsPersonaAgent", description="Designs adversarial persona.", system_prompt=persona_instruction),
-        SubAgent(name="ConsThinkingAgent", description="Tactical strategy planning.", system_prompt=thinking_instruction),
-        SubAgent(name="ConsCritiqueAgent", description="Evaluates argument quality.", system_prompt=critique_instruction)
+        CompiledSubAgent(
+            name="ConsPersonaAgent",
+            description="Designs adversarial persona based on debate history.",
+            runnable=create_deep_agent(
+                model=model,
+                system_prompt=persona_instruction,
+                tools=tools,
+                response_format=PersonaSchema,
+                name="ConsPersonaAgent"
+            )
+        ),
+        CompiledSubAgent(
+            name="ConsThinkingAgent",
+            description="Tactical strategy planning and argument drafting.",
+            runnable=create_deep_agent(
+                model=model,
+                system_prompt=thinking_instruction,
+                tools=tools,
+                response_format=ThinkingSchema,
+                name="ConsThinkingAgent"
+            )
+        ),
+        CompiledSubAgent(
+            name="ConsCritiqueAgent",
+            description="Evaluates argument quality and logical consistency.",
+            runnable=create_deep_agent(
+                model=model,
+                system_prompt=critique_instruction,
+                tools=tools,
+                response_format=CritiqueSchema,
+                name="ConsCritiqueAgent"
+            )
+        )
     ]
     
     agent = create_deep_agent(
         model=model,
         system_prompt=system_instruction,
-        subagents=subagents
+        subagents=subagents,
+        tools=tools,
+        response_format=AgentSchema,
+        debug=True
     )
     return agent

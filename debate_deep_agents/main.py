@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from debate_deep_agents.graph import create_debate_graph
+from debate_deep_agents.tools.memory_tools import refresh_memory
 
 def generate_graph_image(graph):
     """
@@ -20,6 +21,9 @@ def generate_graph_image(graph):
         print(f"Error generating graph: {e}")
 
 async def main():
+    # Initialize memory
+    refresh_memory()
+    
     graph = create_debate_graph()
     generate_graph_image(graph)
     

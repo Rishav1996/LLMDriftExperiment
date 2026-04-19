@@ -5,8 +5,6 @@ description = "A specialized framework to evaluate LLM Drift through adversarial
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "deepagents>=0.5.2",
-    "deepagents-cli[groq,ollama]>=0.0.37",
     "google-adk>=1.29.0",
     "langchain-google-genai>=4.2.1",
     "langchain-google-vertexai>=3.2.2",

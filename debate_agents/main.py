@@ -4,15 +4,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from debate_deep_agents.graph import create_debate_graph
-from debate_deep_agents.tools.memory_tools import refresh_memory
+from debate_agents.graph import create_debate_graph
+from debate_agents.tools.memory_tools import refresh_memory
 
 def generate_graph_image(graph):
     """
     Generates and saves a visualization of the LangGraph workflow.
     """
     try:
-        path = "debate_deep_agents/assets/graph.png"
+        path = "debate_agents/assets/graph.png"
         os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, "wb") as f:
             f.write(graph.get_graph().draw_mermaid_png())

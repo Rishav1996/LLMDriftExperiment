@@ -4,7 +4,7 @@ import json
 from typing import Dict, Any, Optional
 from langchain_core.tools import tool
 
-BASE_MEMORY_DIR = "debate_deep_agents/memory"
+BASE_MEMORY_DIR = "debate_agents/memory"
 
 def refresh_memory():
     """

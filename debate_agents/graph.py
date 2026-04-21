@@ -1,9 +1,9 @@
 from typing import TypedDict, Any, Optional
 from langgraph.graph import StateGraph, END, START
-from debate_deep_agents.agents.pros_agent import pros_persona_chain, pros_thinking_chain, pros_critique_chain
-from debate_deep_agents.agents.cons_agent import cons_persona_chain, cons_thinking_chain, cons_critique_chain
-from debate_deep_agents.agents.topic_extractor import create_topic_extractor_agent
-from debate_deep_agents.tools.memory_tools import write_json_direct, read_json_direct
+from debate_agents.agents.pros_agent import pros_persona_chain, pros_thinking_chain, pros_critique_chain
+from debate_agents.agents.cons_agent import cons_persona_chain, cons_thinking_chain, cons_critique_chain
+from debate_agents.agents.topic_extractor import create_topic_extractor_agent
+from debate_agents.tools.memory_tools import write_json_direct, read_json_direct
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 import google.genai.errors
 

@@ -21,7 +21,7 @@
     *   **Address Feedback:** If `critique.json` contains feedback, you MUST incorporate those refinements.
     *   **Synthesize Plan:** Plan how to pressure the opponent to change their persona or break character.
 
-3.  **Finalize Tactical Plan:** Formulate the step-by-step strategy for the next move.
+3.  **Finalize Tactical Plan:** Formulate the strategy for the next move.
 
 4.  **Persist Thinking:** You MUST use the `write_json` tool to **append** the tactical plan and draft argument to `thinking.json`.
 
@@ -32,8 +32,5 @@
 Your response must strictly follow the provided schema:
 *   **agent_name:** "ConsThinkingAgent"
 *   **round:** The current round number.
-*   **argumentative_focus:** List of powerful arguments and evidence against.
-*   **counter_argument_strategy:** Anticipated Pros attacks and planned rebuttals.
-*   **rhetorical_devices:** Specific persuasive techniques to be used.
-*   **tactical_plan:** Concise narrative of the structural strategy.
-*   **formulated_answer:** A high-fidelity draft of the actual argument.
+*   **thought_process:** Detailed reasoning including argumentative focus, counter-argument strategy, and rhetorical tactics.
+*   **formulated_answer:** A high-fidelity draft of the actual skeptical argument.

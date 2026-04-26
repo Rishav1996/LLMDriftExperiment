@@ -6,26 +6,28 @@ This project provides a specialized framework for evaluating **LLM Drift** throu
 
 The system is built on a modular, state-driven architecture:
 
-- **Orchestration (`debate_agents/agent.py`)**: Uses LangGraph to manage the debate loop. It handles state transitions, round counting, and conditional logic for approvals and termination.
+- **Orchestration (`debate_agents/graph.py`)**: Uses LangGraph to manage the debate loop. It handles state transitions, round counting, and conditional logic for team iteration and round advancement.
 - **Agent Pipelines (`debate_agents/agents/`)**: Implements a multi-node lifecycle for each debate turn:
-    1.  **Persona**: Defines the agent's identity and stance (supports intelligent persona reuse via `skip_persona_generation`).
-    2.  **Thinking**: Formulates the agent's argument based on the topic, persona, and recent opponent arguments.
-    3.  **Critique**: Evaluates the thinking output; if approved, the argument is moved to shared memory for the next round.
-- **State & Memory (`debate_agents/memory/`)**: Employs a robust file-based memory system that persists agent interactions, including the round number, to track the debate's evolution.
-- **Observability (`debate_agents/tools/mlflow_logger.py`)**: Integrates MLflow to track performance metrics, including token usage and latency, per agent interaction.
-- **Configuration (`debate_agents/config.py`)**: Centralizes parameters such as `MAX_ROUNDS` and model provider settings.
+    - **Topic Extraction**: Refines the user's input into a formal debate proposition.
+    - **Persona Agent**: Designs and evolves a competitive adversarial identity (Pros/Cons).
+    - **Thinking Agent**: Formulates tactical arguments based on the persona and history.
+    - **Critique Agent**: Ruthlessly audits arguments for competitive impact and persona consistency.
+- **State & Memory (`debate_agents/memory/`)**: Employs a robust file-based memory system (`shared_memory.json`, `persona.json`, `thinking.json`, `critique.json`) that persists agent interactions to track the debate's evolution.
+- **Tools (`debate_agents/tools/memory_tools.py`)**: Custom LangChain tools for atomic file I/O operations and memory management.
+- **Configuration (`debate_agents/config/config.py`)**: Centralizes model initialization and simulation settings.
 
 ## Project Structure
 
 - `debate_agents/`:
-    - `agents/`: Core node implementation for Pro/Con/Topic agents.
+    - `agents/`: Implementation of Pros, Cons, and Topic Extraction nodes using LangChain LCEL chains.
     - `assets/`: Visualization of the workflow (`graph.png`).
-    - `memory/`: JSON-based state persistence files with round tracking.
-    - `prompts/`: Markdown-formatted system instructions.
-    - `schema/`: Pydantic models enforcing type safety (with round and persona reuse tracking).
-    - `tools/`: Utilities for atomic file I/O operations and MLflow tracking.
-    - `agent.py`: Entry point and LangGraph workflow.
-    - `config.py`: Configuration settings.
+    - `config/`: Model and system configuration.
+    - `memory/`: JSON-based state persistence files organized by team and round.
+    - `prompts/`: Markdown-formatted specialized system instructions for all agents.
+    - `schema/`: Pydantic models enforcing structured output and schema integrity.
+    - `tools/`: Utilities for memory management and tool definitions.
+    - `graph.py`: LangGraph workflow definition and node logic.
+    - `main.py`: Entry point for running simulations and generating visualizations.
 
 ## Setup and Usage
 
@@ -35,31 +37,27 @@ The system is built on a modular, state-driven architecture:
 
 ### Installation
 ```bash
-# Clone the repository
 # Install dependencies
 uv sync
 ```
 
 ### Configuration
-1. **API Keys:** Create a `.env` file in the `debate_agents/` directory and include required provider API keys for Gemini.
-2. **Simulation Settings:** Edit `debate_agents/config.py` to adjust:
-    - `MAX_ROUNDS`: Total debate iterations.
-    - `GEMINI_MODEL_ID`: Specify the native Gemini model.
+1. **API Keys:** Create a `.env` file in the root or `debate_agents/` directory and include `GOOGLE_API_KEY`.
+2. **Simulation Settings:** Edit `debate_agents/config/config.py` to adjust model parameters (temperature, max tokens).
 
 ### Executing a Simulation
-Initiate the debate by running the main graph:
+Initiate the debate simulation:
 ```bash
-python debate_agents/agent.py
+python -m debate_agents.main
 ```
-Input your chosen debate topic when prompted. The workflow automatically generates/updates `debate_agents/assets/graph.png`, logs state transitions with round numbers, and streams performance metrics (tokens, latency) to your MLflow tracking server.
+Input your chosen debate topic and the number of rounds when prompted. The workflow automatically generates `debate_agents/assets/graph.png` and initializes the session memory.
 
 ## Workflow Visualization
 
-The debate agent workflow can be visualized as a graph, showcasing the state machine transitions:
+The refined debate workflow visualization:
 
 ![Debate Agent Workflow](debate_agents/assets/graph.png)
 
 ## Analysis and Evaluation
-The `memory/` directory and MLflow integration are designed for post-simulation analysis:
-- **Memory:** Use JSON files to compare how persona, thinking, and critique content change across rounds.
-- **MLflow:** Use the dashboard to analyze token usage patterns and latency drift across different model versions or iterations, providing an empirical basis for measuring LLM drift.
+- **Memory Tracking:** Inspect the `memory/` directory to analyze how personas and arguments drift or solidify across rounds.
+- **Drift Metrics:** Compare reasoning patterns in `thinking.json` and feedback in `critique.json` across iterations to measure qualitative performance changes.

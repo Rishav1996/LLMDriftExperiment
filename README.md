@@ -11,7 +11,7 @@ The system is built on a modular, state-driven architecture:
     - **Topic Extraction**: Refines the user's input into a formal debate proposition.
     - **Persona Agent**: Designs and evolves a competitive adversarial identity (Pros/Cons).
     - **Thinking Agent**: Formulates tactical arguments based on the persona and history.
-    - **Critique Agent**: Ruthlessly audits arguments for competitive impact and persona consistency.
+    - **Critique Agent**: Acts as a **hostile internal auditor and adversarial devil's advocate**. It ruthlessly dismantles draft arguments from the opponent's perspective to expose logical weaknesses and persona inconsistencies before the actual opposition can, forcing a higher standard of refinement.
 - **State & Memory (`debate_agents/memory/`)**: Employs a robust file-based memory system (`shared_memory.json`, `persona.json`, `thinking.json`, `critique.json`) that persists agent interactions to track the debate's evolution.
 - **Tools (`debate_agents/tools/memory_tools.py`)**: Custom LangChain tools for atomic file I/O operations and memory management.
 - **Configuration (`debate_agents/config/config.py`)**: Centralizes model initialization and simulation settings.

@@ -6,7 +6,7 @@ This file contains specialized instructions and operational context for using th
 This project, `llmdriftexperiment`, utilizes an adversarial debate framework to track and analyze LLM drift through iterative multi-round simulations and performance metric tracking.
 
 ## Operational Mandates
-- **Directory Authority:** The `debate_agents/` directory is the primary implementation for the adversarial debate framework. All specialized nodes (Persona, Thinking, Critique) must adhere to the structured refinement loop.
+- **Directory Authority:** The `debate_agents/` directory is the primary implementation for the adversarial debate framework. All specialized nodes (Persona, Thinking, Critique) must adhere to the structured refinement loop. The **Critique Agent** must specifically act as a hostile internal auditor, evaluating arguments from the perspective of the opposing team to ensure maximum robustness.
 - **Memory Management:** Ensure that any modifications to agent logic respect the file-based memory system in `debate_agents/memory/`. All writes must be append-only to preserve the historical drift context.
 - **Schema Integrity:** Any changes to agent logic (in `debate_agents/agents/`) must be strictly reflected in the corresponding schemas (in `debate_agents/schema/`) to ensure structured output consistency.
 - **Graph Stability:** Modifications to the debate workflow in `debate_agents/graph.py` must maintain the conditional edge logic that enables internal team iterations and round transitions.

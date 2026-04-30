@@ -1,4 +1,4 @@
-# Gemini CLI Configuration for Debate Agents
+# Gemini CLI Configuration for debate_agents
 
 This document defines the high-priority operational standards and research protocols for the `llmdriftexperiment` project.
 

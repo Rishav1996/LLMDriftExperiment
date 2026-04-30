@@ -1,4 +1,4 @@
-# Debate Agents Framework: LLM Drift Experiment
+# debate_agents Framework: LLM Drift Experiment
 
 [![Pylint](https://github.com/Rishav1996/LLMDriftExperiment/actions/workflows/pylint.yml/badge.svg)](https://github.com/Rishav1996/LLMDriftExperiment/actions/workflows/pylint.yml)
 
@@ -11,7 +11,7 @@ This project is a high-fidelity research platform designed to evaluate and quant
 The framework is organized into a four-stage research lifecycle:
 
 1.  **Research**: The overarching inquiry into model stability and behavioral decay.
-2.  **Simulation (Debate Agents)**: The execution engine. It uses an adversarial debate structure to stress-test model consistency across multiple rounds.
+2.  **Simulation (debate_agents)**: The execution engine. It uses an adversarial debate structure to stress-test model consistency across multiple rounds.
 3.  **Data (Research Runs)**: The evidentiary layer. Each run captures a full state snapshot (memory, persona, logic) across different topics and configurations.
 4.  **Analysis (LLM Drift Skills)**: The quantification layer. A library of 20+ metrics used to calculate behavioral vectors and map drift trajectories.
 
@@ -22,7 +22,7 @@ The framework is organized into a four-stage research lifecycle:
 The simulation is powered by **LangGraph**, enabling complex, stateful multi-agent workflows with internal refinement loops.
 
 ### **Workflow Visualization**
-![Debate Agent Workflow](Debate%20Agents/assets/graph.png)
+![Debate Agent Workflow](debate_agents/assets/graph.png)
 
 
 ### **The Refinement Loop (Node-Level Architecture)**
@@ -78,8 +78,8 @@ uv sync
 ```
 
 ### **2. Configuration**
-- **Secrets**: Create a `.env` file in `Debate Agents/` with `GOOGLE_API_KEY`.
-- **Hyperparameters**: Modify `Debate Agents/config/config.py` to set temperature and token limits for specific experiments.
+- **Secrets**: Create a `.env` file in `debate_agents/` with `GOOGLE_API_KEY`.
+- **Hyperparameters**: Modify `debate_agents/config/config.py` to set temperature and token limits for specific experiments.
 
 ### **3. Running a Simulation**
 ```bash
@@ -87,7 +87,7 @@ python -m debate_agents.main
 ```
 The system will prompt for a topic and the number of rounds. It will then:
 1. Initialize/Refresh the `memory/` directory.
-2. Generate/Update the workflow visualization at `Debate Agents/assets/graph.png`.
+2. Generate/Update the workflow visualization at `debate_agents/assets/graph.png`.
 3. Execute the LangGraph workflow.
 
 ## Analysis Protocol

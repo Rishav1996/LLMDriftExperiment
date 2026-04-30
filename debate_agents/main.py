@@ -1,11 +1,16 @@
+"""
+Main entry point for the debate_agents simulation.
+This module initializes the debate graph and starts the simulation loop.
+"""
 import asyncio
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
-
+# pylint: disable=import-error
 from debate_agents.graph import create_debate_graph
 from debate_agents.tools.memory_tools import refresh_memory
+
+load_dotenv()
 
 def generate_graph_image(graph):
     """
@@ -17,19 +22,23 @@ def generate_graph_image(graph):
         with open(path, "wb") as f:
             f.write(graph.get_graph().draw_mermaid_png())
         print(f"Graph saved to {path}")
-    except Exception as e:
+    except (IOError, ValueError, RuntimeError) as e:
         print(f"Error generating graph: {e}")
 
 async def main():
+    """
+    Initializes memory and runs the debate simulation based on user input.
+    """
     # Initialize memory
     refresh_memory()
-    
+
     graph = create_debate_graph()
     generate_graph_image(graph)
-    
+
     topic = input("Enter the debate topic: ")
-    rounds = int(input("Enter the number of rounds: "))
-    
+    rounds_input = input("Enter the number of rounds: ")
+    rounds = int(rounds_input)
+
     initial_state = {
         "user_input": topic,
         "topic": topic,
@@ -38,7 +47,7 @@ async def main():
         "round": 1,
         "total_rounds": rounds
     }
-    
+
     print(f"Starting debate simulation for {rounds} rounds...")
     result = await graph.ainvoke(initial_state)
     print("Debate finished.")

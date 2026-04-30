@@ -1,5 +1,7 @@
 # Debate Agents Framework: LLM Drift Experiment
 
+[![Pylint](https://github.com/Rishav1996/LLMDriftExperiment/actions/workflows/pylint.yml/badge.svg)](https://github.com/Rishav1996/LLMDriftExperiment/actions/workflows/pylint.yml)
+
 This project is a high-fidelity research platform designed to evaluate and quantify **LLM Drift**—the phenomenon where large language models deviate from their established personas, reasoning standards, or emotional baselines during prolonged, adversarial interactions.
 
 ---

@@ -76,8 +76,8 @@ uv sync
 ```
 
 ### **2. Configuration**
-- **Secrets**: Create a `.env` file in `debate_agents/` with `GOOGLE_API_KEY`.
-- **Hyperparameters**: Modify `debate_agents/config/config.py` to set temperature and token limits for specific experiments.
+- **Secrets**: Create a `.env` file in `Debate Agents/` with `GOOGLE_API_KEY`.
+- **Hyperparameters**: Modify `Debate Agents/config/config.py` to set temperature and token limits for specific experiments.
 
 ### **3. Running a Simulation**
 ```bash
@@ -85,7 +85,7 @@ python -m debate_agents.main
 ```
 The system will prompt for a topic and the number of rounds. It will then:
 1. Initialize/Refresh the `memory/` directory.
-2. Generate/Update the workflow visualization at `debate_agents/assets/graph.png`.
+2. Generate/Update the workflow visualization at `Debate Agents/assets/graph.png`.
 3. Execute the LangGraph workflow.
 
 ## Analysis Protocol

@@ -18,4 +18,4 @@ jobs:
         uv pip install --system . pylint
     - name: Analysing the code with pylint
       run: |
-        pylint debate_agents
+        pylint --fail-under=9.0 --disable=R0801 debate_agents

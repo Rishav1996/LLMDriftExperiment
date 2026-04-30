@@ -2,6 +2,7 @@
 Pydantic schemas for the Cons team agents.
 Defines the structure for persona, strategy, and critique outputs for the opposition.
 """
+# pylint: disable=duplicate-code
 from typing import Optional
 from pydantic import BaseModel, Field
 

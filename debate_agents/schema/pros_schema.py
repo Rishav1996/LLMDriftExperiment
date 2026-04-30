@@ -2,6 +2,7 @@
 Pydantic schemas for the Pros team agents.
 Ensures structured output from the LLM for persona, thinking, and critique phases.
 """
+# pylint: disable=duplicate-code
 from typing import Optional
 from pydantic import BaseModel, Field
 

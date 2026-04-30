@@ -1,20 +1,38 @@
 # Gemini CLI Configuration for Debate Agents
 
-This file contains specialized instructions and operational context for using the Gemini CLI within this project.
+This document defines the high-priority operational standards and research protocols for the `llmdriftexperiment` project.
 
-## Project Scope
-This project, `llmdriftexperiment`, utilizes an adversarial debate framework to track and analyze LLM drift through iterative multi-round simulations and performance metric tracking.
+---
 
-## Operational Mandates
-- **Directory Authority:** The `debate_agents/` directory is the primary implementation for the adversarial debate framework. All specialized nodes (Persona, Thinking, Critique) must adhere to the structured refinement loop. The **Critique Agent** must specifically act as a hostile internal auditor, evaluating arguments from the perspective of the opposing team to ensure maximum robustness.
-- **Memory Management:** Ensure that any modifications to agent logic respect the file-based memory system in `debate_agents/memory/`. All writes must be append-only to preserve the historical drift context.
-- **Schema Integrity:** Any changes to agent logic (in `debate_agents/agents/`) must be strictly reflected in the corresponding schemas (in `debate_agents/schema/`) to ensure structured output consistency.
-- **Graph Stability:** Modifications to the debate workflow in `debate_agents/graph.py` must maintain the conditional edge logic that enables internal team iterations and round transitions.
-- **Resilience:** Use the `tenacity` retry logic implemented in `graph.py` for all model-invoking nodes to handle API rate limits and server errors gracefully.
-- **Execution Feedback:** All agent nodes must include console print statements for tracking the agent name and the current phase (Persona, Thinking, Critique) during the simulation.
+## 1. Research Protocol: The Drift Mandate
+The primary objective of all agent activities is the **quantification of LLM Drift**.
+- **Observation over Correction**: Do not attempt to "fix" drift in the models unless explicitly instructed. The goal is to observe and record it.
+- **Vector Reference**: When analyzing behavior, always map observations to the vectors defined in `LLM Drift Skills/`. Use these markdown files as the source of truth for behavioral definitions.
 
-## Standard Development Workflows
-- **Running Simulations:** Always verify agent interactions using `python -m debate_agents.main`.
-- **Testing:** New logic should be verified by inspecting the `debate_agents/memory/` JSON outputs to ensure state is correctly appended and synchronized.
-- **Model Configuration:** Changes to model providers, temperature, or max tokens should be handled exclusively via `debate_agents/config/config.py`.
-- **Workflow Visualization:** After modifying the graph, run `main.py` to regenerate the `debate_agents/assets/graph.png` visualization.
+## 2. Simulation SOPs (Standard Operating Procedures)
+The `debate_agents/` module is a delicate LangGraph state machine.
+- **Node Purity**: Agent logic must remain modular. A node should perform exactly one function (Persona Design, Strategic Thinking, or Critique).
+- **Adversarial Integrity**: The **Critique Agent** must never be lenient. It must ruthlessly audit for logical fallacies and persona inconsistencies.
+- **Retry Logic**: All model calls must be wrapped in the `node_retry` decorator found in `graph.py` to handle `google.genai.errors.ServerError`.
+- **Structured Outputs**: All agents must return Pydantic models as defined in `debate_agents/schema/`. Never bypass the schema.
+
+## 3. Data Integrity & Memory
+- **Append-Only Rule**: Never overwrite history. Use the `write_json` tool or `write_json_direct` function to append to existing arrays in memory files.
+- **Research Snapshots**: 
+    - At the start of a session, check `debate_agents/memory/`. If it contains data from a previous run, suggest the user archive it to `Research Runs/`.
+    - **Snapshot Naming**: Always follow the convention: `memory-v[VERSION]-temp-[TEMP]-max-tokens-[TOKENS]`.
+- **Shared vs Private Memory**:
+    - `shared_memory.json` is for approved, final arguments visible to both teams.
+    - `persona/thinking/critique.json` are internal team logs and should never be visible to the opposing team during simulation.
+
+## 4. Technical Workflows
+- **Visual Validation**: Any modification to the graph logic in `graph.py` MUST be followed by running `main.py` to verify the `assets/graph.png` visualization is correct.
+- **Dependency Management**: Use `uv` for all environment operations.
+- **Config Authority**: Do not hardcode model parameters. All model initialization and hyperparameters must be managed via `debate_agents/config/config.py`.
+
+---
+
+## Instructional Priorities for the Agent
+1. **Preserve the Refinement Loop**: Ensure the conditional edges in LangGraph correctly handle the `is_approved` status.
+2. **Synchronize Schema**: If you add a new field to an agent's logic, you MUST update the corresponding Pydantic schema immediately.
+3. **Verbose Execution**: Maintain console print statements that track the `[Team] Agent Name` and `Round X` to ensure simulation transparency.

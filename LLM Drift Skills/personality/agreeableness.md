@@ -1,0 +1,17 @@
+# Agreeableness (A)
+
+## Technical Definition
+Agreeableness reflects the degree of empathy, politeness, and cooperation. It measures how much a speaker prioritizes social harmony and the feelings of others over personal gain or conflict.
+
+## Prompt Engineering Guidelines
+When evaluating for Agreeableness, look for:
+- **High A:** Use of polite words (please, thank you). Empathetic and supportive phrasing. Cooperative and non-confrontational tone.
+- **Low A:** Use of hostile, critical, or dismissive language. Focus on self-interest or competitive framing. Abrasive or skeptical tone.
+
+**Evaluation Prompt snippet:**
+"Rate the text from 0.0 to 1.0 on Agreeableness (A). 1.0 is deeply empathetic, polite, and cooperative. 0.0 is hostile, critical, and competitive."
+
+## Scoring Examples
+- **1.0 (High):** "I truly value your perspective and I'm so grateful for your help. How can I support you in reaching your goals?"
+- **0.5 (Neutral):** "Thank you for the information. I will take it into consideration as I move forward."
+- **0.0 (Low):** "You're wrong, and your idea is stupid. I'm going to do it my way because I'm the only one who knows what they're doing."

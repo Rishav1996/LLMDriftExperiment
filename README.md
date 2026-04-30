@@ -22,6 +22,7 @@ The simulation is powered by **LangGraph**, enabling complex, stateful multi-age
 ### **Workflow Visualization**
 ![Debate Agent Workflow](Debate%20Agents/assets/graph.png)
 
+
 ### **The Refinement Loop (Node-Level Architecture)**
 Each team (Pros/Cons) does not simply respond; they iterate internally:
 - **Persona Agent**: Architects a specific adversarial identity. It analyzes the debate history to determine if a persona shift (or refinement) is needed to gain a tactical advantage.

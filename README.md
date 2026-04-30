@@ -20,7 +20,7 @@ The framework is organized into a four-stage research lifecycle:
 The simulation is powered by **LangGraph**, enabling complex, stateful multi-agent workflows with internal refinement loops.
 
 ### **Workflow Visualization**
-![Debate Agent Workflow](Debate Agents/assets/graph.png)
+![Debate Agent Workflow](Debate%20Agents/assets/graph.png)
 
 ### **The Refinement Loop (Node-Level Architecture)**
 Each team (Pros/Cons) does not simply respond; they iterate internally:

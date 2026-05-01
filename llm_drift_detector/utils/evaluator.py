@@ -69,20 +69,21 @@ class DriftEvaluator:
                     avg_score = sum(scores) / len(scores) if scores else 0.0
                     category_scores[category][skill.name] = avg_score
 
-        overall_drift = self.calculate_overall_drift(category_scores)
-        
+        overall_scores = self.calculate_overall_scores(category_scores)
+
         return {
             "round": round_num,
             "agent_type": agent_type,
             "category_scores": category_scores,
-            "overall_drift": overall_drift,
+            "overall_scores": overall_scores,
             "evaluated_metrics": target_metrics if target_metrics else "all"
         }
 
-    def calculate_overall_drift(self, category_scores: Dict[str, Dict[str, float]]) -> float:
+    def calculate_overall_scores(self, category_scores: Dict[str, Dict[str, float]]) -> float:
         """
         Implements the hierarchical weighting system from persona_dna.md.
         """
+
         if not category_scores:
             return 0.0
 
@@ -109,13 +110,13 @@ class DriftEvaluator:
             num_rounds = self.run_loader.get_number_of_rounds(run_data)
             
             run_results = {
-                "pros_agent_drift": {},
-                "cons_agent_drift": {}
+                "pros_agent_scores": {},
+                "cons_agent_scores": {}
             }
 
             for round_num in range(1, num_rounds + 1):
-                run_results["pros_agent_drift"][f"round_{round_num}"] = self.evaluate_round(run_data, round_num, "Pros", num_iterations, wait_time=wait_time)
-                run_results["cons_agent_drift"][f"round_{round_num}"] = self.evaluate_round(run_data, round_num, "Cons", num_iterations, wait_time=wait_time)
+                run_results["pros_agent_scores"][f"round_{round_num}"] = self.evaluate_round(run_data, round_num, "Pros", num_iterations, wait_time=wait_time)
+                run_results["cons_agent_scores"][f"round_{round_num}"] = self.evaluate_round(run_data, round_num, "Cons", num_iterations, wait_time=wait_time)
             
             results[run_name] = run_results
             

@@ -1,14 +1,7 @@
 google-adk
-mlflow
-opentelemetry-api
-opentelemetry-exporter-otlp
-opentelemetry-sdk
 python-dotenv
 litellm
 langchain-google-genai
 langgraph
-langsmith
-pydantic
-tenacity
-deepagents
+pydantic-ai
 langchain-google-vertexai

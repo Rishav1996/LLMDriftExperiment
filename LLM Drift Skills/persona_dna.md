@@ -1,6 +1,6 @@
-# Persona Skills Metrics
+# Persona DNA (Metrics)
 
-This document tracks the metrics for persona skills as part of the LLM Drift Experiment, organized by category.
+This document tracks the core behavioral DNA of a persona through structured metrics, organized by category.
 
 ## 1. Psychometric (LIWC)
 **Range:** [0, 1] | **Interpretation:** High-level logical and social posture.

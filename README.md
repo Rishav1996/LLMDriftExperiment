@@ -54,9 +54,15 @@ Snapshots are named by their configuration parameters:
 
 ---
 
-## 4. Analysis Framework: `LLM Drift Skills/`
+## 4. Analysis Framework
 
-Behavior is quantified by extracting vectors across five specialized dimensions.
+Behavior is quantified by extracting vectors across two primary modules:
+
+### **`LLM Drift Detector/`**
+- Module for orchestrating the detection of behavioral drift and calculating complex vectors.
+
+### **`LLM Drift Skills/`**
+- Conceptual framework and metric definitions for drift analysis.
 
 ### **Metric Hierarchy**
 | Category | Metrics (Vectors) |

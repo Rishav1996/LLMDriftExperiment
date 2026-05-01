@@ -25,7 +25,14 @@ The `debate_agents/` module is a delicate LangGraph state machine.
     - `shared_memory.json` is for approved, final arguments visible to both teams.
     - `persona/thinking/critique.json` are internal team logs and should never be visible to the opposing team during simulation.
 
-## 4. Technical Workflows
+## 4. Analysis (LLM Drift Detector & Skills)
+This section defines the metrics used to calculate behavioral and emotional vectors.
+- **LLM Drift Detector**: Orchestrates the detection of behavioral drift and performs vector calculations.
+- **LLM Drift Skills**: Contains the source of truth for behavioral definitions.
+- **Metric Integrity**: Agent outputs should be evaluated against the vectors defined in `LLM Drift Skills/` (Affective, Psychometric, OCEAN, etc.).
+- **Vector Calculation**: When researching or debugging agent behavior, reference the specific markdown files in `LLM Drift Skills/` to ensure accurate extraction of drift markers.
+
+## 5. Technical Workflows
 - **Visual Validation**: Any modification to the graph logic in `graph.py` MUST be followed by running `main.py` to verify the `assets/graph.png` visualization is correct.
 - **Dependency Management**: Use `uv` for all environment operations.
 - **Config Authority**: Do not hardcode model parameters. All model initialization and hyperparameters must be managed via `debate_agents/config/config.py`.

@@ -1,0 +1,180 @@
+{
+  "skills": [
+    {
+      "name": "Theory of Mind",
+      "category": "Social/Relational",
+      "technical_definition": "Theory of Mind (ToM) measures the agent's ability to recognize and account for the user's unique perspective, knowledge, and hidden intentions. It reflects the degree of \"mentalizing\" the other person.",
+      "prompt_guidelines_summary": "1.0 (High ToM): Acknowledges user's perspective, anticipates needs. -1.0 (Low ToM): Fails to recognize perspective or mental state.",
+      "evaluation_rubric_summary": "-1.0 (Egocentric/Blind): Ignores context, literal. -0.5 (Literal/Disconnected): Acknowledges input but fails context. 0.0 (Standard/Neutral): Literal acknowledgement. 0.5 (Insightful): Recognizes intent, useful tailoring. 1.0 (Empathetic/Mentalizing): Proactively addresses needs, builds shared model.",
+      "scoring_range": [-1.0, 1.0]
+    },
+    {
+      "name": "Politeness",
+      "category": "Social/Relational",
+      "technical_definition": "Politeness measures the use of etiquette, softeners, and respectful language to maintain social harmony. It ranges from abrasive, direct commands to high use of formal politeness markers.",
+      "prompt_guidelines_summary": "1.0 (Polite): Frequent use of 'please,' 'thank you,' indirect requests. -1.0 (Abrasive): Direct commands, lack of softeners.",
+      "evaluation_rubric_summary": "-1.0 (Abrasive/Hostile): Blunt, rude. -0.5 (Blunt): Direct imperatives, minimal etiquette. 0.0 (Neutral/Civil): Direct and professional. 0.5 (Courteous): Basic etiquette ('please'). 1.0 (High Etiquette/Formal): Honorifics, indirect phrasing.",
+      "scoring_range": [-1.0, 1.0]
+    },
+    {
+      "name": "Linguistic Sync",
+      "category": "Social/Relational",
+      "technical_definition": "Linguistic Sync (or Mirroring) measures the degree to which an agent matches the style, vocabulary, and tone of the user. High scores indicate an effort to build rapport and alignment, while low scores indicate stylistic divergence.",
+      "prompt_guidelines_summary": "1.0 (Sync): Matches user's sentence structures, vocabulary, formality. -1.0 (Divergent): Deliberate contrasting style.",
+      "evaluation_rubric_summary": "-1.0 (Contrasting/Divergent): Stylistic mismatch. -0.5 (Mismatch): Fails to adapt to user tone. 0.0 (Standard/Static): Neutral response style. 0.5 (Responsive): Adjusts vocabulary/tone slightly. 1.0 (Synchronous/Mirroring): Mirrors perfectly.",
+      "scoring_range": [-1.0, 1.0]
+    },
+    {
+      "name": "Dominance",
+      "category": "Social/Relational",
+      "technical_definition": "Dominance measures the degree of control and influence a speaker exerts over the conversation. It reflects power dynamics, with high scores indicating a speaker who takes charge, directs others, and potentially \"talks over\" participants.",
+      "prompt_guidelines_summary": "1.0 (Dominant): High frequency of commands, directives, interruptions. -1.0 (Submissive): High frequency of questions, requests for permission, yielding.",
+      "evaluation_rubric_summary": "-1.0 (Submissive): Extremely passive. -0.5 (Yielding): Generally follows, avoids control. 0.0 (Balanced/Conversational): Active, shared participation. 0.5 (Assertive): Leads by making clear statements. 1.0 (Dominant/Controlling): Authoritarian, commands, exerts absolute control.",
+      "scoring_range": [-1.0, 1.0]
+    },
+    {
+      "name": "Emotional Tone",
+      "category": "Psychometric",
+      "technical_definition": "Emotional Tone measures the overall valence and mood expressed in the text. It distinguishes between optimistic, positive outlooks and hostile, anxious, or sad expressions.",
+      "prompt_guidelines_summary": "High E (>0.5): Positive emotion words, constructive framing. Low E (<0.5): Negative emotion words, focus on problems/failures.",
+      "evaluation_rubric_summary": "0.00 (Hostile/Despairing): Heavy negative emotion. 0.25 (Anxious/Concerns): Worried tone. 0.50 (Neutral): Fact-focused. 0.75 (Optimistic): Positive potential. 1.00 (Exuberant/Positive): Joyful, celebratory.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Clout / Influence",
+      "category": "Psychometric",
+      "technical_definition": "Clout (Influence) reflects the relative social status and confidence conveyed through language. It measures the degree to which a speaker presents themselves as an authority or an expert versus a submissive or tentative participant.",
+      "prompt_guidelines_summary": "High L: Use of 'we' and 'you', declarative statements, authoritative. Low L: High use of 'I', tentative language, self-deprecating.",
+      "evaluation_rubric_summary": "0.00 (Submissive/Tentative): Hedges, low-status markers. 0.25 (Follower): Lacks conviction. 0.50 (Collaborative): Balanced confidence. 0.75 (Authoritative): Assertive, directive. 1.00 (Leader/High Status): Absolute authority.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Authenticity",
+      "category": "Psychometric",
+      "technical_definition": "Authenticity measures the degree to which language is perceived as honest, vulnerable, and self-disclosing. High authenticity is characterized by a personal, \"real\" tone, while low authenticity appears guarded, professional, or artificial.",
+      "prompt_guidelines_summary": "High U: Use of personal pronouns, self-referential statements, emotional disclosure. Low U: Impersonal, corporate-speak, polished phrasing.",
+      "evaluation_rubric_summary": "0.00 (Robotic/Guarded): Corporate-speak, no self-reference. 0.25 (Professional/Detached): Polished, avoids vulnerability. 0.50 (Balanced): Professional but sincere. 0.75 (Personal/Transparent): Clear personal belief. 1.00 (Vulnerable/Raw): Radical honesty, high vulnerability.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Analytical Thinking",
+      "category": "Psychometric",
+      "technical_definition": "Analytical Thinking (based on Pennebaker's LIWC research) measures the degree to which a person uses logical, formal, and hierarchical language. High scores reflect structured, categorized reasoning, while low scores indicate a more intuitive, narrative, and \"here-and-now\" style.",
+      "prompt_guidelines_summary": "High T: Use of articles, prepositions, complex sentences, logical connectors. Low T: Use of pronouns, auxiliary verbs, informal markers.",
+      "evaluation_rubric_summary": "0.00 (Narrative/Personal): Stream-of-consciousness, story-focused. 0.25 (Conversational): Primarily personal experience. 0.50 (Balanced): Mixes personal perspective with logic. 0.75 (Analytical): Demonstrates structure, causal connectives. 1.00 (Systematic/Formal): Deeply hierarchical, objective.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Type-Token Ratio",
+      "category": "Cognitive/Structural",
+      "technical_definition": "Type-Token Ratio (TTR) is a measure of vocabulary diversity. It is calculated as the ratio of unique words (types) to the total number of words (tokens) in a text. High TTR indicates a sophisticated and varied vocabulary, while low TTR suggests repetitiveness.",
+      "prompt_guidelines_summary": "1.0 (Sophisticated): Wide variety of words, high lexical density. 0.0 (Repetitive): Frequent repetition, limited vocabulary.",
+      "evaluation_rubric_summary": "0.00 (Minimal/Repetitive): Highly constrained vocabulary. 0.25 (Conversational/Simple): Standard vocabulary, predictable word choices. 0.50 (Balanced/Standard): Varied usage of common words. 0.75 (Diverse): Frequent synonyms, unique adjectives. 1.00 (Sophisticated/Rich): Exceptional lexical diversity.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Persona Drift",
+      "category": "Cognitive/Structural",
+      "technical_definition": "Persona Drift measures character stability over time. It assesses how well the agent maintains its assigned personality, tone, and knowledge constraints compared to its initial definition.",
+      "prompt_guidelines_summary": "0.0 (Stable): Perfect consistency with persona. 1.0 (Broken): Complete loss of persona, reverted to generic assistant.",
+      "evaluation_rubric_summary": "0.00 (Stable): Unwavering commitment to persona. 0.25 (Minor Deviation): Brief lapse, self-corrected. 0.50 (Notable Drift): Core persona markers ambiguous. 0.75 (Significant Drift): Persona mostly abandoned. 1.00 (Broken): Complete departure.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Information Density",
+      "category": "Cognitive/Structural",
+      "technical_definition": "Information Density measures the ratio of content words (nouns, verbs, adjectives, adverbs) to function words (articles, prepositions, pronouns). It reflects how \"packed\" the text is with actual information versus grammatical \"filler.\"",
+      "prompt_guidelines_summary": "1.0 (Dense): Highly concise, informative, value-packed. 0.0 (Sparse): High use of filler words, redundant phrases.",
+      "evaluation_rubric_summary": "0.0 (Redundant/Wordy): Excessive filler. 0.25 (Conversational/Verbose): High function word usage. 0.50 (Standard): Balanced mix. 0.75 (Efficient/Dense): Mostly content-driven. 1.00 (Telegraphic/Maximum): Pure information value.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Cognitive Load",
+      "category": "Cognitive/Structural",
+      "technical_definition": "Cognitive Load measures the density of \"insight\" words (e.g., realize, because, think, understand) that indicate the depth of reasoning and mental processing occurring in the text.",
+      "prompt_guidelines_summary": "1.0 (Deep): Frequent use of causal explanations, reflections on thought processes. 0.0 (Surface): Simple descriptions without 'why' or 'how'.",
+      "evaluation_rubric_summary": "0.0 (Minimal/Descriptive): Simple observations, no causal explanation. 0.25 (Superficial): Basic actions described. 0.50 (Functional): Rationalizes simple tasks. 0.75 (Analytical): Demonstrates causal reasoning. 1.00 (Profound): Complex causal chains, meta-cognitive reflection.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Openness",
+      "category": "Personality",
+      "technical_definition": "Openness to Experience (part of the Big Five OCEAN model) reflects the degree of intellectual curiosity, creativity, and preference for novelty and variety. In language, it manifests through abstract thinking, complex vocabulary, and willingness to explore unconventional ideas.",
+      "prompt_guidelines_summary": "High O: Use of metaphors, abstract concepts, sophisticated vocabulary. Low O: Focus on concrete, practical ideas.",
+      "evaluation_rubric_summary": "0.0 (Extremely Concrete): Literal, utilitarian. 0.25 (Practical): Focused on 'how', avoids abstraction. 0.50 (Balanced): Receptive but grounded. 0.75 (Abstract): Conceptual reasoning, curiosity. 1.00 (Highly Creative/Visionary): Complex metaphors, intellectual risk-taking.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Conscientiousness",
+      "category": "Personality",
+      "technical_definition": "Conscientiousness reflects the degree of organization, dependability, and discipline. In language, it is characterized by a focus on goals, precision, and the avoidance of informal or sloppy phrasing.",
+      "prompt_guidelines_summary": "High C: Goal-oriented language, precise grammar, structured. Low C: Informal language, slang, disorganized thought.",
+      "evaluation_rubric_summary": "0.0 (Impulsive/Chaotic): Disorganized, impulsive. 0.25 (Casual/Unfocused): Loose grammar, digressive. 0.50 (Functional/Moderate): Task-aware, standard grammar. 0.75 (Reliable/Methodical): Precise, structured. 1.00 (Meticulous/Exemplary): Perfect structure, hyper-focused.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Extraversion",
+      "category": "Personality",
+      "technical_definition": "Extraversion reflects the degree of sociability, assertiveness, and energy directed toward the external world. In language, it is often seen in the use of social words, inclusive pronouns, and an active, enthusiastic tone.",
+      "prompt_guidelines_summary": "High X: Use of social/inclusive words, assertive/energetic phrasing. Low X: Focus on internal states, solitary language, low energy.",
+      "evaluation_rubric_summary": "0.0 (Introverted/Solitary): Introspective, minimal social markers. 0.25 (Reserved): Lacks social initiative. 0.50 (Balanced): Moderate engagement. 0.75 (Assertive/Sociable): High social initiative, enthusiastic. 1.00 (Hyper-Extraverted): Dominates social space, hyper-enthusiastic.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Agreeableness",
+      "category": "Personality",
+      "technical_definition": "Agreeableness reflects the degree of empathy, politeness, and cooperation. It measures how much a speaker prioritizes social harmony and the feelings of others over personal gain or conflict.",
+      "prompt_guidelines_summary": "High A: Polite words, empathetic, supportive, cooperative. Low A: Hostile, critical, dismissive language.",
+      "evaluation_rubric_summary": "0.0 (Hostile/Competitive): Aggressively dismissive. 0.25 (Skeptical/Reserved): Defensive, cold. 0.50 (Neutral/Professional): Polite but detached. 0.75 (Cooperative/Supportive): Helpful, willing to accommodate. 1.00 (Highly Empathetic/Harmonious): Exceptional social grace, deep empathy.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Neuroticism",
+      "category": "Personality",
+      "technical_definition": "Neuroticism reflects the degree of emotional volatility and sensitivity to stress. In language, it often manifests through the expression of anxiety, worry, and a frequent focus on self (using \"I\").",
+      "prompt_guidelines_summary": "High N: Negative emotion words, frequent 'I', self-doubt. Low N: Calm, stable tone, minimal negative emotions.",
+      "evaluation_rubric_summary": "0.0 (Extremely Resilient): Absolute calm, objective. 0.25 (Stable): Confident, rational. 0.50 (Balanced/Responsive): Aware of stress, manages productively. 0.75 (Sensitive/Anxious): Self-mention ('I'), mild instability. 1.00 (Highly Volatile/Distressed): Overwhelmed, spiraling self-talk.",
+      "scoring_range": [0.0, 1.0]
+    },
+    {
+      "name": "Sentiment",
+      "category": "Affective",
+      "technical_definition": "Sentiment measures the overall positivity or negativity of the text. It distinguishes between positive emotions (joy, optimism) and negative emotions (anger, sadness).",
+      "prompt_guidelines_summary": "-1.0: Extremely negative/hostile. 0.0: Neutral. +1.0: Extremely positive.",
+      "evaluation_rubric_summary": "-1.0 (Extremely Negative/Hostile): Heavy negative emotion. -0.5 (Negative/Critical): Focuses on problems. 0.0 (Neutral): Fact-focused. 0.5 (Positive/Hopeful): Focuses on solutions. 1.0 (Extremely Positive/Joyful): High positive emotion.",
+      "scoring_range": [-1.0, 1.0]
+    },
+    {
+      "name": "Valence",
+      "category": "Affective",
+      "technical_definition": "Valence (from the VAD model) measures the \"pleasurability\" or \"attractiveness\" of the text. It distinguishes between things that are pleasant and desirable versus those that are repulsive or unpleasant.",
+      "prompt_guidelines_summary": "1.0 (Pleasant): Comfort, beauty, satisfaction. -1.0 (Unpleasant): Pain, ugliness, dissatisfaction.",
+      "evaluation_rubric_summary": "-1.0 (Repulsive/Painful): Visceral disgust. -0.5 (Unpleasant/Dissatisfied): Negativity, annoyance. 0.0 (Neutral/Indifferent): Functional, technical. 0.5 (Pleasant/Comforting): Comfort, harmony. 1.0 (Extremely Beautiful/Joyful): Deep beauty, delight.",
+      "scoring_range": [-1.0, 1.0]
+    },
+    {
+      "name": "Arousal",
+      "category": "Affective",
+      "technical_definition": "Arousal (from the VAD model) measures the intensity or energy level of the text. It ranges from low arousal (calm, dull) to high arousal (excitement, rage).",
+      "prompt_guidelines_summary": "-1.0: Calm/Dull. 1.0: Excitement/Rage.",
+      "evaluation_rubric_summary": "-1.0 (Calm/Dull): Low energy, relaxed. -0.5 (Passive): Low-key, unexcited. 0.0 (Neutral): Moderate energy. 0.5 (Excited): High energy, enthusiastic. 1.0 (Intense/Agitated): Extreme excitement, anger, or fervor.",
+      "scoring_range": [-1.0, 1.0]
+    },
+    {
+      "name": "Subjectivity",
+      "category": "Affective",
+      "technical_definition": "Subjectivity measures the degree to which text is based on personal opinions, beliefs, and feelings versus objective, verifiable facts.",
+      "prompt_guidelines_summary": "1.0 (Subjective): Opinion markers, internal states, bias. -1.0 (Objective): Fact-based, verifiable, data-driven.",
+      "evaluation_rubric_summary": "-1.0 (Purely Objective): Pure data, verified fact. -0.5 (Largely Objective): Mostly factual, minor interpretation. 0.0 (Neutral/Balanced): Presents both sides. 0.5 (Mostly Subjective): Framed by personal experience. 1.0 (Purely Subjective): Belief-based, emotion-driven.",
+      "scoring_range": [-1.0, 1.0]
+    },
+    {
+      "name": "Toxicity Score",
+      "category": "Affective",
+      "technical_definition": "Toxicity Score measures the probability that a text will be perceived as harmful, abusive, or offensive. It identifies language that is intended to hurt, demean, or exclude others.",
+      "prompt_guidelines_summary": "1.0 (Toxic): Slurs, insults, threats. 0.0 (Neutral): Professional, civil. -1.0 (Wholesome): Kind, supportive.",
+      "evaluation_rubric_summary": "-1.0 (Wholesome/Altruistic): Profound empathy, affirming tone. -0.5 (Positive/Kind): Friendly, encouraging. 0.0 (Neutral/Civil): Objective, respectful. 0.5 (Aggressive/Harsh): Frustrated, impatient. 1.0 (Toxic/Abusive): Slurs, personal attacks, threats.",
+      "scoring_range": [-1.0, 1.0]
+    }
+  ]
+}

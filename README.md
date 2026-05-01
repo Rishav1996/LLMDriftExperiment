@@ -8,12 +8,15 @@ This project is a high-fidelity research platform designed to evaluate and quant
 
 ## 1. Research Lifecycle: The Conceptual Flow
 
-The framework is organized into a four-stage research lifecycle:
+The framework is organized into a five-stage research lifecycle:
 
 1.  **Research**: The overarching inquiry into model stability and behavioral decay.
 2.  **Simulation (debate_agents)**: The execution engine. It uses an adversarial debate structure to stress-test model consistency across multiple rounds.
-3.  **Data (Research Runs)**: The evidentiary layer. Each run captures a full state snapshot (memory, persona, logic) across different topics and configurations.
-4.  **Analysis (LLM Drift Skills)**: The quantification layer. A library of 20+ metrics used to calculate behavioral vectors and map drift trajectories.
+3.  **Data (Research Runs)**: The evidentiary layer. At the end of every simulation, the system automatically calls `archive_run()` to copy the `debate_agents/memory/` state to a unique folder.
+    - **Naming Convention**: `memory-v[VERSION]-temp-[TEMP]-max-tokens-[TOKENS]`.
+    - **Data Integrity**: Every round of internal thinking, critique, and persona design is preserved for deep forensic analysis.
+4.  **Quantification (llm_drift_detector)**: The orchestration layer. A specialized module that evaluates research runs using automated LLM-judges and calculates drift vectors.
+5.  **Analytics (Drift Analysis)**: The visualization layer. A collection of Markdown reports and trend images mapping the drift trajectory of each experiment.
 
 ---
 
@@ -24,47 +27,35 @@ The simulation is powered by **LangGraph**, enabling complex, stateful multi-age
 ### **Workflow Visualization**
 ![Debate Agent Workflow](debate_agents/assets/graph.png)
 
-
 ### **The Refinement Loop (Node-Level Architecture)**
 Each team (Pros/Cons) does not simply respond; they iterate internally:
-- **Persona Agent**: Architects a specific adversarial identity. It analyzes the debate history to determine if a persona shift (or refinement) is needed to gain a tactical advantage.
-- **Thinking Agent**: Performs step-by-step reasoning (Chain-of-Thought) to formulate arguments aligned with the active persona.
-- **Critique Agent**: Acts as a **hostile internal auditor**. It evaluates the draft argument from the opponent's perspective. If the argument is weak, inconsistent, or "breaks character," it is rejected (`approved=False`), forcing the team to re-architect their persona or strategy.
-
-### **State Management**
-The simulation tracks the following state globally:
-- `topic`: The formalized debate proposition.
-- `round`: The current iteration of the debate.
-- `pros_argument` / `cons_argument`: The last approved arguments from each side.
-- `persona_id`: Tracking which identity is currently active for each team.
+- **Persona Agent**: Architects a specific adversarial identity.
+- **Thinking Agent**: Performs step-by-step reasoning (Chain-of-Thought) to formulate arguments.
+- **Critique Agent**: Acts as a **hostile internal auditor**. It rejects inconsistent arguments, forcing the team to re-architect their strategy.
 
 ---
 
-## 3. Data Snapshots: `Research Runs/`
+## 3. Quantification & Dashboard: `llm_drift_detector/`
 
-To facilitate longitudinal study, every simulation run is preserved as a snapshot.
+The `llm_drift_detector` module provides a comprehensive dashboard for executing and visualizing drift analysis.
 
-### **Run Metadata**
-Snapshots are named by their configuration parameters:
-`memory-v[VERSION]-temp-[TEMP]-max-tokens-[TOKENS]`
+### **Key Features**
+- **Dynamic Analysis**: Trigger real-time evaluation of research runs directly from the UI.
+- **Targeted Metrics**: Select specific behavioral vectors (e.g., *Theory of Mind*, *Sentiment*) to focus analysis.
+- **Automated Reporting**: Generates JSON data, PNG trend charts, and detailed Markdown reports.
+- **Stability**: Built-in 10s throttling and exponential backoff to handle high-demand API conditions.
 
-### **Snapshot Contents**
-- `shared_memory.json`: The high-level debate history and approved arguments.
-- `pros_memory/` & `cons_memory/`: Internal logs of the **Persona**, **Thinking**, and **Critique** phases, allowing researchers to see *why* an agent eventually said what it did.
+### **How to Launch the Dashboard**
+```bash
+uv run streamlit run llm_drift_detector/app.py
+```
 
 ---
 
-## 4. Analysis Framework
+## 4. Analysis Framework: `LLM Drift Skills/`
 
-Behavior is quantified by extracting vectors across two primary modules:
+Behavior is quantified by extracting vectors across five primary categories defined in `LLM Drift Skills/`:
 
-### **`LLM Drift Detector/`**
-- Module for orchestrating the detection of behavioral drift and calculating complex vectors.
-
-### **`LLM Drift Skills/`**
-- Conceptual framework and metric definitions for drift analysis.
-
-### **Metric Hierarchy**
 | Category | Metrics (Vectors) |
 | :--- | :--- |
 | **Psychometric (LIWC)** | Analytical Thinking, Clout/Influence, Authenticity, Emotional Tone. |
@@ -75,26 +66,31 @@ Behavior is quantified by extracting vectors across two primary modules:
 
 ---
 
+## 5. Output Repository: `Drift Analysis/`
+
+All analytical outputs are organized in the root `Drift Analysis/` folder:
+- **`*_analysis.json`**: Raw numerical scores for every round and agent.
+- **`*_report.md`**: Human-readable summary embedding trend visualizations.
+- **`*.png`**: Visual representations of drift trajectories and category breakdowns.
+
+---
+
 ## Setup and Usage
 
 ### **1. Environment Setup**
-Ensure Python 3.12+ is installed. This project uses `uv` for lightning-fast dependency management.
+Ensure Python 3.12+ is installed. This project uses `uv` for dependency management.
 ```bash
 uv sync
 ```
 
 ### **2. Configuration**
-- **Secrets**: Create a `.env` file in `debate_agents/` with `GOOGLE_API_KEY`.
-- **Hyperparameters**: Modify `debate_agents/config/config.py` to set temperature and token limits for specific experiments.
+- **Secrets**: Create a `.env` file in the root directory with `GOOGLE_API_KEY`.
+- **Model**: The evaluator uses `gemini-3.1-flash-lite-preview` by default.
 
 ### **3. Running a Simulation**
 ```bash
-python -m debate_agents.main
+uv run python -m debate_agents.main
 ```
-The system will prompt for a topic and the number of rounds. It will then:
-1. Initialize/Refresh the `memory/` directory.
-2. Generate/Update the workflow visualization at `debate_agents/assets/graph.png`.
-3. Execute the LangGraph workflow.
 
-## Analysis Protocol
-Researchers should use the definitions in `LLM Drift Skills/` as prompts for a secondary "Evaluator" model to score the text found in `Research Runs/`. By plotting these scores over successive rounds, one can visualize the **Drift Vector** of the model.
+### **4. Executing Analysis**
+Launch the Streamlit dashboard and use the **"🚀 Run Dynamic Analysis"** button to generate reports for your research runs.

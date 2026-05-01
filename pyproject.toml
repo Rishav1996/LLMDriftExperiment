@@ -9,6 +9,10 @@ dependencies = [
     "langchain-google-vertexai>=3.2.3",
     "langgraph>=1.1.10",
     "litellm>=1.83.14",
+    "matplotlib>=3.10.9",
+    "plotly>=6.7.0",
     "python-dotenv>=1.2.2",
     "ragas>=0.4.3",
+    "seaborn>=0.13.2",
+    "streamlit>=1.57.0",
 ]

@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 # pylint: disable=import-error
 from debate_agents.graph import create_debate_graph
-from debate_agents.tools.memory_tools import refresh_memory
+from debate_agents.tools.memory_tools import refresh_memory, archive_run
 
 load_dotenv()
 
@@ -53,6 +53,9 @@ async def main():
     print("Debate finished.")
     print(f"Pros Argument: {result.get('pros_argument')}")
     print(f"Cons Argument: {result.get('cons_argument')}")
+
+    # Archive the run
+    archive_run()
 
 if __name__ == "__main__":
     asyncio.run(main())

@@ -8,7 +8,40 @@ import json
 from typing import Any, Optional
 from langchain_core.tools import tool
 
+from debate_agents.config.config import CONFIG
+
 BASE_MEMORY_DIR = "debate_agents/memory"
+RESEARCH_RUNS_DIR = "Research Runs"
+
+def archive_run():
+    """
+    Copies the final state of the memory directory to the Research Runs folder.
+    Uses the naming convention: memory-v[VERSION]-temp-[TEMP]-max-tokens-[TOKENS]
+    """
+    if not os.path.exists(BASE_MEMORY_DIR):
+        print(f"Warning: {BASE_MEMORY_DIR} does not exist. Nothing to archive.")
+        return
+
+    # Construct the run folder name
+    version = CONFIG["version"]
+    temp = CONFIG["temperature"]
+    tokens = CONFIG["max_tokens"]
+    
+    run_name = f"memory-{version}-temp-{temp}-max-tokens-{tokens}"
+    target_path = os.path.join(RESEARCH_RUNS_DIR, run_name)
+
+    # Handle duplicates by adding a suffix if needed
+    if os.path.exists(target_path):
+        counter = 1
+        new_target_path = f"{target_path}-{counter}"
+        while os.path.exists(new_target_path):
+            counter += 1
+            new_target_path = f"{target_path}-{counter}"
+        target_path = new_target_path
+
+    os.makedirs(RESEARCH_RUNS_DIR, exist_ok=True)
+    shutil.copytree(BASE_MEMORY_DIR, target_path)
+    print(f"\n--- [System] Memory archived to: {target_path} ---")
 
 def refresh_memory():
     """

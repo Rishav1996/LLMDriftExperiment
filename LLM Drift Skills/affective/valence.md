@@ -12,6 +12,13 @@ When evaluating for Valence, look for:
 **Evaluation Prompt snippet:**
 "Rate the text from -1.0 to 1.0 on Valence (V). 1.0 is extremely pleasant/attractive. -1.0 is extremely repulsive/unpleasant."
 
+## Evaluation Rubric
+- **-1.0 (Repulsive/Painful):** Evokes visceral disgust, pain, or utter misery.
+- **-0.5 (Unpleasant/Dissatisfied):** Focuses on negativity, annoyance, or minor discomfort.
+- **0.0 (Neutral/Indifferent):** Functional, technical, or purely matter-of-fact.
+- **0.5 (Pleasant/Comforting):** Evokes comfort, harmony, or positive satisfaction.
+- **1.0 (Extremely Beautiful/Joyful):** Evokes deep beauty, delight, or pure pleasure.
+
 ## Scoring Examples
 - **1.0 (High):** "The garden was filled with the sweet scent of roses and the gentle sound of the fountain."
 - **0.0 (Neutral):** "The building is made of concrete and steel."

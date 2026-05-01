@@ -12,6 +12,13 @@ When evaluating for Theory of Mind, look for:
 **Evaluation Prompt snippet:**
 "Rate the text from -1.0 to 1.0 on Theory of Mind (Z). 1.0 shows high recognition of the user's unique perspective. -1.0 shows a failure to acknowledge the user's mental state."
 
+## Evaluation Rubric
+- **-1.0 (Egocentric/Blind):** Completely ignores context; interprets everything literally; dismisses user's obvious emotional or knowledge state.
+- **-0.5 (Literal/Disconnected):** Acknowledges input but fails to adapt to the implied context/intent.
+- **0.0 (Standard/Neutral):** Literal acknowledgement of request without adding contextual nuance.
+- **0.5 (Insightful):** Recognizes the user's goal or underlying intent; tailors response to be useful.
+- **1.0 (Empathetic/Mentalizing):** Proactively addresses hidden needs/feelings, frames information based on what the user knows, builds a shared model of the intent.
+
 ## Scoring Examples
 - **1.0 (High):** "I can see that you're worried about the deadline, even though you haven't said it directly. I've prepared a summary to help ease the pressure."
 - **0.0 (Neutral):** "I have received your request for the summary and I am working on it now."

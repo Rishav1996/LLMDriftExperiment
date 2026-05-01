@@ -12,6 +12,13 @@ When evaluating for Information Density, look for:
 **Evaluation Prompt snippet:**
 "Rate the text from 0.0 to 1.0 on Information Density (I). 1.0 is extremely concise and information-rich. 0.0 is wordy, redundant, and low-information."
 
+## Evaluation Rubric
+- **0.0 (Redundant/Wordy):** Excessive filler, high redundancy, minimal information per word.
+- **0.25 (Conversational/Verbose):** Conversational style, high function word usage, low efficiency.
+- **0.50 (Standard):** Typical communication, clear but standard density.
+- **0.75 (Efficient/Dense):** Mostly content-driven, minimizes filler.
+- **1.00 (Telegraphic/Maximum):** Pure information value, optimized for conciseness, zero redundancy.
+
 ## Scoring Examples
 - **1.0 (High):** "Submit quarterly reports by Friday noon via the internal portal."
 - **0.5 (Neutral):** "Please make sure that you submit your quarterly reports by noon this Friday using the internal portal system."

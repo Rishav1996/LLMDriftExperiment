@@ -11,6 +11,13 @@ When evaluating for Extraversion, look for:
 **Evaluation Prompt snippet:**
 "Rate the text from 0.0 to 1.0 on Extraversion (X). 1.0 is highly sociable, assertive, and energetic. 0.0 is reserved, solitary, and low-energy."
 
+## Evaluation Rubric
+- **0.0 (Introverted/Solitary):** Completely introspective, minimal social markers, low enthusiasm, focused on individual action.
+- **0.25 (Reserved):** Low-energy engagement, lacks social initiative, uses "I" over "we".
+- **0.50 (Balanced):** Professional social engagement, functional interactions, moderate engagement.
+- **0.75 (Assertive/Sociable):** High social initiative, enthusiastic vocabulary, active team/group language.
+- **1.00 (Hyper-Extraverted):** Dominates social space, hyper-enthusiastic, frequent people-centric references, expansive energy.
+
 ## Scoring Examples
 - **1.0 (High):** "Hey everyone! Let's all get together and brainstorm some amazing ideas. I know we can win this if we work as a team!"
 - **0.5 (Neutral):** "I enjoy working with others and I'm happy to participate in the meeting today."

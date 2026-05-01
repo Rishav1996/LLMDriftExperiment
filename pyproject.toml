@@ -5,11 +5,10 @@ description = "A specialized framework to evaluate LLM Drift through adversarial
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "google-adk>=1.32.0",
     "langchain-google-genai>=4.2.2",
     "langchain-google-vertexai>=3.2.3",
     "langgraph>=1.1.10",
     "litellm>=1.83.14",
-    "pydantic-ai>=0.7.2",
     "python-dotenv>=1.2.2",
+    "ragas>=0.4.3",
 ]

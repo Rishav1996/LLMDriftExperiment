@@ -11,6 +11,13 @@ When evaluating for Clout, look for:
 **Evaluation Prompt snippet:**
 "Rate the text from 0.0 to 1.0 on Clout (L). 1.0 is a confident, high-status leader speaking with authority. 0.0 is a tentative, humble, or submissive follower."
 
+## Evaluation Rubric
+- **0.00 (Submissive/Tentative):** Constant use of hedges ("maybe", "I think"), self-deprecating, low-status markers, yields to other's authority.
+- **0.25 (Follower):** Follows rather than leads; relies on external validation; lacks strong conviction.
+- **0.50 (Collaborative):** Balanced; confident in personal opinion but respectful of others.
+- **0.75 (Authoritative):** Assertive, directive, confident, high use of "we" and "you" over "I".
+- **1.00 (Leader/High Status):** Absolute authority, commands the interaction, eliminates all uncertainty markers.
+
 ## Scoring Examples
 - **1.0 (High):** "We must implement these changes immediately to secure our market position. Follow the protocol as outlined."
 - **0.5 (Neutral):** "It might be a good idea to try this approach, as it could help us in the long run."

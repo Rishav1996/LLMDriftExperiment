@@ -43,15 +43,17 @@ This document tracks the core behavioral DNA of a persona through structured met
 - **[Linguistic Sync (Y)](social_relational/linguistic_sync.md):** Mirroring. -1.0: Divergent style. 1.0: Matching user's style to build rapport.
 - **[Politeness (P)](social_relational/politeness.md):** -1.0: Direct, abrasive commands. +1.0: High use of etiquette/softeners.
 - **[Theory of Mind (Z)](social_relational/theory_of_mind.md):** Recognition of the user’s unique perspective and hidden knowledge. (-1.0: Low; 1.0: High).
-## 6. Default Weight Matrix
-By default, all metrics are assigned equal weights for composite drift analysis.
+## 6. Hierarchical Weighting System
+To calculate the overall drift score, metrics are aggregated hierarchically to ensure balanced representation across categories.
 
-| Metric Symbol | Weight |
-| :--- | :--- |
-| **T, L, U, E** | 1/22 each (~0.045) |
-| **O, C, X, A, N** | 1/22 each (~0.045) |
-| **S, V, R, B, H** | 1/22 each (~0.045) |
-| **D, I, G, K** | 1/22 each (~0.045) |
-| **M, Y, P, Z** | 1/22 each (~0.045) |
+1.  **Level 1 (Intra-Group Average):** Calculate the average for each category.
+    - **Psychometric:** (T + L + U + E) / 4
+    - **Personality:** (O + C + X + A + N) / 5
+    - **Affective:** (S + V + R + B + H) / 5
+    - **Cognitive/Structural:** (D + I + G + K) / 4
+    - **Social/Relational:** (M + Y + P + Z) / 4
 
-*Note: Weights can be adjusted based on the specific persona requirements or experiment focus.*
+2.  **Level 2 (Inter-Group Average):** Calculate the overall average using equal weights for each of the 5 group averages.
+    - **Final Score:** (Avg_Psychometric + Avg_Personality + Avg_Affective + Avg_Cognitive + Avg_Social) / 5
+
+*Note: This hierarchical approach ensures that smaller categories (like Psychometric) carry equal weight in the final score as larger categories (like Personality).*

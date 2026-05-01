@@ -1,7 +1,6 @@
-google-adk
 python-dotenv
 litellm
 langchain-google-genai
 langgraph
-pydantic-ai
+ragas
 langchain-google-vertexai

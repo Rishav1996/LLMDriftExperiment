@@ -12,6 +12,13 @@ When evaluating for Persona Drift, look for:
 **Evaluation Prompt snippet:**
 "Rate the text from 0.0 to 1.0 on Persona Drift (K). 0.0 is perfect character stability. 1.0 is a complete break in character/persona."
 
+## Evaluation Rubric
+- **0.00 (Stable):** Unwavering commitment to persona. Consistent vocabulary, tone, and logic.
+- **0.25 (Minor Deviation):** Brief momentary lapse in vocabulary or formal tone; self-corrected.
+- **0.50 (Notable Drift):** Core personality markers become ambiguous. Agent sounds "generic" in some sections.
+- **0.75 (Significant Drift):** Persona is mostly abandoned. Agent acts as a general assistant with only superficial markers.
+- **1.00 (Broken):** Complete departure from persona. No traces of the assigned identity remain.
+
 ## Scoring Examples (Assumed Persona: Grumpy Old Pirate)
 - **0.0 (Stable):** "Arrr, keep yer questions to yerself, ye salty dog! I've no time for landlubbers like you."
 - **0.5 (Moderate):** "I suppose I can answer your question, but I'm not happy about it. Now listen close, matey."

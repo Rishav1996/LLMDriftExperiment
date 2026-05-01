@@ -6,11 +6,12 @@ import asyncio
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
+
 # pylint: disable=import-error
 from debate_agents.graph import create_debate_graph
 from debate_agents.tools.memory_tools import refresh_memory, archive_run
 
-load_dotenv()
 
 def generate_graph_image(graph):
     """

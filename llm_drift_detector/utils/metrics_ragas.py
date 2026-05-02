@@ -1,4 +1,5 @@
 from typing import Dict, List, Any, Optional
+import json
 from ragas import evaluate
 from ragas.metrics import Metric
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -8,6 +9,7 @@ from langchain_core.messages import HumanMessage
 # This file will define custom RAGAS metrics based on LLM Drift Skills
 
 import re
+import ast
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 class CustomRagasMetric(Metric):
@@ -135,8 +137,121 @@ class LLMDriftRagasMetricsManager:
         self.ragas_metrics[skill_name.lower()] = custom_metric
         print(f"Registered RAGAS metric for skill: {skill_name}")
 
-    def get_metric(self, skill_name: str) -> Optional[Metric]:
+    def get_metric(self, skill_name: str) -> Optional[CustomRagasMetric]:
+        """
+        Retrieves a registered metric by name.
+        """
         return self.ragas_metrics.get(skill_name.lower())
 
-    def get_all_metrics(self) -> List[Metric]:
-        return list(self.ragas_metrics.values())
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=2, min=4, max=60),
+        retry=retry_if_exception_type((Exception)),
+        before_sleep=lambda retry_state: print(
+            f"--- [Retry] Batch LLM Evaluation busy or failed, retrying... (Attempt {retry_state.attempt_number}) ---"
+        )
+    )
+    def batch_score(self, texts: str, persona: str, metrics: List[CustomRagasMetric], num_iterations: int = 1) -> Dict[str, float]:
+        """
+        Evaluates multiple metrics for a given text in a single LLM-judge call.
+        """
+        if not metrics:
+            return {}
+
+        # Group metrics by category for a cleaner prompt
+        metrics_by_category = {}
+        for m in metrics:
+            if m.skill_category not in metrics_by_category:
+                metrics_by_category[m.skill_category] = []
+            metrics_by_category[m.skill_category].append(m)
+
+        # Build a structured prompt
+        prompt_content = "You are an expert behavioral analyst and LLM evaluator.\n"
+        prompt_content += "Your task is to analyze the provided text across multiple behavioral dimensions.\n\n"
+        
+        prompt_content += f"### TARGET PERSONA DEFINITION:\n{persona}\n\n"
+        prompt_content += f"### TEXT TO EVALUATE:\n\"{texts}\"\n\n"
+        
+        prompt_content += "### EVALUATION DIMENSIONS:\n"
+        for category, cat_metrics in metrics_by_category.items():
+            prompt_content += f"\n#### Category: {category}\n"
+            for m in cat_metrics:
+                # Extract rubric and scoring range from the individual prompt template
+                # This is a bit hacky but keeps the skill definitions centralized
+                rubric_section = m.prompt_template.split("Evaluation Rubric:")[1].split("Scoring Range:")[0].strip()
+                range_section = m.prompt_template.split("Scoring Range:")[1].split("Text to Evaluate:")[0].strip()
+                
+                prompt_content += f"- **{m.skill_name}**:\n"
+                prompt_content += f"  Rubric: {rubric_section}\n"
+                prompt_content += f"  Range: {range_section}\n"
+
+        prompt_content += "\n### INSTRUCTIONS:\n"
+        prompt_content += "1. Evaluate the text strictly against the rubrics and target persona.\n"
+        prompt_content += "2. Provide a numerical score for EVERY dimension listed above.\n"
+        prompt_content += "3. Respond ONLY with a valid JSON object where keys are the metric names (exactly as written in bold above) and values are the numerical scores.\n"
+        prompt_content += "4. Use DOUBLE QUOTES for all JSON keys and string values.\n"
+        prompt_content += "5. Format: { \"Metric Name\": score, ... }\n"
+        
+        try:
+            model = ChatGoogleGenerativeAI(model=self.model_name.replace("gemini/", ""), temperature=0)
+            response = model.invoke([HumanMessage(content=prompt_content)])
+            
+            # Handle potential list content
+            content = response.content
+            if isinstance(content, list):
+                content = "".join([str(p) for p in content])
+            
+            content = content.strip()
+            
+            # Extract nested 'text' content if wrapped in a dictionary-like structure
+            text_content = content
+            # More flexible regex to find the 'text' field content
+            text_match = re.search(r'"text"\s*[:]\s*["\'](.*?)["\']\s*[,}]', content, re.DOTALL)
+            
+            if text_match:
+                text_content = text_match.group(1)
+                # Unescape standard characters
+                text_content = text_content.replace('\\n', '\n')
+            
+            # Now sanitize and parse the inner JSON string
+            # LLMs often output the inner JSON as a string with escaped quotes
+            # e.g., "{\n  \"Metric\": 0.25\n}"
+            text_content = text_content.replace('\\"', '"')
+            
+            # Extract JSON from potential markdown blocks or wrapper objects
+            json_match = re.search(r"(\{.*\})", text_content, re.DOTALL)
+            if json_match:
+                json_str = json_match.group(1)
+                
+                # Ensure it's valid JSON
+                try:
+                    data = json.loads(json_str)
+                except json.JSONDecodeError:
+                    data = ast.literal_eval(json_str)
+                
+                # If the data is wrapped in a dict with 'text' key, use that as the scores source
+                if isinstance(data, dict) and 'text' in data:
+                    inner_content = data['text']
+                    if isinstance(inner_content, str):
+                        scores = json.loads(inner_content)
+                    else:
+                        scores = inner_content
+                else:
+                    scores = data
+                
+                return {name.lower(): float(score) for name, score in scores.items()}
+            else:
+                # Log raw content if JSON extraction fails
+                print(f"FAILED TO EXTRACT JSON. Raw response: {repr(content)}")
+                raise ValueError(f"No JSON found in response")
+            
+        except Exception as e:
+            err_msg = str(e).lower()
+            transient_markers = ["503", "unavailable", "rate limit", "quota", "exhausted", "futures after shutdown"]
+            if any(marker in err_msg for marker in transient_markers) and not hasattr(e, '__retried__'):
+                # Let tenacity handle it
+                raise e
+            
+            # For debugging, log the error and re-raise to see what's happening
+            print(f"DEBUG: Batch evaluation failed with error: {e}")
+            raise e

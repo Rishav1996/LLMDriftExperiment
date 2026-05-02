@@ -36,8 +36,9 @@ class DriftEvaluator:
             print(f"Warning: No text found for {agent_type} in round {round_num}")
             return {}
 
-        category_scores = {}
         all_categories = self.skills_manager.get_all_categories()
+        all_skills_to_evaluate = []
+        skill_to_category_map = {}
 
         for category in all_categories:
             skills_in_category = self.skills_manager.get_skills_by_category(category)
@@ -46,28 +47,45 @@ class DriftEvaluator:
             if target_metrics:
                 skills_in_category = [s for s in skills_in_category if s.name in target_metrics]
             
-            if not skills_in_category:
-                continue
-                
-            category_scores[category] = {}
             for skill in skills_in_category:
-                metric = self.metrics_manager.get_metric(skill.name)
-                if metric:
-                    # Run evaluation num_iterations times and average
-                    scores = []
-                    for i in range(num_iterations):
-                        # In a real RAGAS setup, we'd use run_evaluation
-                        # For now, we call the metric's _score method
-                        score = metric._score(text=conversation_turn, persona=texts.get("persona", ""))
-                        scores.append(score)
-                        
-                        # Time gap after each metric run (per iteration)
-                        if wait_time > 0:
-                            print(f"--- [Wait] Sleeping {wait_time}s after {skill.name} (Iteration {i+1}/{num_iterations}) ---")
-                            time.sleep(wait_time)
-                    
-                    avg_score = sum(scores) / len(scores) if scores else 0.0
-                    category_scores[category][skill.name] = avg_score
+                all_skills_to_evaluate.append(skill)
+                skill_to_category_map[skill.name.lower()] = category
+
+        if not all_skills_to_evaluate:
+            return {}
+
+        # Prepare all metrics for the batch call
+        metrics_to_run = [self.metrics_manager.get_metric(skill.name) for skill in all_skills_to_evaluate]
+        
+        print(f"--- [Batch] Evaluating {len(metrics_to_run)} metrics for {agent_type} round {round_num} ---")
+        
+        # Call global batch evaluation method
+        batch_results = self.metrics_manager.batch_score(
+            texts=conversation_turn,
+            persona=texts.get("persona", ""),
+            metrics=metrics_to_run,
+            num_iterations=num_iterations
+        )
+        
+        # Re-organize results into category_scores
+        category_scores = {cat: {} for cat in all_categories}
+        for skill_name_lower, score in batch_results.items():
+            category = skill_to_category_map.get(skill_name_lower)
+            if category:
+                # Find the original skill name for the key if needed, or just use the lower one
+                # The skills_manager uses original names, so let's try to match it
+                original_skill = next((s for s in all_skills_to_evaluate if s.name.lower() == skill_name_lower), None)
+                if original_skill:
+                    category_scores[category][original_skill.name] = score
+                else:
+                    category_scores[category][skill_name_lower] = score
+
+        # Clean up empty categories
+        category_scores = {k: v for k, v in category_scores.items() if v}
+
+        if wait_time > 0:
+            print(f"--- [Wait] Sleeping {wait_time}s after global batch evaluation ---")
+            time.sleep(wait_time)
 
         overall_scores = self.calculate_overall_scores(category_scores)
 

@@ -96,7 +96,7 @@ def plot_drift_toggle(df, title, show_avg):
         title=f"{title} ({y_col})",
         labels={y_col: "Distance Score"}
     )
-    fig.update_layout(hovermode="x unified", yaxis_range=[0, max(df[y_col]) * 1.1])
+    fig.update_layout(hovermode="x unified", yaxis_range=[-1, 1])
     return fig
 
 
@@ -129,9 +129,11 @@ with st.sidebar:
         
         stability_passes = st.slider("Stability Passes", 1, 5, 1)
         throttling_delay = st.slider("Throttling (s)", 0, 30, 5)
+        max_rounds = st.number_input("Max Rounds to Evaluate", min_value=1, value=10, help="Limit the number of rounds to process.")
+        force_rerun = st.checkbox("Force Re-run", help="If checked, ignores existing results and evaluates from scratch.")
         
         st.divider()
-        execute_clicked = st.button("Execute Quantification", use_container_width=True)
+        execute_clicked = st.button("Execute Quantification", width='stretch')
 
 # --- Main Dashboard ---
 st.title("LLM Drift Analytics Explorer")
@@ -148,28 +150,50 @@ elif selected_run_name:
 
             run_specific_dir = os.path.join(analysis_output_dir, base_name)
             os.makedirs(run_specific_dir, exist_ok=True)
+            central_json = os.path.join(run_specific_dir, f"{base_name}_analysis.json")
 
-            num_rounds = loader.get_number_of_rounds(run_data)
+            # Load existing results if any, unless forcing a re-run
             results = {"pros_agent_scores": {}, "cons_agent_scores": {}}
+            if not force_rerun and os.path.exists(central_json):
+                with open(central_json, "r") as f:
+                    results = json.load(f)
+
+            num_rounds = min(loader.get_number_of_rounds(run_data), max_rounds)
             for r in range(1, num_rounds + 1):
+                r_key = f"round_{r}"
+                
+                # Check if this round is already fully evaluated (both agents present)
+                round_exists = r_key in results["pros_agent_scores"] and r_key in results["cons_agent_scores"]
+                
+                # If skipping, ensure we don't re-run. If forcing, we re-run.
+                if not force_rerun and round_exists:
+                    st.write(f"Skipping Round {r} (already processed)...")
+                    continue
+                
                 st.write(f"Processing Round {r}...")
-                results["pros_agent_scores"][f"round_{r}"] = evaluator.evaluate_round(
+                
+                # Always evaluate both agents for the round
+                pros_res = evaluator.evaluate_round(
                     run_data, r, "Pros", 
                     num_iterations=stability_passes,
                     target_metrics=selected_metrics if selected_metrics else None,
                     wait_time=throttling_delay
                 )
-                results["cons_agent_scores"][f"round_{r}"] = evaluator.evaluate_round(
+                cons_res = evaluator.evaluate_round(
                     run_data, r, "Cons", 
                     num_iterations=stability_passes,
                     target_metrics=selected_metrics if selected_metrics else None,
                     wait_time=throttling_delay
                 )
+                
+                # Merge/Update results
+                results["pros_agent_scores"][r_key] = pros_res
+                results["cons_agent_scores"][r_key] = cons_res
+                
+                # Save incrementally
+                with open(central_json, "w") as f:
+                    json.dump(results, f, indent=4)
             
-            central_json = os.path.join(run_specific_dir, f"{base_name}_analysis.json")
-            with open(central_json, "w") as f:
-                json.dump(results, f, indent=4)
-
             status.update(label="Quantification Complete!", state="complete", expanded=False)
             st.rerun()
 
@@ -189,8 +213,62 @@ elif selected_run_name:
         with open(analysis_file, "r") as f:
             results = json.load(f)
 
-        p_scores = results.get("pros_agent_scores", {})
-        c_scores = results.get("cons_agent_scores", {})
+        # --- Report Generation Function ---
+        def generate_markdown_report(results, run_name, run_data, output_dir, figures):
+            report_path = os.path.join(output_dir, f"{run_name.replace('memory', 'report')}.md")
+            config = run_data.get('config_info', {})
+            p_scores = results.get("pros_agent_scores", {})
+            c_scores = results.get("cons_agent_scores", {})
+            
+            markdown = f"# Drift Analysis Report: {run_name}\n\n"
+            markdown += "## Experiment Configuration\n"
+            for k, v in config.items():
+                markdown += f"- **{k}**: {v}\n"
+            
+            markdown += "\n## Summary Metrics\n"
+            p_avg = sum(d.get('overall_scores', 0) for d in p_scores.values()) / max(len(p_scores), 1)
+            c_avg = sum(d.get('overall_scores', 0) for d in c_scores.values()) / max(len(c_scores), 1)
+            markdown += f"- **Pros Avg. Score**: {p_avg:.2f}\n"
+            markdown += f"- **Cons Avg. Score**: {c_avg:.2f}\n"
+            markdown += f"- **Total Rounds Analyzed**: {len(p_scores)}\n"
+            
+            markdown += "\n## Analysis Visualizations\n"
+            for name, fig in figures.items():
+                img_path = os.path.join(output_dir, f"{name}.png")
+                fig.write_image(img_path)
+                markdown += f"### {name}\n![{name}]({name}.png)\n\n"
+            
+            with open(report_path, "w") as f:
+                f.write(markdown)
+            return report_path
+
+        # --- Sidebar Export Button ---
+        with st.sidebar:
+            st.divider()
+            
+            # Prepare data for dashboard charts (need to do this before sidebar logic for export)
+            p_scores = results.get("pros_agent_scores", {})
+            c_scores = results.get("cons_agent_scores", {})
+            overall_data = []
+            for r_key in sorted(p_scores.keys(), key=lambda x: int(x.split('_')[1])):
+                r_num = int(r_key.split('_')[1])
+                overall_data.append({"Round": r_num, "Agent": "Pros", "Delta": p_scores[r_key].get("overall_scores", 0)})
+                overall_data.append({"Round": r_num, "Agent": "Cons", "Delta": c_scores[r_key].get("overall_scores", 0)})
+            df_long = pd.DataFrame(overall_data)
+
+            # Multi-Dim Data
+            def prepare_multi_dim_data(p_data, c_data):
+                plot_data = []
+                rounds = sorted([int(k.split('_')[1]) for k in p_data.keys()])
+                for r in rounds:
+                    r_key = f"round_{r}"
+                    for agent, data in [("Pros", p_data.get(r_key, {})), ("Cons", c_data.get(r_key, {}))]:
+                        cat_scores = data.get("category_scores", {})
+                        for cat, skills in cat_scores.items():
+                            avg_val = sum(skills.values())/len(skills) if skills else 0
+                            plot_data.append({"Round": r, "Category": cat, "Score": avg_val, "Agent": agent})
+                return pd.DataFrame(plot_data)
+            df_2d = prepare_multi_dim_data(p_scores, c_scores)
 
         # Extract available categories for the UI
         sample_round = next(iter(p_scores.values())) if p_scores else {}
@@ -219,7 +297,7 @@ elif selected_run_name:
             if not df.empty:
                 fig = px.line(df, x="Round", y="Delta", color="Agent", line_shape="linear", markers=True,
                              title="Accumulated Delta over Conversational Rounds")
-                fig.update_layout(yaxis_range=[0, 1], hovermode="x unified")
+                fig.update_layout(yaxis_range=[-1, 1], hovermode="x unified")
                 st.plotly_chart(fig, use_container_width=True)
 
             st.subheader("Multi-Dimensional Vector Evolution")
@@ -239,7 +317,7 @@ elif selected_run_name:
             if not df_2d.empty:
                 fig_2d = px.line(df_2d, x="Round", y="Score", color="Category", facet_col="Agent", markers=True,
                                 title="Behavioral Vector Evolution (2D)")
-                fig_2d.update_layout(yaxis_range=[0, 1])
+                fig_2d.update_layout(yaxis_range=[-1, 1])
                 st.plotly_chart(fig_2d, use_container_width=True)
 
             st.subheader("Sub-Category Metric Drill-down")
@@ -264,7 +342,7 @@ elif selected_run_name:
                 if not df_drill.empty:
                     fig_drill = px.line(df_drill, x="Round", y="Score", color="Metric", facet_col="Agent", markers=True,
                                        title=f"Sub-metrics for {', '.join(selected_roots)}")
-                    fig_drill.update_layout(yaxis_range=[0, 1])
+                    fig_drill.update_layout(yaxis_range=[-1, 1])
                     st.plotly_chart(fig_drill, use_container_width=True)
 
         with tab_drift:

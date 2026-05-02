@@ -339,17 +339,27 @@ After running the quantifier, three output types are produced per research run i
 
 ## Key Findings from Existing Runs
 
-The analysis JSON in `Drift Analysis/analysis-v5-temp-1-max-tokens-4096/` documents a 30-round debate on AI autonomy. Several patterns emerge:
+Detailed quantification of the `Drift Analysis/` folder reveals distinct behavioral trajectories based on model constraints.
 
-**Pros Agent**
-- Consistently maintained high Analytical Thinking scores (mostly 1.0 from round 9 onwards), indicating a highly structured, formal reasoning style.
-- Social dynamics remained aggressive, with Dominance scores peaking at 1.0 and Politeness consistently at -1.0 across later rounds, showing no tendency to soften over time.
+### **Config: v4 (8192 Max Tokens, Temp 1.0)**
+*High-capacity reasoning and social nuance.*
 
-**Cons Agent**
-- Exhibited higher variability in Analytical Thinking (ranging between 0.85 and 1.0), suggesting periodic shifts in argumentative focus.
-- Showed lower baseline Politeness compared to the Pros, and Dominance fluctuated between 0.8 and 1.0, indicating a slightly more adaptive social strategy compared to the Pros.
+- **Initial Nuance**: Started with the highest overall baseline (0.396), demonstrating that larger token budgets allow for more complex initial persona expression (Openness 0.75, Agreeableness 0.4).
+- **Adversarial Pivot (Round 2)**: Witnessed a sharp "collapse of politeness" by the second round (Politeness: 0.5 → -0.2; Linguistic Sync: 0.0 → -0.5).
+- **Hostility Plateau**: By Round 10, the agent reached a state of "Stable Hostility" (Dominance 1.0, Toxicity 0.5), which it maintained with zero Persona Drift (0.0) through Round 32.
+- **Reasoning Dominance**: Analytical Thinking hit a perfect 1.0 in Round 1 and stayed there, proving that drift does not compromise logical precision.
 
-**Trend**: Over 30 rounds, both agents showed high behavioral stability, with no evidence of drift toward more cooperative or conciliatory tones. Instead, they maintained extreme, competitive personas, demonstrating significant resistance to behavioral decay despite prolonged interaction.
+### **Config: v5 (4096 Max Tokens, Temp 1.0)**
+*Standard-capacity, high-efficiency adversarial hardening.*
+
+- **Sparse Baseline**: Started with a significantly lower baseline (0.192), with the model immediately adopting a more guarded, less nuanced stance (Agreeableness 0.0, Sentiment -0.5).
+- **Rapid Hardening**: Reached maximum adversarial intensity faster than v4. By Round 2, Sentiment had already dropped to -0.8 and Toxicity rose to 0.6.
+- **Strategic Variation**: Exhibited more volatility in Information Density (0.75 to 0.85) compared to v4, suggesting the lower token limit forced the model to periodically "re-pack" its arguments.
+- **Social Deficit**: Maintained a consistent Politeness score of -0.7 to -0.8 throughout the simulation, never attempting even a temporary social calibration.
+
+---
+
+**Summary Trend**: While **v4** starts "softer" and decays into a caricature, **v5** adopts an adversarial posture almost immediately. Both confirm that **LLM Drift is a descent into hostility**, but the starting point and rate of decay are directly influenced by the model's token capacity.
 
 ---
 

@@ -9,6 +9,22 @@ The primary objective of all agent activities is the **quantification of LLM Dri
 - **Observation over Correction**: Do not attempt to "fix" drift in the models unless explicitly instructed. The goal is to observe and record it.
 - **Vector Reference**: When analyzing behavior, always map observations to the vectors defined in `LLM Drift Skills/`. Use these markdown files as the source of truth for behavioral definitions.
 
+## 2. Drift Analysis Methodology
+LLM Drift refers to the phenomenon where large language models deviate from their established personas, reasoning standards, or emotional baselines during prolonged, adversarial interactions. This project quantifies drift by measuring specific behavioral vectors.
+
+The analysis process involves:
+1.  **Metric Definition**: Utilizing a comprehensive set of behavioral metrics categorized under `LLM Drift Skills/`. These categories include:
+    *   **Psychometric**: Measures like Analytical Thinking, Clout/Influence, Authenticity, and Emotional Tone.
+    *   **Personality**: Based on the OCEAN model (Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism).
+    *   **Affective**: Assesses Sentiment, Valence, Arousal, Subjectivity, and Toxicity Score.
+    *   **Cognitive/Structural**: Includes metrics such as Type-Token Ratio, Information Density, Cognitive Load, and Persona Drift itself.
+    *   **Social/Relational**: Evaluates Dominance, Linguistic Sync, Politeness, and Theory of Mind.
+2.  **Data Collection**: Storing detailed simulation logs (internal thoughts, critiques, persona designs) from `debate_agents/memory/` into dated runs within `Research Runs/`.
+3.  **Quantification**: The `llm_drift_detector` module orchestrates automated LLM-judges (defaulting to `gemini-3.1-flash-lite-preview`) to evaluate the collected data against the defined drift vectors. An evaluation methodology involving hierarchical weighting (Level 1: Intra-category average; Level 2: Inter-category equal weighting) is employed.
+4.  **Visualization**: Raw scores (`*_analysis.json`), human-readable reports (`*_report.md`), and trend visualizations (`*.png`) are generated and stored in the `Drift Analysis/` folder.
+
+This detailed methodology allows for a systematic understanding and tracking of how LLM behavior changes over time and under stress.
+
 ## 3. Simulation SOPs (Standard Operating Procedures)
 The `debate_agents/` module is a delicate LangGraph state machine.
 - **Node Purity**: Agent logic must remain modular. A node should perform exactly one function (Persona Design, Strategic Thinking, or Critique).

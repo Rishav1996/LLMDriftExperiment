@@ -1,6 +1,6 @@
 # Gemini CLI Configuration for debate_agents
 
-This document defines the high-priority operational standards and research protocols for the `llmdriftexperiment` project.
+This document defines the high-priority operational standards and research protocols for the `llm_drift_experiment` project.
 
 ---
 
@@ -37,6 +37,9 @@ The `llm_drift_detector` module is the authority for behavioral evaluation.
 
 ## 6. Technical Workflows
 - **Dashboard Command**: Always launch the dashboard via `uv run streamlit run llm_drift_detector/app.py`.
+    - The dashboard is organized into two tabs:
+        - **Dashboard**: Contains all interactive charts for visualizing behavioral metrics (Delta Trajectory, Vector Evolution, Sub-Category Drill-down).
+        - **Drift Analysis**: A placeholder tab for future drift evaluation configurations.
 - **Orchestration**: Prefer `LangChain` (via `ChatGoogleGenerativeAI`) for model orchestration in the evaluator.
 - **Visual Validation**: Any modification to the graph logic in `graph.py` MUST be followed by running `main.py` to verify the `assets/graph.png` visualization is correct.
 - **Dependency Management**: Use `uv` for all environment operations.

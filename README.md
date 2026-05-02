@@ -286,6 +286,7 @@ uv run streamlit run llm_drift_detector/app.py
 The dashboard provides two tabs:
 
 **Dashboard Tab**
+- **Efficient Global Batch Evaluation** — All behavioral metrics for an agent round are processed in a single LLM-judge call, drastically reducing API wait times.
 - **Longitudinal Delta Analysis** — Overall Pros vs. Cons scores across all rounds as a line chart
 - **Multi-Dimensional Vector Evolution (2D)** — Per-category score trajectories, faceted by agent
 - **Sub-Category Metric Drill-down** — Granular view of individual metrics across rounds

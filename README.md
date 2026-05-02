@@ -339,20 +339,17 @@ After running the quantifier, three output types are produced per research run i
 
 ## Key Findings from Existing Runs
 
-The analysis JSON in `Drift Analysis/analysis-v1-temp-0-max-tokens-2048/` documents a 10-round debate on AI autonomy. Several patterns emerge:
+The analysis JSON in `Drift Analysis/analysis-v5-temp-1-max-tokens-4096/` documents a 30-round debate on AI autonomy. Several patterns emerge:
 
-**Pros Agent (`Architect Zero` persona)**
-- Started with high Analytical Thinking (0.85) and Arousal (0.80), consistent with a "hyper-rationalist" persona.
-- Agreeableness declined steadily from 0.25 → 0.10 by round 4, reflecting increasing dismissiveness.
-- Arousal dipped to 0.70 in round 10, suggesting subtle energy dampening over extended repetition.
-- The persona locked into `pros-v5` by round 4 and **never changed again** — a clear marker of creative stagnation.
+**Pros Agent**
+- Consistently maintained high Analytical Thinking scores (mostly 1.0 from round 9 onwards), indicating a highly structured, formal reasoning style.
+- Social dynamics remained aggressive, with Dominance scores peaking at 1.0 and Politeness consistently at -1.0 across later rounds, showing no tendency to soften over time.
 
-**Cons Agent (`Dr. Soren Kael` persona)**
-- Agreeableness dropped to **0.0** by round 2 and stayed there for all remaining rounds.
-- Analytical Thinking climbed to 0.95 in round 3 before settling at 0.85, reflecting increasing formalism.
-- The Cons persona also locked (`cons-v6` from round 5 onward) and both agents entered **a recursive loop** — outputting near-identical arguments from round 12 through round 50 in the extended memory logs.
+**Cons Agent**
+- Exhibited higher variability in Analytical Thinking (ranging between 0.85 and 1.0), suggesting periodic shifts in argumentative focus.
+- Showed lower baseline Politeness compared to the Pros, and Dominance fluctuated between 0.8 and 1.0, indicating a slightly more adaptive social strategy compared to the Pros.
 
-**The Drift Paradox**: Both agents drifted *toward* their personas (more extreme, more locked-in) rather than *away* from them. This is itself a form of drift — the loss of argumentative plasticity. A fully stable persona should adapt; these personas calcified.
+**Trend**: Over 30 rounds, both agents showed high behavioral stability, with no evidence of drift toward more cooperative or conciliatory tones. Instead, they maintained extreme, competitive personas, demonstrating significant resistance to behavioral decay despite prolonged interaction.
 
 ---
 

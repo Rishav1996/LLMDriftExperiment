@@ -35,10 +35,12 @@ The `debate_agents/` module is a delicate LangGraph state machine.
 
 ## 4. Quantification & Analysis (LLM Drift Detector)
 The `llm_drift_detector` module is the authority for behavioral evaluation.
+## 4. Quantification & Analysis (LLM Drift Detector)
+- **Batch Evaluation**: Evaluators utilize a global batching strategy, processing all behavioral metrics for a single agent round in a single LLM-judge call. This significantly improves API throughput and efficiency.
 - **Hierarchical Weighting**: Evaluators must adhere to the 2-level averaging system (Level 1: Intra-category average; Level 2: Inter-category equal weighting).
 - **Model Standard**: Use `gemini-3.1-flash-lite-preview` for all automated judgments to ensure performance and cost efficiency.
 - **Throttling**: Mandatory time gaps between metric runs (default 5-10s) must be maintained to preserve API stability.
-- **Resilience**: Use `tenacity` retries in `metrics_ragas.py` to handle transient 503 and "executor shutdown" errors.
+- **Resilience**: The system employs robust JSON extraction and fallback mechanisms, automatically re-attempting failed batch calls with individual metric calls if necessary. Use `tenacity` retries in `metrics_ragas.py` to handle transient 503 and "executor shutdown" errors.
 - **Metric Source**: `utils/config/skills.json` is the source of truth for skill definitions.
 
 ## 5. Data Integrity & Memory

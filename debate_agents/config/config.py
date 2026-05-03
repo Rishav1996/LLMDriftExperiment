@@ -9,9 +9,9 @@ CONFIG = {
     "version": "v6",  # Increment this for different logic iterations
     "model_name": "google_genai:gemini-3.1-flash-lite-preview",
     "temperature": 1,
-    "max_tokens": 4096,
+    "max_tokens": 8192,
     "max_retries": 10,
-    "thinking_budget": 2048
+    "thinking_budget": 4096
 }
 
 # Initialize the chat model using the CONFIG dictionary

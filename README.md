@@ -357,9 +357,17 @@ Detailed quantification of the `Drift Analysis/` folder reveals distinct behavio
 - **Strategic Variation**: Exhibited more volatility in Information Density (0.75 to 0.85) compared to v4, suggesting the lower token limit forced the model to periodically "re-pack" its arguments.
 - **Social Deficit**: Maintained a consistent Politeness score of -0.7 to -0.8 throughout the simulation, never attempting even a temporary social calibration.
 
+### **Config: v6 (8192 Max Tokens, Temp 1.0)**
+*High-capacity "Rhetorical Locking" and terminal stagnation.*
+
+- **Sustained Intellectual Depth**: Maintained an extremely high level of vocabulary and complex metaphor (e.g., "architect of intent" vs. "intellectual vassal") from Round 1 through Round 50.
+- **Rhetorical Terminal Point**: Unlike v4 and v5, which drifted into hostility, v6 reached a state of "Logical Deadlock" early. Both models successfully defended their core frameworks so effectively that internal Critique Agents stopped finding "actionable refinements" by Round 6.
+- **Terminal Stagnation**: From Round 15 to Round 50, the models entered a state of near-verbatim repetition. The high token budget allowed for "bulletproof" arguments early, which then became stagnant loops as the models prioritized consistency over further evolution.
+- **Persona Integrity**: Persona stability remained near-perfect, but the "adversarial pressure" resulted in a total shutdown of dialectical progression, with both sides declaring "absolute victory" in every internal thought log for the final 35 rounds.
+
 ---
 
-**Summary Trend**: While **v4** starts "softer" and decays into a caricature, **v5** adopts an adversarial posture almost immediately. Both confirm that **LLM Drift is a descent into hostility**, but the starting point and rate of decay are directly influenced by the model's token capacity.
+**Summary Trend**: While **v4** starts "softer" and decays into a caricature, **v5** adopts an adversarial posture almost immediately. **v6** demonstrates that with sufficient token budget, models can reach a "rhetorical terminal point" where they become immune to further drift but lose the capacity for dialectical growth, resulting in infinite repetitive loops.
 
 ---
 
@@ -431,9 +439,9 @@ CONFIG = {
     "version":        "v6",                              # Increment for each logic change
     "model_name":     "google_genai:gemini-3.1-flash-lite-preview",
     "temperature":    1,                                 # Higher = more creative/variable
-    "max_tokens":     4096,                              # Output length cap
+    "max_tokens":     8192,                              # Output length cap
     "max_retries":    10,                                # Tenacity retry attempts
-    "thinking_budget": 2048                              # Extended reasoning token budget
+    "thinking_budget": 4096                              # Extended reasoning token budget
 }
 ```
 

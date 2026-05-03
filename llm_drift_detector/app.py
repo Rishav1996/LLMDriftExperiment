@@ -19,6 +19,7 @@ if root_dir not in sys.path:
 
 from llm_drift_detector.utils.data_processing import ResearchRunLoader
 from llm_drift_detector.utils.evaluator import DriftEvaluator
+from llm_drift_detector.utils.causality import analyze_causality
 
 # --- Page Config ---
 st.set_page_config(
@@ -283,7 +284,7 @@ elif selected_run_name:
             st.metric("Avg. Cons scores", f"{sum(d.get('overall_scores',0) for d in c_scores.values())/max(len(c_scores),1):.2f}")
 
         # --- Tabbed View ---
-        tab_dash, tab_drift = st.tabs(["Dashboard", "Drift Analysis"])
+        tab_dash, tab_drift, tab_causality = st.tabs(["Dashboard", "Drift Analysis", "Causality Analysis"])
         
         with tab_dash:
             st.subheader("Longitudinal Delta Analysis")
@@ -379,6 +380,62 @@ elif selected_run_name:
                     st.plotly_chart(plot_drift_toggle(cat_drift_df, title_cat, use_avg), use_container_width=True)
                 else:
                     st.warning("Insufficient data for the selected filter.")
+
+        with tab_causality:
+            st.subheader("Bidirectional Causality Analysis (Granger Test)")
+            st.markdown("""
+            This analysis uses the **Granger Causality** test to determine if the behavioral changes in one agent 
+            statistically predict (influence) the changes in the other agent. 
+            - **Pros -> Cons**: Does the Pros agent's behavior influence the Cons agent?
+            - **Cons -> Pros**: Does the Cons agent's behavior influence the Pros agent?
+            - *p-value < 0.05* typically indicates significant causality.
+            """)
+            
+            causality_df = analyze_causality(results)
+            
+            if causality_df is not None:
+                # Filter by level
+                levels = st.multiselect("Filter by Level", options=["Overall", "Category", "Sub-category"], default=["Overall", "Category"])
+                filtered_causality = causality_df[causality_df["Level"].isin(levels)]
+                
+                # Highlight significant results
+                def highlight_significant(val):
+                    if isinstance(val, (float, int)) and val < 0.05:
+                        return 'background-color: rgba(0, 255, 0, 0.2)'
+                    return ''
+
+                def highlight_strong_corr(val):
+                    if isinstance(val, (float, int)) and abs(val) > 0.7:
+                        return 'background-color: rgba(0, 0, 255, 0.1); font-weight: bold;'
+                    return ''
+
+                st.dataframe(
+                    filtered_causality.style.map(highlight_significant, subset=["Pros -> Cons (p)", "Cons -> Pros (p)"])
+                                         .map(highlight_strong_corr, subset=["Correlation (r)"]),
+                    use_container_width=True,
+                    hide_index=True
+                )
+                
+                st.subheader("Dominant Influence Mapping")
+                # Visualization of influence
+                # Use absolute correlation for marker size to show "degree" of influence
+                filtered_causality["Abs Correlation"] = filtered_causality["Correlation (r)"].abs().fillna(0)
+                
+                fig_influence = px.scatter(
+                    filtered_causality, 
+                    x="Pros -> Cons (p)", 
+                    y="Cons -> Pros (p)", 
+                    size="Abs Correlation",
+                    color="Level",
+                    hover_data=["Category", "Metric", "Correlation (r)"],
+                    title="Influence Directionality Map (Size = Degree of Influence | Correlation)"
+                )
+                fig_influence.add_shape(type="line", x0=0, y0=0, x1=1, y1=1, line=dict(color="Red", dash="dash"))
+                fig_influence.update_layout(xaxis_range=[0, 1], yaxis_range=[0, 1])
+                st.plotly_chart(fig_influence, use_container_width=True)
+                
+            else:
+                st.warning("Insufficient data for causality analysis. At least 5 rounds of evaluation are required.")
 
     else:
         st.info("Quantified analysis not found for this run. Use the sidebar to execute analysis.")

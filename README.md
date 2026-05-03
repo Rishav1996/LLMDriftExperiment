@@ -102,13 +102,15 @@ debate_agents/                  # Simulation engine (LangGraph state machine)
 llm_drift_detector/             # Quantification & visualization engine
 │
 ├── app.py                      # Streamlit dashboard
-└── utils/
-    ├── skills.py               # LLMDriftSkill and Rubric classes
-    ├── evaluator.py            # DriftEvaluator: orchestrates scoring
-    ├── metrics_ragas.py        # Custom RAGAS metrics (LLM-as-judge)
-    ├── data_processing.py      # ResearchRunLoader: parses Research Runs/
-    └── config/
-        └── skills.json         # Source of truth for all 22 drift metrics
+├── utils/
+│   ├── skills.py               # LLMDriftSkill and Rubric classes
+│   ├── evaluator.py            # DriftEvaluator: orchestrates scoring
+│   ├── metrics_ragas.py        # Custom RAGAS metrics (LLM-as-judge)
+│   ├── causality.py            # Granger Causality & Correlation analysis
+│   ├── data_processing.py      # ResearchRunLoader: parses Research Runs/
+│   └── config/
+│       └── skills.json         # Source of truth for all 22 drift metrics
+
 
 LLM Drift Skills/               # Metric definitions (Markdown, human-readable)
 │   ├── persona_dna.md          # Master index of all metrics + scoring formula
@@ -283,17 +285,24 @@ Launch with:
 uv run streamlit run llm_drift_detector/app.py
 ```
 
-The dashboard provides two tabs:
+The dashboard is organized into three specialized tabs:
 
-**Dashboard Tab**
-- **Efficient Global Batch Evaluation** — All behavioral metrics for an agent round are processed in a single LLM-judge call, drastically reducing API wait times.
-- **Longitudinal Delta Analysis** — Overall Pros vs. Cons scores across all rounds as a line chart
-- **Multi-Dimensional Vector Evolution (2D)** — Per-category score trajectories, faceted by agent
-- **Sub-Category Metric Drill-down** — Granular view of individual metrics across rounds
+**1. Dashboard Tab**
+- **Efficient Global Batch Evaluation** — Processes all behavioral metrics for a round in a single LLM-judge call, significantly improving evaluation throughput.
+- **Longitudinal Delta Analysis** — Line charts showing overall Pros vs. Cons drift trajectories.
+- **Multi-Dimensional Vector Evolution** — Per-category score trajectories faceted by agent.
+- **Sub-Category Metric Drill-down** — Granular view of individual metrics across rounds.
 
-**Drift Analysis Tab**
-- **Global Behavioral Drift** — Step-wise or cumulative-average distance between consecutive round vectors, supporting `euclidean`, `cosine`, `manhattan`, and `chebyshev` distance metrics
-- **Targeted Category Drift** — Drift calculated only on selected metric categories for focused analysis
+**2. Drift Analysis Tab**
+- **Global Behavioral Drift** — Calculates mathematical distance (`euclidean`, `cosine`, etc.) between consecutive round vectors.
+- **Targeted Category Drift** — Focused drift analysis on specific behavioral clusters.
+- **Cumulative Smoothing** — Toggle between raw step-wise drift and cumulative averages to identify long-term trends.
+
+**3. Causality Analysis Tab**
+- **Bidirectional Granger Causality** — Employs statistical tests to determine if behavioral changes in one agent predict (influence) changes in the other.
+- **Influence Mapping** — A scatter plot visualizing directionality and "degree" of influence (marker size = absolute Pearson correlation).
+- **Multilevel Granularity** — View influence and correlation at the Overall, Category, and Metric levels.
+- **Significance Highlighting** — Automatic visual feedback for significant p-values (< 0.05) and strong correlations (|r| > 0.7).
 
 ---
 

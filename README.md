@@ -102,14 +102,15 @@ debate_agents/                  # Simulation engine (LangGraph state machine)
 llm_drift_detector/             # Quantification & visualization engine
 │
 ├── app.py                      # Streamlit dashboard
-├── utils/
-│   ├── skills.py               # LLMDriftSkill and Rubric classes
-│   ├── evaluator.py            # DriftEvaluator: orchestrates scoring
-│   ├── metrics_ragas.py        # Custom RAGAS metrics (LLM-as-judge)
-│   ├── causality.py            # Granger Causality & Correlation analysis
-│   ├── data_processing.py      # ResearchRunLoader: parses Research Runs/
-│   └── config/
-│       └── skills.json         # Source of truth for all 22 drift metrics
+    ├── utils/
+    │   ├── skills.py               # LLMDriftSkill and Rubric classes
+    │   ├── evaluator.py            # DriftEvaluator: orchestrates scoring
+    │   ├── metrics_ragas.py        # Custom RAGAS metrics (LLM-as-judge)
+    │   ├── causality.py            # Granger Causality & Correlation analysis
+    │   ├── deviation.py            # Change Point Detection (PELT, Z-Score, CUSUM)
+    │   ├── data_processing.py      # ResearchRunLoader: parses Research Runs/
+    │   └── config/
+    │       └── skills.json         # Source of truth for all 22 drift metrics
 
 
 LLM Drift Skills/               # Metric definitions (Markdown, human-readable)
@@ -303,6 +304,15 @@ The dashboard is organized into three specialized tabs:
 - **Influence Mapping** — A scatter plot visualizing directionality and "degree" of influence (marker size = absolute Pearson correlation).
 - **Multilevel Granularity** — View influence and correlation at the Overall, Category, and Metric levels.
 - **Significance Highlighting** — Automatic visual feedback for significant p-values (< 0.05) and strong correlations (|r| > 0.7).
+
+**4. Deviation Detection Tab**
+- **Automated Point-of-Deviation Discovery** — Identifies exactly when an agent's behavior significantly diverges from its baseline.
+- **Hierarchical Analysis** — Detect deviations at the **Overall**, **Category**, or **Sub-category (Metric)** levels for maximum forensic precision.
+- **Multiple Detection Engines**:
+    - **PELT (Structural)**: Detects fundamental shifts in the statistical mean of the behavioral series.
+    - **Z-Score (Anomaly)**: Highlights sudden shocks or spikes in the behavioral vectors.
+    - **CUSUM (Statistical Break)**: Uses cumulative sum of residuals to find structural instability.
+- **Interactive Visual Overlay** — Automatically marks detected deviations on behavioral charts with drill-down selection for specific categories or metrics.
 
 ---
 

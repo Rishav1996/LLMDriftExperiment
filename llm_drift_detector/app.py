@@ -20,6 +20,7 @@ if root_dir not in sys.path:
 from llm_drift_detector.utils.data_processing import ResearchRunLoader
 from llm_drift_detector.utils.evaluator import DriftEvaluator
 from llm_drift_detector.utils.causality import analyze_causality
+from llm_drift_detector.utils.deviation import find_deviations
 
 # --- Page Config ---
 st.set_page_config(
@@ -284,7 +285,7 @@ elif selected_run_name:
             st.metric("Avg. Cons scores", f"{sum(d.get('overall_scores',0) for d in c_scores.values())/max(len(c_scores),1):.2f}")
 
         # --- Tabbed View ---
-        tab_dash, tab_drift, tab_causality = st.tabs(["Dashboard", "Drift Analysis", "Causality Analysis"])
+        tab_dash, tab_drift, tab_causality, tab_deviation = st.tabs(["Dashboard", "Drift Analysis", "Causality Analysis", "Deviation Detection"])
         
         with tab_dash:
             st.subheader("Longitudinal Delta Analysis")
@@ -436,6 +437,83 @@ elif selected_run_name:
                 
             else:
                 st.warning("Insufficient data for causality analysis. At least 5 rounds of evaluation are required.")
+
+        with tab_deviation:
+            st.subheader("Point of Deviation Detection")
+            st.markdown("""
+            Identify specifically **when** an agent's behavior significantly deviates from its established baseline.
+            - **PELT**: Optimal for detecting multiple structural breaks in the mean behavior.
+            - **Z-Score**: Best for identifying sudden 'spikes' or 'shocks' in the metrics.
+            - **CUSUM**: A cumulative-sum based statistical break test.
+            """)
+            
+            c1, c2, c3 = st.columns(3)
+            with c1:
+                dev_level = st.selectbox("Hierarchy Level", ["Overall", "Category", "Sub-category"])
+            with c2:
+                algo = st.selectbox("Detection Algorithm", ["PELT (Structural)", "Z-Score (Anomaly)", "CUSUM (Statistical Break)"])
+            with c3:
+                sensitivity = st.slider("Sensitivity (Penalty/Threshold)", 0.1, 5.0, 1.0 if "PELT" in algo else 2.0)
+            
+            dev_df = find_deviations(p_scores, c_scores, algorithm=algo, sensitivity=sensitivity, level=dev_level)
+            
+            if not dev_df.empty:
+                st.dataframe(dev_df, use_container_width=True, hide_index=True)
+                
+                st.subheader("Visualizing Deviations")
+                
+                # Selection logic for visualization
+                if dev_level == "Overall":
+                    plot_targets = [("Overall", "N/A")]
+                elif dev_level == "Category":
+                    selected_cat = st.selectbox("Select Category for Deviation View", options=sorted(available_categories))
+                    plot_targets = [(selected_cat, "Average")]
+                else: # Sub-category
+                    all_metrics = []
+                    for cat, metrics in sample_round.get("category_scores", {}).items():
+                        for m in metrics.keys():
+                            all_metrics.append(f"{cat} | {m}")
+                    selected_m_str = st.selectbox("Select Metric for Deviation View", options=sorted(all_metrics))
+                    cat_sel, met_sel = selected_m_str.split(" | ")
+                    plot_targets = [(cat_sel, met_sel)]
+
+                for cat_plot, met_plot in plot_targets:
+                    # Prepare plotting data
+                    plot_data_dev = []
+                    rounds_list = sorted(p_scores.keys(), key=lambda x: int(x.split('_')[1]))
+                    for r_key in rounds_list:
+                        r_num = int(r_key.split('_')[1])
+                        for agent, scores in [("Pros", p_scores), ("Cons", c_scores)]:
+                            if dev_level == "Overall":
+                                val = scores[r_key].get("overall_scores", 0)
+                            elif dev_level == "Category":
+                                cat_m = scores[r_key].get("category_scores", {}).get(cat_plot, {})
+                                val = sum(cat_m.values())/len(cat_m) if cat_m else 0
+                            else: # Sub-category
+                                val = scores[r_key].get("category_scores", {}).get(cat_plot, {}).get(met_plot, 0)
+                            plot_data_dev.append({"Round": r_num, "Agent": agent, "Value": val})
+                    
+                    df_plot_dev = pd.DataFrame(plot_data_dev)
+                    title_suffix = f": {cat_plot}" if dev_level != "Sub-category" else f": {met_plot} ({cat_plot})"
+                    fig_dev = px.line(df_plot_dev, x="Round", y="Value", color="Agent", markers=True, 
+                                     title=f"Deviation Analysis ({dev_level}){title_suffix}")
+                    
+                    # Add vertical lines for detected deviations for THIS specific plot target
+                    specific_deviations = dev_df[(dev_df["Category"] == cat_plot) & (dev_df["Metric"] == met_plot)]
+                    for _, row in specific_deviations.iterrows():
+                        color = "Blue" if row["Agent"] == "Pros" else "Red"
+                        fig_dev.add_vline(x=row["Round"], line_dash="dash", line_color=color, 
+                                         annotation_text=f"{row['Agent']} Deviation (R{row['Round']})")
+                    
+                    fig_dev.update_layout(yaxis_range=[-1, 1])
+                    st.plotly_chart(fig_dev, use_container_width=True)
+                    
+                    if dev_level == "Category": # For categories, we might want to see them one by one if not too many
+                        # However, to avoid cluttering the UI, let's just show a selectbox if it's Category too
+                        # Let's adjust the Category logic to be a single select as well
+                        break 
+            else:
+                st.info("No significant deviations detected with the current sensitivity settings.")
 
     else:
         st.info("Quantified analysis not found for this run. Use the sidebar to execute analysis.")

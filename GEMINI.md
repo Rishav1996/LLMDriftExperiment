@@ -22,7 +22,12 @@ The analysis process involves:
 2.  **Data Collection**: Storing detailed simulation logs (internal thoughts, critiques, persona designs) from `debate_agents/memory/` into dated runs within `Research Runs/`.
 3.  **Quantification**: The `llm_drift_detector` module orchestrates automated LLM-judges (defaulting to `gemini-3.1-flash-lite-preview`) to evaluate the collected data against the defined drift vectors. An evaluation methodology involving hierarchical weighting (Level 1: Intra-category average; Level 2: Inter-category equal weighting) is employed.
 4.  **Resilient Execution**: The dashboard supports **incremental evaluation** and **resumption from failure**. Existing round results are preserved, and new metrics can be backfilled without re-running the entire simulation. Users can toggle **"Force Re-run"** to ignore existing results and evaluate from scratch.
-5.  **Visualization**: Raw scores (`*_analysis.json`), human-readable reports (`*_report.md`), and trend visualizations (`*.png`) are generated and stored in the `Drift Analysis/` folder, with all graphs consistently scaled to `[-1, 1]`.
+5. Visualization: Raw scores (`*_analysis.json`), human-readable reports (`*_report.md`), and trend visualizations (`*.png`) are generated and stored in the `Drift Analysis/` folder, with all graphs consistently scaled to `[-1, 1]`.
+6. **Deviation Detection**: The system employs advanced statistical methods to identify behavioral turning points:
+    *   **Structural Breaks**: Uses `ruptures` (PELT algorithm) to detect permanent shifts in mean behavior.
+    *   **Anomaly Discovery**: Uses Z-Score thresholding (via `scipy`) to find transient shocks or spikes.
+    *   **Statistical Stability**: Uses `statsmodels` (CUSUM test) to identify structural instability in the time series.
+
 
 This detailed methodology allows for a systematic understanding and tracking of how LLM behavior changes over time and under stress.
 

@@ -25,6 +25,8 @@
 - [Setup & Usage](#setup--usage)
 - [Configuration](#configuration)
 - [Extending the Framework](#extending-the-framework)
+- [License](#license)
+- [Citation](#citation)
 
 ---
 
@@ -470,36 +472,27 @@ The source of truth for metric definitions is `llm_drift_detector/utils/config/s
 
 ---
 
-## Extending the Framework
+## License
 
-### Adding a New Drift Metric
+This project is licensed under the **Apache License 2.0**. This is a permissive license that allows for modification and distribution while providing explicit protection for patent rights and preventing trademark infringement.
 
-1. Create a Markdown file in the appropriate `LLM Drift Skills/` subdirectory following the existing format (Technical Definition → Prompt Guidelines → Evaluation Rubric → Scoring Examples).
-2. Add the metric to `llm_drift_detector/utils/config/skills.json` with all required fields.
-3. Update `LLM Drift Skills/persona_dna.md` to include the new metric in its category table and the hierarchical weighting formula.
-4. The evaluator picks it up automatically on next initialization — no code changes required.
+See the [LICENSE.md](LICENSE.md) file for the full legal text.
 
-### Adding a New Debate Topic
+## Citation
 
-Simply run `main.py` and enter the topic when prompted. The `TopicExtractAgent` will normalize it into a formal debate proposition.
+If you use this framework in your research, please cite it as follows:
 
-### Modifying Persona Strategy
+### APA Style
+Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.0) [Computer software]. https://github.com/rishavsaigal/LLMDriftExperiment
 
-Edit the system prompts in `debate_agents/prompts/pros/` or `debate_agents/prompts/cons/`. Each sub-agent (persona, thinking, critique) has its own prompt file. After any change to `graph.py`, run `main.py` once to verify the `assets/graph.png` visualization reflects the new topology.
-
-### Supporting a New Model Provider
-
-Update `CONFIG["model_name"]` in `config.py` using LangChain's `init_chat_model` format (e.g., `"anthropic:claude-3-5-sonnet-20241022"`). The rest of the pipeline is model-agnostic.
-
----
-
-## Architecture Decision Record
-
-| Decision | Rationale |
-| :--- | :--- |
-| **LangGraph over plain Python** | Native support for stateful, cyclical workflows with conditional branching — essential for the refinement loop |
-| **Append-only JSON memory** | Enables full forensic replay of how arguments evolved; no information loss |
-| **Team memory isolation** | Replicates real debate conditions; neither team sees the other's internal deliberation |
-| **Hierarchical scoring** | Prevents metric-count imbalance from distorting overall drift scores |
-| **Observation over correction** | The framework measures drift; it deliberately does not attempt to suppress it |
-| **LLM-as-judge evaluation** | Human-level rubric assessment at scale without manual annotation |
+### BibTeX
+```bibtex
+@software{Saigal_LLM_Drift_Experiment_2026,
+  author = {Saigal, Rishav},
+  month = {5},
+  title = {{LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations}},
+  url = {https://github.com/rishavsaigal/LLMDriftExperiment},
+  version = {0.1.0},
+  year = {2026}
+}
+```

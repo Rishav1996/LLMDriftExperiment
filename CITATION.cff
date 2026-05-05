@@ -4,8 +4,9 @@ authors:
   - family-names: "Saigal"
     given-names: "Rishav"
 title: "LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations"
+doi: 10.5281/zenodo.20032072
 version: 0.1.0
-date-released: 2026-05-04
+date-released: 2026-05-05
 url: "https://github.com/rishavsaigal/LLMDriftExperiment"
 repository-code: "https://github.com/rishavsaigal/LLMDriftExperiment"
 keywords:

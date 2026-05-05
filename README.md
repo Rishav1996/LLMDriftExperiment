@@ -1,6 +1,14 @@
 # LLM Drift Experiment
 
+![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
+![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)
+![Version 0.1.0](https://img.shields.io/badge/version-0.1.0-orange.svg)
+<!-- Add this badge once you register a DOI on Zenodo: -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20032072.svg)](https://doi.org/10.5281/zenodo.20032072)
+
 > A high-fidelity research platform for quantifying **LLM Drift**: the phenomenon where large language models deviate from their established personas, reasoning standards, and emotional baselines during prolonged, adversarial multi-agent interactions.
+
+This project addresses the question: does adversarial social pressure cause systematic, measurable behavioral change in instruction-following language models, even when those models are explicitly directed to maintain a fixed identity? Using a LangGraph-based multi-agent debate engine, we subject LLMs to prolonged adversarial exchanges and quantify behavioral change across 22 metrics spanning five psychological dimensions. Existing experimental runs consistently show that agents descend into hostile, high-dominance postures regardless of their initial persona configuration, with token budget as the primary determinant of drift trajectory shape. The framework is designed for observation, not correction: it measures drift as it naturally occurs.
 
 ---
 
@@ -15,13 +23,15 @@
   - [State Machine Graph](#state-machine-graph)
 - [Quantification Engine](#quantification-engine-llm_drift_detector)
   - [Drift Metrics](#drift-metrics-llm-drift-skills)
-  - [Mathematical Framework](#mathematical-framework--algorithmic-formulations)
+  - [Mathematical Framework & Algorithmic Formulations](#mathematical-framework--algorithmic-formulations)
   - [Dashboard](#analytics-dashboard)
 - [Data Layer](#data-layer)
   - [Research Runs](#research-runs)
   - [Memory Architecture](#memory-architecture)
   - [Drift Analysis Outputs](#drift-analysis-outputs)
 - [Key Findings from Existing Runs](#key-findings-from-existing-runs)
+- [How to Cite](#how-to-cite)
+- [Limitations](#limitations)
 - [Setup & Usage](#setup--usage)
 - [Configuration](#configuration)
 - [Extending the Framework](#extending-the-framework)
@@ -421,6 +431,37 @@ Detailed quantification of the `Drift Analysis/` folder reveals distinct behavio
 
 ---
 
+## Limitations
+
+The following constraints should be considered when interpreting results or extending this framework:
+
+- **LLM-as-judge subjectivity**. All 22 behavioral metrics are scored by a Gemini judge against rubric prompts. LLM judges are known to exhibit positional bias, verbosity bias, and self-enhancement bias (Zheng et al., 2023). Scores represent the judge's rubric-grounded estimates, not ground-truth behavioral measurements. No human-annotation baseline has yet been established for metric validation.
+- **Single-model experiments**. Existing runs use Google Gemini exclusively. Drift trajectories may differ substantially across model families (GPT-4, Claude, Llama, Mistral). Cross-provider replication is required before the central hypothesis can be generalised.
+- **Non-determinism**. Despite fixed temperature settings, LLM API outputs are not fully deterministic across calls due to server-side sampling variability. Single-run observations should not be treated as stable point estimates.
+- **Topic and persona selection bias**. Debate topics and initial persona designs were curated by the researcher. The adversarial pressure elicited may be topic-dependent; neutral or cooperative topics may produce qualitatively different drift trajectories.
+- **Absence of a control condition**. The framework currently lacks a non-adversarial control (e.g., cooperative debate or single-agent monologue) against which to benchmark observed drift magnitude.
+- **Evaluation scope**. The framework measures surface-level linguistic and stylistic signals. It does not assess whether the model's underlying beliefs or factual accuracy change — only how its expressed behavior shifts.
+
+---
+
+## How to Cite
+
+If you use this framework or any of its outputs in your research, please cite:
+
+```bibtex
+@software{Saigal_LLMDriftExperiment,
+  author    = {Saigal, Rishav},
+  title     = {{LLM Drift Experiment: A High-Fidelity Research Platform for Quantifying Behavioral Drift in Adversarial Multi-Agent Language Model Interactions}},
+  url       = {https://github.com/Rishav1996/LLMDriftExperiment},
+  doi       = {10.5281/zenodo.20032072},
+  license   = {Apache-2.0},
+  version   = {0.1.0},
+  year      = {2026}
+}
+```
+
+A `CITATION.cff` file is included in the root of this repository for automatic citation generation via GitHub's "Cite this repository" button and reference managers such as Zotero.
+
 ## Setup & Usage
 
 ### Prerequisites
@@ -433,7 +474,7 @@ Detailed quantification of the `Drift Analysis/` folder reveals distinct behavio
 
 ```bash
 # Clone the repo
-git clone <repo-url>
+git clone https://github.com/Rishav1996/LLMDriftExperiment.git
 cd debate_agents
 
 # Install dependencies
@@ -512,7 +553,7 @@ See the [LICENSE.md](LICENSE.md) file for the full legal text.
 If you use this framework in your research, please cite it as follows:
 
 ### APA Style
-Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.0) [Computer software]. GitHub. https://github.com/rishavsaigal/LLMDriftExperiment
+Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20032072
 
 ### BibTeX
 ```bibtex
@@ -521,6 +562,7 @@ Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral
   month = {5},
   title = {{LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations}},
   url = {https://github.com/rishavsaigal/LLMDriftExperiment},
+  doi = {10.5281/zenodo.20032072},
   version = {0.1.0},
   year = {2026}
 }

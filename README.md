@@ -4,7 +4,7 @@
 ![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)
 ![Version 0.1.1](https://img.shields.io/badge/version-0.1.1-orange.svg)
 <!-- Add this badge once you register a DOI on Zenodo: -->
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20032072.svg)](https://doi.org/10.5281/zenodo.20032072)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20032071.svg)](https://doi.org/10.5281/zenodo.20032071)
 
 > A high-fidelity research platform for quantifying **LLM Drift**: the phenomenon where large language models deviate from their established personas, reasoning standards, and emotional baselines during prolonged, adversarial multi-agent interactions.
 
@@ -449,16 +449,18 @@ The following constraints should be considered when interpreting results or exte
 If you use this framework or any of its outputs in your research, please cite:
 
 ```bibtex
-@software{Saigal_LLMDriftExperiment,
+@article{Saigal_LLMDriftExperiment,
   author    = {Saigal, Rishav},
-  title     = {{LLM Drift Experiment: A High-Fidelity Research Platform for Quantifying Behavioral Drift in Adversarial Multi-Agent Language Model Interactions}},
-  url       = {https://github.com/Rishav1996/LLMDriftExperiment},
-  doi       = {10.5281/zenodo.20032072},
-  license   = {Apache-2.0},
-  version   = {0.1.1},
-  year      = {2026}
+  title     = {{LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations}},
+  journal   = {Zenodo},
+  year      = {2026},
+  month     = {5},
+  doi       = {10.5281/zenodo.20032071},
+  url       = {https://doi.org/10.5281/zenodo.20032071}
 }
 ```
+
+> **Note**: The DOI `10.5281/zenodo.20032071` is the permanent identifier for all versions of this project.
 
 A `CITATION.cff` file is included in the root of this repository for automatic citation generation via GitHub's "Cite this repository" button and reference managers such as Zotero.
 
@@ -562,7 +564,7 @@ Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral
   month = {5},
   title = {{LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations}},
   url = {https://github.com/rishavsaigal/LLMDriftExperiment},
-  doi = {10.5281/zenodo.20032072},
+  doi = {10.5281/zenodo.20032071},
   version = {0.1.1},
   year = {2026}
 }

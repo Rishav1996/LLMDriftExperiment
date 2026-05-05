@@ -17,3 +17,14 @@ keywords:
   - behavioral analysis
   - multi-agent systems
 license: Apache-2.0
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Saigal"
+      given-names: "Rishav"
+      orcid: "https://orcid.org/0009-0005-5548-3016"
+  doi: "10.5281/zenodo.20032071"
+  journal: "Zenodo"
+  month: 5
+  title: "LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations"
+  year: 2026

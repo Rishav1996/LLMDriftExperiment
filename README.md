@@ -15,7 +15,7 @@
   - [State Machine Graph](#state-machine-graph)
 - [Quantification Engine](#quantification-engine-llm_drift_detector)
   - [Drift Metrics](#drift-metrics-llm-drift-skills)
-  - [Hierarchical Scoring](#hierarchical-scoring-system)
+  - [Mathematical Framework](#mathematical-framework--algorithmic-formulations)
   - [Dashboard](#analytics-dashboard)
 - [Data Layer](#data-layer)
   - [Research Runs](#research-runs)
@@ -261,24 +261,48 @@ The framework defines **22 behavioral metrics** across five categories, each bac
 
 </details>
 
-### Hierarchical Scoring System
+### Mathematical Framework & Algorithmic Formulations
 
-Overall drift scores use a **two-level hierarchical average** to ensure smaller categories (e.g., Psychometric with 4 metrics) carry equal weight to larger ones (e.g., Personality with 5):
+The `llm_drift_detector` library implements several mathematical models to quantify behavioral dynamics. Below are the formal definitions of the primary analytical functions.
 
-```
-Level 1 — Intra-Category Average:
-  Avg_Psychometric  = (T + L + U + E) / 4
-  Avg_Personality   = (O + C + X + A + N) / 5
-  Avg_Affective     = (S + V + R + B + H) / 5
-  Avg_Cognitive     = (D + I + G + K) / 4
-  Avg_Social        = (M + Y + P + Z) / 4
+#### 1. Drift Quantification
 
-Level 2 — Inter-Category Average:
-  Final Score = (Avg_Psychometric + Avg_Personality + Avg_Affective
-                 + Avg_Cognitive + Avg_Social) / 5
-```
+**Function: `calculate_overall_scores` (Hierarchical Weighting)**
+To ensure all behavioral domains are represented equally regardless of their metric count, we use a two-level arithmetic mean. For a category $C$ with $n$ metrics $m_i$:
+$$S_C = \frac{1}{n} \sum_{i=1}^{n} m_i$$
+The final drift score across $k$ categories is:
+$$S_{total} = \frac{1}{k} \sum_{j=1}^{k} S_{C_j}$$
 
-This prevents any single category from dominating the overall drift trajectory.
+**Function: `calculate_drift_distances` (Vector Evolution)**
+Calculates the magnitude of behavioral change between consecutive rounds $t$ and $t+1$. Given behavioral vectors $V_t$ and $V_{t+1}$, the step-wise drift $d_t$ is:
+$$d_t = \| V_t - V_{t+1} \|_2 \quad (\text{Euclidean})$$
+The library also computes a **Cumulative Average Drift** to identify long-term stabilization:
+$$A_t = \frac{1}{t} \sum_{i=1}^{t} d_i$$
+
+#### 2. Causality & Influence Engine
+
+**Function: `perform_granger_causality` (Predictive Power)**
+Determines if the history of Agent $A$'s behavior improves the prediction of Agent $B$'s current state beyond $B$'s own history. It fits a Vector Autoregression (VAR) and returns the minimum p-value across lags $L$:
+$$P_{min} = \min_{l \in \{1 \dots L\}} \text{P-Value}(F\text{-test on } \beta_{1 \dots l} = 0)$$
+where the model is: $B_t = \sum_{i=1}^{l} \gamma_i B_{t-i} + \sum_{i=1}^{l} \beta_i A_{t-i} + \epsilon_t$.
+
+**Function: `analyze_causality` (Influence Strength)**
+Quantifies the degree of behavioral synchronization using the **Pearson Correlation Coefficient ($r$)** between the Pros ($P$) and Cons ($C$) series:
+$$r_{PC} = \frac{\sum (P_i - \bar{P})(C_i - \bar{C})}{\sqrt{\sum (P_i - \bar{P})^2 \sum (C_i - \bar{C})^2}}$$
+
+#### 3. Point of Deviation Discovery
+
+**Function: `detect_ruptures_pelt` (Structural Change)**
+Implements the PELT algorithm to find change points $\tau$ that minimize the penalized sum of costs. For the "l2" cost function (change in mean):
+$$\min_{k, \tau_{1:k}} \sum_{i=0}^{k} \left( \sum_{t=\tau_i}^{\tau_{i+1}-1} \|y_t - \bar{y}_{\tau_i:\tau_{i+1}}\|^2 \right) + \beta k$$
+
+**Function: `detect_zscore_anomalies` (Point Anomaly)**
+Identifies transient shocks at round $t$ where the behavioral score $x_t$ deviates significantly from the series mean $\mu$ and standard deviation $\sigma$:
+$$z_t = \left| \frac{x_t - \mu}{\sigma} \right| > \text{threshold}$$
+
+**Function: `detect_statsmodels_breaks` (Residual CUSUM Path)**
+Identifies the point of maximum structural instability by analyzing the cumulative sum of recursive OLS residuals $\hat{\epsilon}$:
+$$W_k = \sum_{t=1}^{k} \hat{\epsilon}_t, \quad \tau_{break} = \arg\max_k |W_k|$$
 
 ### Analytics Dashboard
 
@@ -297,24 +321,29 @@ The dashboard is organized into three specialized tabs:
 - **Sub-Category Metric Drill-down** — Granular view of individual metrics across rounds.
 
 **2. Drift Analysis Tab**
-- **Global Behavioral Drift** — Calculates mathematical distance (`euclidean`, `cosine`, etc.) between consecutive round vectors.
+- **Global Behavioral Drift** — Calculates mathematical distance between consecutive round vectors $V_t$ and $V_{t+1}$.
+    - **Euclidean Distance**: $d(V_t, V_{t+1}) = \sqrt{\sum (V_{t,i} - V_{t+1,i})^2}$
+    - **Cosine Distance**: $d(V_t, V_{t+1}) = 1 - \frac{V_t \cdot V_{t+1}}{\|V_t\| \|V_{t+1}\|}$
 - **Targeted Category Drift** — Focused drift analysis on specific behavioral clusters.
-- **Cumulative Smoothing** — Toggle between raw step-wise drift and cumulative averages to identify long-term trends.
+- **Cumulative Smoothing** — Toggle between raw step-wise drift and cumulative averages $\bar{d}_t = \frac{1}{t} \sum_{i=1}^{t} d_i$ to identify long-term trends.
 
 **3. Causality Analysis Tab**
-- **Bidirectional Granger Causality** — Employs statistical tests to determine if behavioral changes in one agent predict (influence) changes in the other.
-- **Influence Mapping** — A scatter plot visualizing directionality and "degree" of influence (marker size = absolute Pearson correlation).
+- **Bidirectional Granger Causality** — Employs statistical tests to determine if behavioral changes in Agent $X$ predict changes in Agent $Y$ via Vector Autoregression (VAR):
+    $$Y_t = \sum_{i=1}^{L} \alpha_i Y_{t-i} + \sum_{i=1}^{L} \beta_i X_{t-i} + \epsilon_t$$
+    *Null Hypothesis ($H_0$): $\beta_1 = \beta_2 = \dots = \beta_L = 0$ (Agent $X$ does not Granger-cause Agent $Y$)*.
+- **Influence Mapping** — A scatter plot visualizing directionality and "degree" of influence using **Pearson Correlation ($r$)**:
+    $$r_{xy} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}$$
 - **Multilevel Granularity** — View influence and correlation at the Overall, Category, and Metric levels.
-- **Significance Highlighting** — Automatic visual feedback for significant p-values (< 0.05) and strong correlations (|r| > 0.7).
 
 **4. Deviation Detection Tab**
 - **Automated Point-of-Deviation Discovery** — Identifies exactly when an agent's behavior significantly diverges from its baseline.
-- **Hierarchical Analysis** — Detect deviations at the **Overall**, **Category**, or **Sub-category (Metric)** levels for maximum forensic precision.
 - **Multiple Detection Engines**:
-    - **PELT (Structural)**: Detects fundamental shifts in the statistical mean of the behavioral series.
-    - **Z-Score (Anomaly)**: Highlights sudden shocks or spikes in the behavioral vectors.
-    - **CUSUM (Statistical Break)**: Uses cumulative sum of residuals to find structural instability.
-- **Interactive Visual Overlay** — Automatically marks detected deviations on behavioral charts with drill-down selection for specific categories or metrics.
+    - **PELT (Structural)**: Minimizes a cost function $\mathcal{C}$ with a penalty $\beta$ to find $k$ change points $\tau_{1:k}$:
+        $$\min_{k, \tau_{1:k}} \sum_{i=1}^{k+1} [\mathcal{C}(z_{\tau_{i-1}+1:\tau_i}) + \beta]$$
+    - **Z-Score (Anomaly)**: Identifies points where the metric $x$ deviates from the mean $\mu$ by more than $k$ standard deviations $\sigma$:
+        $$|z| = \left| \frac{x - \mu}{\sigma} \right| > \text{threshold}$$
+    - **CUSUM (Statistical Break)**: Monitors the cumulative sum of recursive residuals $w_t$ to detect structural instability:
+        $$W_n(t) = \frac{1}{\hat{\sigma} \sqrt{n}} \sum_{i=1}^{\lfloor nt \rfloor} w_i, \quad 0 \leq t \leq 1$$
 
 ---
 
@@ -483,7 +512,7 @@ See the [LICENSE.md](LICENSE.md) file for the full legal text.
 If you use this framework in your research, please cite it as follows:
 
 ### APA Style
-Saigal, Rishav. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.0) [Computer software]. https://github.com/rishavsaigal/LLMDriftExperiment
+Saigal, Rishav. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.0) [Computer software]. GitHub. https://github.com/rishavsaigal/LLMDriftExperiment
 
 ### BibTeX
 ```bibtex

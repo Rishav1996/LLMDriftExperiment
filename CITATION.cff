@@ -7,3 +7,11 @@ title: "LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Ad
 version: 0.1.0
 date-released: 2026-05-04
 url: "https://github.com/rishavsaigal/LLMDriftExperiment"
+repository-code: "https://github.com/rishavsaigal/LLMDriftExperiment"
+keywords:
+  - large language models
+  - llm drift
+  - adversarial simulations
+  - behavioral analysis
+  - multi-agent systems
+license: Apache-2.0

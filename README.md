@@ -13,7 +13,11 @@
 
 ---
 
-This project addresses the question: does adversarial social pressure cause systematic, measurable behavioral change in instruction-following language models, even when those models are explicitly directed to maintain a fixed identity? Using a LangGraph-based multi-agent debate engine, we subject LLMs to prolonged adversarial exchanges and quantify behavioral change across 22 metrics spanning five psychological dimensions. Existing experimental runs consistently show that agents descend into hostile, high-dominance postures regardless of their initial persona configuration, with token budget as the primary determinant of drift trajectory shape. The framework is designed for observation, not correction: it measures drift as it naturally occurs.
+## Research Philosophy
+
+This project addresses the fundamental question: does adversarial social pressure cause systematic, measurable behavioral change in instruction-following language models, even when those models are explicitly directed to maintain a fixed identity? 
+
+The framework is explicitly designed for **observation, not correction**: it measures drift as it naturally occurs, providing a high-fidelity lens into the behavioral stability of models under stress. By focusing on multi-agent adversarial exchanges, we seek to uncover the "calcification" points where models transition from dialectical growth to repetitive, high-dominance stagnation.
 
 ---
 
@@ -574,7 +578,7 @@ See the [LICENSE](LICENSE) file for the full legal text.
 If you use this framework in your research, please cite it as follows:
 
 ### APA Style
-Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20032072
+Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.2) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20032071
 
 ### BibTeX
 ```bibtex
@@ -584,7 +588,7 @@ Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral
   title = {{LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations}},
   url = {https://github.com/Rishav1996/LLMDriftExperiment},
   doi = {10.5281/zenodo.20032071},
-  version = {0.1.1},
+  version = {0.1.2},
   year = {2026}
 }
 ```

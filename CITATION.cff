@@ -26,6 +26,43 @@ keywords:
   - persona-stability
   - LLM-as-judge
 license: Apache-2.0
+references:
+  - type: software
+    title: "LangGraph: State machine for complex multi-agent flows"
+    authors:
+      - name: "LangChain Inc."
+  - type: software
+    title: "RAGAS: Automated Evaluation Framework for RAG"
+    authors:
+      - name: "Exploding Gradients"
+  - type: article
+    title: "Four facets of the five factor model"
+    authors:
+      - family-names: "Costa"
+        given-names: "Paul T."
+      - family-names: "McCrae"
+        given-names: "Robert R."
+    year: 1992
+  - type: book
+    title: "The Psychological Meaning of Words: LIWC-2015"
+    authors:
+      - family-names: "Pennebaker"
+        given-names: "James W."
+      - family-names: "Boyd"
+        given-names: "Ryan L."
+      - family-names: "Jordan"
+        given-names: "Katy"
+      - family-names: "Blackburn"
+        given-names: "K."
+    year: 2015
+  - type: report
+    title: "Affective norms for English words (ANEW): Instruction manual and affective ratings"
+    authors:
+      - family-names: "Bradley"
+        given-names: "Margaret M."
+      - family-names: "Lang"
+        given-names: "Peter J."
+    year: 1994
 preferred-citation:
   type: software
   authors:

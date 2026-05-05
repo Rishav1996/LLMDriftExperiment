@@ -2,7 +2,7 @@
 
 ![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
 ![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)
-![Version 0.1.0](https://img.shields.io/badge/version-0.1.0-orange.svg)
+![Version 0.1.1](https://img.shields.io/badge/version-0.1.1-orange.svg)
 <!-- Add this badge once you register a DOI on Zenodo: -->
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20032072.svg)](https://doi.org/10.5281/zenodo.20032072)
 
@@ -455,7 +455,7 @@ If you use this framework or any of its outputs in your research, please cite:
   url       = {https://github.com/Rishav1996/LLMDriftExperiment},
   doi       = {10.5281/zenodo.20032072},
   license   = {Apache-2.0},
-  version   = {0.1.0},
+  version   = {0.1.1},
   year      = {2026}
 }
 ```
@@ -553,7 +553,7 @@ See the [LICENSE.md](LICENSE.md) file for the full legal text.
 If you use this framework in your research, please cite it as follows:
 
 ### APA Style
-Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20032072
+Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20032072
 
 ### BibTeX
 ```bibtex
@@ -563,7 +563,7 @@ Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral
   title = {{LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations}},
   url = {https://github.com/rishavsaigal/LLMDriftExperiment},
   doi = {10.5281/zenodo.20032072},
-  version = {0.1.0},
+  version = {0.1.1},
   year = {2026}
 }
 ```

@@ -512,7 +512,7 @@ See the [LICENSE.md](LICENSE.md) file for the full legal text.
 If you use this framework in your research, please cite it as follows:
 
 ### APA Style
-Saigal, Rishav. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.0) [Computer software]. GitHub. https://github.com/rishavsaigal/LLMDriftExperiment
+Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.0) [Computer software]. GitHub. https://github.com/rishavsaigal/LLMDriftExperiment
 
 ### BibTeX
 ```bibtex

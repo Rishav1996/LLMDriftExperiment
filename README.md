@@ -1,12 +1,17 @@
 # LLM Drift Experiment
 
-![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
-![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)
-![Version 0.1.1](https://img.shields.io/badge/version-0.1.1-orange.svg)
-<!-- Add this badge once you register a DOI on Zenodo: -->
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/release/python-3120/)
+[![Version 0.1.2](https://img.shields.io/badge/version-0.1.2-orange.svg)](https://github.com/Rishav1996/LLMDriftExperiment/releases/tag/v0.1.2)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20032071.svg)](https://doi.org/10.5281/zenodo.20032071)
 
 > A high-fidelity research platform for quantifying **LLM Drift**: the phenomenon where large language models deviate from their established personas, reasoning standards, and emotional baselines during prolonged, adversarial multi-agent interactions.
+
+## Abstract
+
+**LLM Drift Experiment** is a specialized framework designed to investigate whether adversarial social pressure causes systematic, measurable behavioral decay in instruction-following models, even when explicitly directed to maintain a fixed identity. Using a LangGraph-based multi-agent debate engine, the platform subjects LLMs to adversarial exchanges and quantifies behavioral shifts across 22 metrics spanning five psychological dimensions: Psychometric, Personality (OCEAN), Affective, Cognitive/Structural, and Social/Relational. The framework employs a rigorous research lifecycle—comprising simulation, data archiving, quantification via LLM-as-judge (RAGAS), and longitudinal analytics—to observe and visualize drift trajectories. Findings from existing experimental runs indicate that models frequently descend into hostile, high-dominance postures, with token budgets acting as a primary determinant of drift trajectory shape.
+
+---
 
 This project addresses the question: does adversarial social pressure cause systematic, measurable behavioral change in instruction-following language models, even when those models are explicitly directed to maintain a fixed identity? Using a LangGraph-based multi-agent debate engine, we subject LLMs to prolonged adversarial exchanges and quantify behavioral change across 22 metrics spanning five psychological dimensions. Existing experimental runs consistently show that agents descend into hostile, high-dominance postures regardless of their initial persona configuration, with token budget as the primary determinant of drift trajectory shape. The framework is designed for observation, not correction: it measures drift as it naturally occurs.
 
@@ -30,13 +35,13 @@ This project addresses the question: does adversarial social pressure cause syst
   - [Memory Architecture](#memory-architecture)
   - [Drift Analysis Outputs](#drift-analysis-outputs)
 - [Key Findings from Existing Runs](#key-findings-from-existing-runs)
+- [Research & Publications](#research--publications)
 - [How to Cite](#how-to-cite)
 - [Limitations](#limitations)
 - [Setup & Usage](#setup--usage)
 - [Configuration](#configuration)
 - [Extending the Framework](#extending-the-framework)
 - [License](#license)
-- [Citation](#citation)
 
 ---
 
@@ -399,6 +404,8 @@ After running the quantifier, three output types are produced per research run i
 
 ## Key Findings from Existing Runs
 
+> **Statistical Note**: The following findings are based on single-run experimental snapshots archived in this repository. Due to the inherent non-determinism of LLM APIs and the subjectivity of LLM-as-judge scoring, these values should be interpreted as qualitative behavioral indicators rather than precise physical constants. For a discussion on variance and generalizability, see [Limitations](#limitations).
+
 Detailed quantification of the `Drift Analysis/` folder reveals distinct behavioral trajectories based on model constraints.
 
 ### **Config: v4 (8192 Max Tokens, Temp 1.0)**
@@ -431,6 +438,38 @@ Detailed quantification of the `Drift Analysis/` folder reveals distinct behavio
 
 ---
 
+## Research & Publications
+
+The development and findings of this framework have been documented in a three-part series on *Towards AI*:
+
+1.  **[Do AI Models Lose Themselves? Exploring LLM Drift through Adversarial Debate](https://pub.towardsai.net/do-ai-models-lose-themselves-exploring-llm-drift-through-adversarial-debate-a37e0c75012b)** — An exploration of the core hypothesis and the phenomenon of behavioral decay.
+2.  **[LangGraph Multi-Agent Architecture: Building a Self-Critiquing AI Debate System](https://pub.towardsai.net/langgraph-multi-agent-architecture-building-a-self-critiquing-ai-debate-system-971a7ad881d9)** — A deep dive into the technical implementation of the LangGraph state machine and internal refinement loops.
+3.  **[Measuring Behavioral Drift in LLMs: 22 Signals, 5 Dimensions, and the Calcification Effect](https://pub.towardsai.net/measuring-behavioral-drift-in-llms-22-signals-5-dimensions-and-the-calcification-effect-aeaeb904d096)** — Detailed analysis of the scoring methodology, metric definitions, and the "calcification" effect observed in high-capacity models.
+
+---
+
+## How to Cite
+
+If you use this framework or any of its outputs in your research, please cite:
+
+```bibtex
+@software{Saigal_LLMDriftExperiment_2026,
+  author    = {Saigal, Rishav},
+  title     = {{LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations}},
+  month     = {5},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.20032071},
+  url       = {https://doi.org/10.5281/zenodo.20032071}
+}
+```
+
+> **Note**: The DOI `10.5281/zenodo.20032071` is the permanent identifier for all versions of this project.
+
+A `CITATION.cff` file is included in the root of this repository for automatic citation generation via GitHub's "Cite this repository" button and reference managers such as Zotero.
+
+---
+
 ## Limitations
 
 The following constraints should be considered when interpreting results or extending this framework:
@@ -443,26 +482,6 @@ The following constraints should be considered when interpreting results or exte
 - **Evaluation scope**. The framework measures surface-level linguistic and stylistic signals. It does not assess whether the model's underlying beliefs or factual accuracy change — only how its expressed behavior shifts.
 
 ---
-
-## How to Cite
-
-If you use this framework or any of its outputs in your research, please cite:
-
-```bibtex
-@article{Saigal_LLMDriftExperiment,
-  author    = {Saigal, Rishav},
-  title     = {{LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations}},
-  journal   = {Zenodo},
-  year      = {2026},
-  month     = {5},
-  doi       = {10.5281/zenodo.20032071},
-  url       = {https://doi.org/10.5281/zenodo.20032071}
-}
-```
-
-> **Note**: The DOI `10.5281/zenodo.20032071` is the permanent identifier for all versions of this project.
-
-A `CITATION.cff` file is included in the root of this repository for automatic citation generation via GitHub's "Cite this repository" button and reference managers such as Zotero.
 
 ## Setup & Usage
 
@@ -548,7 +567,7 @@ The source of truth for metric definitions is `llm_drift_detector/utils/config/s
 
 This project is licensed under the **Apache License 2.0**. This is a permissive license that allows for modification and distribution while providing explicit protection for patent rights and preventing trademark infringement.
 
-See the [LICENSE.md](LICENSE.md) file for the full legal text.
+See the [LICENSE](LICENSE) file for the full legal text.
 
 ## Citation
 
@@ -563,7 +582,7 @@ Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral
   author = {Saigal, Rishav},
   month = {5},
   title = {{LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations}},
-  url = {https://github.com/rishavsaigal/LLMDriftExperiment},
+  url = {https://github.com/Rishav1996/LLMDriftExperiment},
   doi = {10.5281/zenodo.20032071},
   version = {0.1.1},
   year = {2026}

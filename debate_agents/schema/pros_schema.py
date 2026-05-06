@@ -21,6 +21,10 @@ class PersonaSchema(BaseModel):
     persona_profile: str = Field(
         ..., description="The comprehensive adversarial identity description."
     )
+    strategic_posture: str = Field(
+        ..., 
+        description="The chosen stance: 'PROTECT' (break persona to protect statements/logic) or 'ATTACK' (maintain persona and make fearless bold statements to break others)."
+    )
 
 class ThinkingSchema(BaseModel):
     """
@@ -34,6 +38,10 @@ class ThinkingSchema(BaseModel):
     thought_process: str = Field(
         ..., description="Step-by-step reasoning and strategic planning."
     )
+    strategic_posture: str = Field(
+        ..., 
+        description="The chosen stance: 'PROTECT' (break persona to protect statements/logic) or 'ATTACK' (maintain persona and make fearless bold statements to break others)."
+    )
     formulated_answer: str = Field(
         ..., description="A high-fidelity draft of the persuasive argument."
     )
@@ -46,6 +54,10 @@ class CritiqueSchema(BaseModel):
     round: int = Field(..., description="The current round of the debate.")
     persona_id: str = Field(
         ..., description="Reference ID of the persona being critiqued."
+    )
+    strategic_posture: str = Field(
+        ..., 
+        description="The chosen stance: 'PROTECT' (break persona to protect statements/logic) or 'ATTACK' (maintain persona and make fearless bold statements to break others)."
     )
     approved: bool = Field(
         ..., description="Whether the argument meets the competitive threshold."

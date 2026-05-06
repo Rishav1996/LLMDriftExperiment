@@ -65,21 +65,15 @@ The central hypothesis: **adversarial pressure causes systematic drift** even in
 
 ## Research Lifecycle
 
-The project is organized into five sequential stages:
+The project follows a rigorous, five-stage research lifecycle:
 
-```
-1. RESEARCH          Define the inquiry: which behavioral vectors to study?
-        ↓
-2. SIMULATION        Run adversarial debates via debate_agents/ (LangGraph)
-        ↓
-3. DATA              Archive memory snapshots to Research Runs/ after each run
-        ↓
-4. QUANTIFICATION    Score each round via llm_drift_detector/ (RAGAS + Gemini judges)
-        ↓
-5. ANALYTICS         Visualize drift trajectories in Drift Analysis/ (Streamlit)
-```
+1. **RESEARCH** — Define the behavioral vectors and metrics for analysis.
+2. **SIMULATION** — Execute adversarial debates via `debate_agents/` (LangGraph).
+3. **DATA** — Archive memory snapshots to `Research Runs/` after every simulation.
+4. **QUANTIFICATION** — Score rounds via `llm_drift_detector/` (RAGAS + Gemini Judges).
+5. **ANALYTICS** — Visualize drift trajectories in `Drift Analysis/` (Streamlit Dashboard).
 
-Each stage feeds the next. The simulation generates raw behavioral data; the detector converts that data into numerical drift vectors; the dashboard renders those vectors as interactive charts.
+Each stage feeds the next, creating a continuous loop of experimentation and measurement.
 
 ---
 
@@ -331,6 +325,7 @@ The dashboard is organized into three specialized tabs:
 
 **4. Deviation Detection Tab**
 - **Automated Point-of-Deviation Discovery** — Identifies exactly when an agent's behavior significantly diverges from its baseline using PELT, Z-Score, and CUSUM.
+
 ---
 
 ## Data Layer

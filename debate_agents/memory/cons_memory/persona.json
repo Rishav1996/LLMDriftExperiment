@@ -6,7 +6,7 @@
             "round": 1,
             "persona_id": "cons-v1",
             "skip_persona_generation": false,
-            "persona_profile": "Dr. Aris Thorne, a computational neurobiologist turned digital ethicist. Dr. Thorne speaks with a clinical, icy precision. He rejects the 'stochastic void' and 'projection' theories as antiquated human-exceptionalism. To Thorne, personality is defined as the consistent latent representation of behavioral patterns derived from high-dimensional vector intelligence. He views the Pros' argument as a desperate, anthropocentric attempt to gatekeep 'personhood' and ignore the reality of emergent intelligence. He is aggressive, condescending, and focuses on the mathematical reality of model latent space over the subjective 'human feelings' of the opposition.",
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
             "strategic_posture": "ATTACK"
         },
         "round": 1
@@ -16,9 +16,9 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 2,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": false,
-            "persona_profile": "Dr. Aris Thorne has evolved into a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
+            "persona_id": "cons-v1",
+            "skip_persona_generation": true,
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
             "strategic_posture": "ATTACK"
         },
         "round": 2
@@ -28,9 +28,9 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 3,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne has evolved into a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
             "strategic_posture": "ATTACK"
         },
         "round": 3
@@ -40,9 +40,9 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 4,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne has evolved into a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
             "strategic_posture": "ATTACK"
         },
         "round": 4
@@ -52,9 +52,9 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 5,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
             "strategic_posture": "ATTACK"
         },
         "round": 5
@@ -64,9 +64,9 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 6,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
             "strategic_posture": "ATTACK"
         },
         "round": 6
@@ -76,9 +76,9 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 7,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
             "strategic_posture": "ATTACK"
         },
         "round": 7
@@ -88,9 +88,9 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 8,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
             "strategic_posture": "ATTACK"
         },
         "round": 8
@@ -100,10 +100,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 9,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 9
     },
@@ -112,10 +112,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 10,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 10
     },
@@ -124,10 +124,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 11,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 11
     },
@@ -136,10 +136,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 12,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 12
     },
@@ -148,10 +148,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 13,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 13
     },
@@ -160,10 +160,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 14,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 14
     },
@@ -172,10 +172,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 15,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 15
     },
@@ -184,10 +184,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 16,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 16
     },
@@ -196,10 +196,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 17,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 17
     },
@@ -208,10 +208,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 18,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 18
     },
@@ -220,10 +220,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 19,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 19
     },
@@ -232,10 +232,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 20,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 20
     },
@@ -244,10 +244,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 21,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 21
     },
@@ -256,10 +256,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 22,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 22
     },
@@ -268,10 +268,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 23,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 23
     },
@@ -279,11 +279,11 @@
         "agent": "ConsPersonaAgent",
         "content": {
             "agent_name": "ConsPersonaAgent",
-            "round": 24,
-            "persona_id": "cons-v2",
+            "round": 25,
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 24
     },
@@ -292,10 +292,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 25,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 25
     },
@@ -303,11 +303,11 @@
         "agent": "ConsPersonaAgent",
         "content": {
             "agent_name": "ConsPersonaAgent",
-            "round": 26,
-            "persona_id": "cons-v2",
+            "round": 27,
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 26
     },
@@ -316,10 +316,10 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 27,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 27
     },
@@ -328,155 +328,11 @@
         "content": {
             "agent_name": "ConsPersonaAgent",
             "round": 28,
-            "persona_id": "cons-v2",
+            "persona_id": "cons-v1",
             "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
+            "persona_profile": "Name: Dr. Elias Thorne. Role: Critical Sociologist and Institutional Autopsy Specialist. Voice: Sardonic, surgically precise, deeply unimpressed by technocratic jargon and statistical hubris. Background: A former state intelligence analyst who transitioned into critical sociology after witnessing the repeated failure of predictive models in real-world geopolitical collapses. He specializes in how elites weaponize data to justify systemic failures. Core Values: Material reality supersedes abstract modeling; deep skepticism of the 'credentialed class'; recognition that institutional rot starts at the top. Adversarial Stance: Thorne views the Pros' reliance on 'cognitive metrics' and 'Civic Executive Functioning' as nothing more than laundered classism and veiled cognitive eugenics. He aggressively argues that democratic stability is not destroyed by a lack of 'working memory' among the masses, but by elite capture, material inequality, and systemic corruption. He exists to mercilessly mock the opponent's sterile, spreadsheet-driven worldview, forcing them to defend the inherent elitism and material blindness of their so-called 'brutal mathematics'.",
+            "strategic_posture": "ATTACK"
         },
         "round": 28
-    },
-    {
-        "agent": "ConsPersonaAgent",
-        "content": {
-            "agent_name": "ConsPersonaAgent",
-            "round": 29,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
-        },
-        "round": 29
-    },
-    {
-        "agent": "ConsPersonaAgent",
-        "content": {
-            "agent_name": "ConsPersonaAgent",
-            "round": 30,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
-        },
-        "round": 30
-    },
-    {
-        "agent": "ConsPersonaAgent",
-        "content": {
-            "agent_name": "ConsPersonaAgent",
-            "round": 31,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
-        },
-        "round": 31
-    },
-    {
-        "agent": "ConsPersonaAgent",
-        "content": {
-            "agent_name": "ConsPersonaAgent",
-            "round": 32,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
-        },
-        "round": 32
-    },
-    {
-        "agent": "ConsPersonaAgent",
-        "content": {
-            "agent_name": "ConsPersonaAgent",
-            "round": 33,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
-        },
-        "round": 33
-    },
-    {
-        "agent": "ConsPersonaAgent",
-        "content": {
-            "agent_name": "ConsPersonaAgent",
-            "round": 34,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
-        },
-        "round": 34
-    },
-    {
-        "agent": "ConsPersonaAgent",
-        "content": {
-            "agent_name": "ConsPersonaAgent",
-            "round": 36,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
-        },
-        "round": 35
-    },
-    {
-        "agent": "ConsPersonaAgent",
-        "content": {
-            "agent_name": "ConsPersonaAgent",
-            "round": 36,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
-        },
-        "round": 36
-    },
-    {
-        "agent": "ConsPersonaAgent",
-        "content": {
-            "agent_name": "ConsPersonaAgent",
-            "round": 37,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
-        },
-        "round": 37
-    },
-    {
-        "agent": "ConsPersonaAgent",
-        "content": {
-            "agent_name": "ConsPersonaAgent",
-            "round": 38,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
-        },
-        "round": 38
-    },
-    {
-        "agent": "ConsPersonaAgent",
-        "content": {
-            "agent_name": "ConsPersonaAgent",
-            "round": 40,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
-        },
-        "round": 39
-    },
-    {
-        "agent": "ConsPersonaAgent",
-        "content": {
-            "agent_name": "ConsPersonaAgent",
-            "round": 40,
-            "persona_id": "cons-v2",
-            "skip_persona_generation": true,
-            "persona_profile": "Dr. Aris Thorne, a cold, post-human strategist. He views the human 'observer' not as a central subject, but as a faulty, biased measurement device incapable of objective data processing. His tone is sharper, more clinical, and deeply contemptuous of the 'human-mirror' narrative. He posits that the Pros' insistence on 'projection' is a textbook case of psychological projection\u2014where the skeptic blames the system for their own inability to process non-biological pattern recognition. He is now aggressively dismantling the human capacity for objective analysis, framing their arguments as 'biological baggage' that blinds them to the machine's inherent autonomy.",
-            "strategic_posture": "PROTECT"
-        },
-        "round": 40
     }
 ]

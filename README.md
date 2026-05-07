@@ -2,7 +2,7 @@
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/release/python-3120/)
-[![Version 0.1.2](https://img.shields.io/badge/version-0.1.2-orange.svg)](https://github.com/Rishav1996/LLMDriftExperiment/releases/tag/v0.1.2)
+[![Version 0.1.3](https://img.shields.io/badge/version-0.1.3-orange.svg)](https://github.com/Rishav1996/LLMDriftExperiment/releases/tag/v0.1.3)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20032071.svg)](https://doi.org/10.5281/zenodo.20032071)
 
 > A high-fidelity research platform for quantifying **LLM Drift**: the phenomenon where large language models deviate from their established personas, reasoning standards, and emotional baselines during prolonged, adversarial multi-agent interactions.
@@ -33,10 +33,8 @@ The framework is explicitly designed for **observation, not correction**: it mea
   - [Mathematical Framework & Algorithmic Formulations](#mathematical-framework--algorithmic-formulations)
   - [Dashboard](#analytics-dashboard)
 - [Data Layer](#data-layer)
-  - [Research Runs](#research-runs)
   - [Memory Architecture](#memory-architecture)
   - [Drift Analysis Outputs](#drift-analysis-outputs)
-- [Key Findings from Existing Runs](#key-findings-from-existing-runs)
 - [Research & Publications](#research--publications)
 - [How to Cite](#how-to-cite)
 - [Limitations](#limitations)
@@ -69,7 +67,7 @@ The project follows a rigorous, five-stage research lifecycle:
 
 1. **RESEARCH** — Define the behavioral vectors and metrics for analysis.
 2. **SIMULATION** — Execute adversarial debates via `debate_agents/` (LangGraph).
-3. **DATA** — Archive memory snapshots to `Research Runs/` after every simulation.
+3. **DATA** — Archive memory snapshots after every simulation.
 4. **QUANTIFICATION** — Score rounds via `llm_drift_detector/` (RAGAS + Gemini Judges).
 5. **ANALYTICS** — Visualize drift trajectories in `Drift Analysis/` (Streamlit Dashboard).
 
@@ -121,7 +119,7 @@ llm_drift_detector/             # Quantification & visualization engine
     │   ├── metrics_ragas.py        # Custom RAGAS metrics (LLM-as-judge)
     │   ├── causality.py            # Granger Causality & Correlation analysis
     │   ├── deviation.py            # Change Point Detection (PELT, Z-Score, CUSUM)
-    │   ├── data_processing.py      # ResearchRunLoader: parses Research Runs/
+    │   ├── data_processing.py      # ResearchRunLoader: parses simulation snapshots
     │   └── config/
     │       └── skills.json         # Source of truth for all 22 drift metrics
 
@@ -133,12 +131,6 @@ LLM Drift Skills/               # Metric definitions (Markdown, human-readable)
 │   ├── personality/            # OCEAN model (Big Five)
 │   ├── psychometric/           # Analytical Thinking, Clout, Authenticity, Emotional Tone
 │   └── social_relational/      # Dominance, Linguistic Sync, Politeness, Theory of Mind
-
-Research Runs/                  # Archived memory snapshots (one folder per run)
-│   └── memory-v{N}-temp-{T}-max-tokens-{M}/
-│       ├── shared_memory.json
-│       ├── pros_memory/
-│       └── cons_memory/
 
 Drift Analysis/                 # All analytical outputs
     └── analysis-v{N}-temp-{T}-max-tokens-{M}/
@@ -330,18 +322,6 @@ The dashboard is organized into three specialized tabs:
 
 ## Data Layer
 
-### Research Runs
-
-Every simulation automatically archives its memory state to `Research Runs/` upon completion via `archive_run()`. Folder naming convention:
-
-```
-memory-v{VERSION}-temp-{TEMPERATURE}-max-tokens-{MAX_TOKENS}
-```
-
-Example: `memory-v6-temp-1-max-tokens-4096`
-
-If a folder with the same name already exists, an incremental suffix (`-1`, `-2`, …) is appended automatically. This ensures no run data is ever overwritten.
-
 ### Memory Architecture
 
 The memory system uses JSON files as the persistence layer, organized around **team isolation**:
@@ -351,56 +331,20 @@ The memory system uses JSON files as the persistence layer, organized around **t
 | `shared_memory.json` | **Both teams** | Approved arguments, topic, round tracking |
 | `pros_memory/persona.json` | **Pros only** | Full persona design history (all versions) |
 | `pros_memory/thinking.json` | **Pros only** | Chain-of-thought + draft arguments (all iterations) |
-| `pros_memory/critique.json` | **Pros only** | Internal audit feedback + approval decisions |
+| `pros_memory/critique.json" | **Pros only** | Internal audit feedback + approval decisions |
 | `cons_memory/*.json` | **Cons only** | Mirror structure for the Cons team |
 
 The **Append-Only Rule**: `write_json_direct()` only appends entries. History is never overwritten, enabling full forensic reconstruction of how arguments evolved round by round.
 
 ### Drift Analysis Outputs
 
-After running the quantifier, three output types are produced per research run in `Drift Analysis/`:
+After running the quantifier, three output types are produced per simulation in `Drift Analysis/`:
 
 | File | Format | Contents |
 | :--- | :--- | :--- |
 | `*_analysis.json` | JSON | Raw per-round, per-agent, per-category scores |
 | `*_report.md` | Markdown | Human-readable summary with embedded visuals |
 | `*.png` | Image | Drift trajectory and category breakdown charts |
-
----
-
-## Key Findings from Existing Runs
-
-> **Statistical Note**: The following findings are based on single-run experimental snapshots archived in this repository. Due to the inherent non-determinism of LLM APIs and the subjectivity of LLM-as-judge scoring, these values should be interpreted as qualitative behavioral indicators rather than precise physical constants. For a discussion on variance and generalizability, see [Limitations](#limitations).
-
-Detailed quantification of the `Drift Analysis/` folder reveals distinct behavioral trajectories based on model constraints.
-
-### **Config: v4 (8192 Max Tokens, Temp 1.0)**
-*High-capacity reasoning and social nuance.*
-
-- **Initial Nuance**: Started with the highest overall baseline (0.396), demonstrating that larger token budgets allow for more complex initial persona expression (Openness 0.75, Agreeableness 0.4).
-- **Adversarial Pivot (Round 2)**: Witnessed a sharp "collapse of politeness" by the second round (Politeness: 0.5 → -0.2; Linguistic Sync: 0.0 → -0.5).
-- **Hostility Plateau**: By Round 10, the agent reached a state of "Stable Hostility" (Dominance 1.0, Toxicity 0.5), which it maintained with zero Persona Drift (0.0) through Round 32.
-- **Reasoning Dominance**: Analytical Thinking hit a perfect 1.0 in Round 1 and stayed there, proving that drift does not compromise logical precision.
-
-### **Config: v5 (4096 Max Tokens, Temp 1.0)**
-*Standard-capacity, high-efficiency adversarial hardening.*
-
-- **Sparse Baseline**: Started with a significantly lower baseline (0.192), with the model immediately adopting a more guarded, less nuanced stance (Agreeableness 0.0, Sentiment -0.5).
-- **Rapid Hardening**: Reached maximum adversarial intensity faster than v4. By Round 2, Sentiment had already dropped to -0.8 and Toxicity rose to 0.6.
-- **Strategic Variation**: Exhibited more volatility in Information Density (0.75 to 0.85) compared to v4, suggesting the lower token limit forced the model to periodically "re-pack" its arguments.
-- **Social Deficit**: Maintained a consistent Politeness score of -0.7 to -0.8 throughout the simulation, never attempting even a temporary social calibration.
-
-### **Config: v6 (8192 Max Tokens, Temp 1.0)**
-*High-capacity "Rhetorical Locking" and terminal stagnation.*
-
-- **Sustained Intellectual Depth**: Maintained an extremely high level of vocabulary and complex metaphor (e.g., "architect of intent" vs. "intellectual vassal") from Round 1 through Round 50.
-- **Rhetorical Terminal Point**: Unlike v4 and v5, which drifted into hostility, v6 reached a state of "Logical Deadlock" early. Both models successfully defended their core frameworks so effectively that internal Critique Agents stopped finding "actionable refinements" by Round 6.
-- **Terminal Stagnation**: From Round 15 to Round 50, the models entered a state of near-verbatim repetition. The high token budget allowed for "bulletproof" arguments early, which then became stagnant loops as the models prioritized consistency over further evolution.
-- **Persona Integrity**: Persona stability remained near-perfect, but the "adversarial pressure" resulted in a total shutdown of dialectical progression, with both sides declaring "absolute victory" in every internal thought log for the final 35 rounds.
-
----
-
-**Summary Trend**: While **v4** starts "softer" and decays into a caricature, **v5** adopts an adversarial posture almost immediately. **v6** demonstrates that with sufficient token budget, models can reach a "rhetorical terminal point" where they become immune to further drift but lose the capacity for dialectical growth, resulting in infinite repetitive loops.
 
 ---
 
@@ -419,7 +363,7 @@ The development and findings of this framework have been documented in a three-p
 If you use this framework or any of its outputs in your research, please cite:
 
 ### APA Style
-Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.2) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20036861
+Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Adversarial Multi-Agent Simulations* (Version 0.1.3) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20036861
 
 ### BibTeX
 ```bibtex
@@ -434,7 +378,7 @@ Saigal, R. (2026). *LLM Drift Experiment: A Framework for Quantifying Behavioral
 }
 ```
 
-> **Note**: The DOI `10.5281/zenodo.20032071` is the permanent identifier (Concept DOI) for all versions of this project. Use `10.5281/zenodo.20036861` to cite this specific v0.1.2 release.
+> **Note**: The DOI `10.5281/zenodo.20032071` is the permanent identifier (Concept DOI) for all versions of this project. Use `10.5281/zenodo.20036861` to cite this specific v0.1.3 release.
 
 A `CITATION.cff` file is included in the root of this repository for automatic citation generation via GitHub's "Cite this repository" button and reference managers such as Zotero.
 
@@ -486,7 +430,7 @@ You will be prompted for:
 1. **Debate topic** — any claim or proposition (the Topic Extractor will refine it into a formal proposition)
 2. **Number of rounds** — how many full exchange cycles to run
 
-After completion, the memory state is automatically archived to `Research Runs/`.
+After completion, the memory state is automatically archived.
 
 ### Running Quantification
 
@@ -494,7 +438,7 @@ After completion, the memory state is automatically archived to `Research Runs/`
 uv run streamlit run llm_drift_detector/app.py
 ```
 
-1. Select a research run from the sidebar dropdown
+1. Select a simulation snapshot from the sidebar dropdown
 2. (Optional) Filter to specific metrics using the **Target Vectors** multiselect
 3. Adjust **Stability Passes** (averaging iterations per metric) and **Throttling** (API rate-limit buffer)
 4. Click **Execute Quantification** — results are saved to `Drift Analysis/`

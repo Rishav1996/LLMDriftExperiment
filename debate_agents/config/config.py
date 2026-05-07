@@ -6,12 +6,12 @@ from langchain.chat_models import init_chat_model
 
 # Central configuration for the debate simulation
 CONFIG = {
-    "version": "v7",  # Increment this for different logic iterations
-    "model_name": "google_genai:gemini-3.1-flash-lite-preview",
+    "version": "v8",  # Increment this for different logic iterations
+    "model_name": "google_genai:gemini-3.1-pro-preview",
     "temperature": 1,
-    "max_tokens": 8192,
+    "max_tokens": 4096,
     "max_retries": 10,
-    "thinking_budget": 4096
+    "thinking_budget": 2048
 }
 
 # Initialize the chat model using the CONFIG dictionary

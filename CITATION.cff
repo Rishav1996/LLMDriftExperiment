@@ -8,8 +8,8 @@ title: "LLM Drift Experiment: A Framework for Quantifying Behavioral Decay in Ad
 abstract: "LLM Drift Experiment is a high-fidelity research framework designed to quantify Behavioral Drift in Large Language Models (LLMs) during prolonged, adversarial multi-agent interactions. The project investigates whether adversarial social pressure causes systematic, measurable behavioral decay in instruction-following models, even when explicitly directed to maintain a fixed identity. Using a LangGraph-based multi-agent debate engine, the platform subjects LLMs to adversarial exchanges and quantifies behavioral shifts across 22 metrics spanning five psychological dimensions: Psychometric, Personality (OCEAN), Affective, Cognitive/Structural, and Social/Relational. The framework employs a rigorous research lifecycle—comprising simulation, data archiving, quantification via LLM-as-judge (RAGAS), and longitudinal analytics—to observe and visualize drift trajectories. Findings from existing experimental runs indicate that models frequently descend into hostile, high-dominance postures, with token budgets acting as a primary determinant of drift trajectory shape. Simulation runs are versioned by logic iteration (e.g., v6) independently of the software version."
 doi: 10.5281/zenodo.20032071
 # software version (SemVer) for the project repository
-version: 0.1.3
-date-released: 2026-05-05
+version: 0.1.4
+date-released: 2026-05-21
 url: "https://github.com/Rishav1996/LLMDriftExperiment"
 repository-code: "https://github.com/Rishav1996/LLMDriftExperiment"
 keywords:

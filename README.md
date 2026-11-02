@@ -4,6 +4,7 @@
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/release/python-3120/)
 [![Version 0.1.4](https://img.shields.io/badge/version-0.1.4-orange.svg)](https://github.com/Rishav1996/LLMDriftExperiment/releases/tag/v0.1.4)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20032071.svg)](https://doi.org/10.5281/zenodo.20032071)
+[![Sponsor](https://img.shields.io/badge/Sponsor-$5%20Compute-EA4AAA?style=flat-square&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/Rishav1996)
 
 > A high-fidelity research platform for simulating adversarial multi-agent interactions to observe **LLM Drift**: the phenomenon where large language models deviate from their established personas, reasoning standards, and emotional baselines.
 
@@ -36,6 +37,7 @@ The framework is explicitly designed for **observation, not correction**: it pro
 - [Setup & Usage](#setup--usage)
 - [Configuration](#configuration)
 - [Extending the Framework](#extending-the-framework)
+- [Support the Research](#-support-open-ai-behavioral-research)
 - [License](#license)
 
 ---
@@ -204,6 +206,20 @@ CONFIG = {
     "thinking_budget": 2048
 }
 ```
+
+---
+
+## Extending the Framework
+
+Contributions that add new behavioral dimensions or novel debate topologies are welcome. Please ensure all agent prompts follow the existing schema structure and include appropriate test coverage.
+
+---
+
+## 🔬 Support Open AI Behavioral Research
+
+If you find this research framework valuable, consider contributing a $5 one-time compute sponsorship. All contributions directly support API token budgets for multi-model debate sweeps and open dataset generation.
+
+[**→ Sponsor $5 via GitHub Sponsors**](https://github.com/sponsors/Rishav1996)
 
 ---
 
